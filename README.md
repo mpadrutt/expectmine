@@ -1,18 +1,19 @@
-## 👋 Quick Start
+## Things still to do:
 
-After cloning into this repository, set up a venv environment and install the python requirements using the following commands (on Windows, the commands to initialize the venv environment might look slightly different):
+### Migrations
+- [ ] Migrate steps
+- [ ] Migrate utility functions
 
-```
-python3.10 -m venv env
-source env/bin/activate
-make init
-```
+### Documentation
+- [ ] `README.md` in every submodule️
+- [ ] Generate docs from docstrings
 
-## 📁 Repo structure
 
-This repo is divided into three distinct folders that have their own README and their own set of commands:
+### Testing
+- [ ] Add Unit testing
+- [ ] Add Test coverage information
 
-- `scripts`: contains all necessary codegen scripts to generate new pipeline steps.
-- `src/cli`: contains the CLI code.
-- `src/steps`: contains all pipeline steps.
-- `src/utils`: contains utility functions.
+### Features
+- [ ] Finish pipeline storing
+- [ ] Finish pipeline loading from store
+- [ ] Maybe add more adapters 🤷🏽‍♂️
