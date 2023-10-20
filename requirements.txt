@@ -1,0 +1,29 @@
+# config
+flake8-pyproject
+
+# formatting
+black
+isort
+flake8
+flake8-simplify
+flake8-tidy-imports
+pep8-naming
+
+# type checking and testing
+pyright
+pytest
+pytest-cov
+
+# documentation (advised to freeze dependencies)
+sphinx==7.2.6
+furo==2023.09.10
+
+# codegen
+inflection
+Jinja2
+
+
+# dependencies (make sure dependencies work)
+InquirerPy==0.3.4
+requests==2.31.0
+tqdm==4.66.1
