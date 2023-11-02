@@ -108,14 +108,13 @@ class Pipeline:
 
         >>> add_step(Step(...), Io(...))
 
-
         >>> add_step()
         TypeError("Step needs to be of type BaseStep")
 
 
         :raises TypeError: If the arguments have the wrong type.
         :raises ValueError: If the step can not run on previous output or if
-        no input has been given to the pipeline yet.
+            no input has been given to the pipeline yet.
         """
         validate_add_step(step, io)
         validate_step_can_run(step, self._current_output_filetypes)

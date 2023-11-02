@@ -3,7 +3,7 @@ from typing import Type
 import src.steps.steps as steps
 import inspect
 
-from .base_step import BaseStep
+from . import BaseStep
 
 
 def get_registered_steps() -> list[tuple[str, Type[BaseStep]]]:
