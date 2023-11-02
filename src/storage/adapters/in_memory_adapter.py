@@ -1,12 +1,12 @@
 from pathlib import Path
 
 from ..base_storage import BaseStore
-from ..base_storage_adapter import BaseStorageAdapter
+from ..base_storage_adapter import BaseStoreAdapter
 from ..stores.in_memory_store import InMemoryStore
 from ..utils import validate_adapter_init, validate_step_name
 
 
-class InMemoryStorageAdapter(BaseStorageAdapter):
+class InMemoryStoreAdapter(BaseStoreAdapter):
     """
     Pipeline storage adapter for InMemoryStorage.
     """

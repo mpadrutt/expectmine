@@ -4,12 +4,12 @@ from typing import Type
 from src.steps import BaseStep
 from src.io import BaseIo
 from src.logger import BaseLoggerAdapter
-from src.storage import BaseStorageAdapter
+from src.storage import BaseStoreAdapter
 
 
 def validate_init(
-    persistent_adapter: BaseStorageAdapter,
-    volatile_adapter: BaseStorageAdapter,
+    persistent_adapter: BaseStoreAdapter,
+    volatile_adapter: BaseStoreAdapter,
     logger_adapter: BaseLoggerAdapter,
 ):
     """
@@ -17,9 +17,9 @@ def validate_init(
 
 
     :param persistent_adapter: Persistent storage adapter to the pipeline
-    :type persistent_adapter: BaseStorageAdapter
+    :type persistent_adapter: BaseStoreAdapter
     :param volatile_adapter: Volatile storage adapter to the pipeline
-    :type volatile_adapter: BaseStorageAdapter
+    :type volatile_adapter: BaseStoreAdapter
     :param logger_adapter: Logging adapter to the pipeline
     :type logger_adapter: BaseLoggerAdapter
 
@@ -34,11 +34,11 @@ def validate_init(
 
     :raises TypeError: If the arguments have the wrong type.
     """
-    if not isinstance(persistent_adapter, BaseStorageAdapter):
+    if not isinstance(persistent_adapter, BaseStoreAdapter):
         raise TypeError(
             "Persistent adapter needs to be an instance of BaseStorageAdapter."
         )
-    if not isinstance(volatile_adapter, BaseStorageAdapter):
+    if not isinstance(volatile_adapter, BaseStoreAdapter):
         raise TypeError(
             "Volatile adapter needs to be an instance of BaseStorageAdapter."
         )

@@ -6,6 +6,7 @@
 
 ### Documentation
 - [ ] `README.md` in every submodule️
+- [ ] Good `how get started`guide
 - [ ] Generate docs from docstrings
 
 
@@ -16,4 +17,7 @@
 ### Features
 - [ ] Finish pipeline storing
 - [ ] Finish pipeline loading from store
-- [ ] Maybe add more adapters 🤷🏽‍♂️
+- [ ] Maybe add more adapters 🤷🏽‍
+
+### Finishing touches
+- [ ] Bring the trash out :)
