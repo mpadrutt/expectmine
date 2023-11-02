@@ -161,33 +161,6 @@ class Sqlite3Store(BaseStore):
 
         return res is not None
 
-    def store_pipeline(
-        self,
-        key: str,
-        steps: list[BaseStep],
-        volatile_store: list[BaseStore],
-        input_files: list[Path],
-    ):
-        s = steps
-        v = volatile_store
-        i = input_files
-        print(s, v, i)
-
-    def list_pipelines(self) -> list[str]:
-        cur = self.conn.cursor()
-
-        res = cur.execute(
-            """
-                SELECT name
-                FROM pipeline_table
-                """,
-        )
-
-        return [k[0] for k in res]
-
-    def load_pipeline(self, key: str) -> tuple[list[tuple[str, BaseIo]], list[str]]:
-        pass
-
     def _setup(self):
         """
         Sets up the database, creates the necessary tables (if they don't exist)

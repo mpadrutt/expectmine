@@ -21,3 +21,5 @@
 
 ### Finishing touches
 - [ ] Bring the trash out :)
+
+[link](docs/source/markdown/getting_started.md)
