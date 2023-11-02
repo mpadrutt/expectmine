@@ -6,6 +6,8 @@ from typing import Optional, Type
 
 from ..base_storage import BaseStore, T
 from ..utils import validate_key, validate_storage_init, validate_value
+from ...io import BaseIo
+from ...steps import BaseStep
 
 
 class Sqlite3Store(BaseStore):
@@ -15,6 +17,7 @@ class Sqlite3Store(BaseStore):
         validate_storage_init(step_name, persistent_path, working_directory)
 
         self.step_name = step_name
+        self.persistent_path = persistent_path
         self.working_directory = working_directory
         self.kwargs = kwargs
 
@@ -79,9 +82,9 @@ class Sqlite3Store(BaseStore):
         res = cur.execute(
             """
             SELECT type, int_value, float_value, string_value, boolean_value, blob_value
-            FROM steps_table
-            JOIN kv_table ON steps_table.id = kv_table.stepid
-            WHERE steps_table.name = ? AND kv_table.key = ?;
+            FROM step_table
+            JOIN kv_table ON step_table.id = kv_table.stepid
+            WHERE step_table.name = ? AND kv_table.key = ?;
             """,
             (self.step_name, key),
         ).fetchone()
@@ -125,7 +128,7 @@ class Sqlite3Store(BaseStore):
         cur.execute(
             """
             DELETE FROM kv_table
-            WHERE key = ? AND stepid IN (SELECT id FROM steps_table WHERE name = ?);
+            WHERE key = ? AND stepid IN (SELECT id FROM step_table WHERE name = ?);
             """,
             (key, self.step_name),
         )
@@ -137,7 +140,7 @@ class Sqlite3Store(BaseStore):
             """
             SELECT key
             FROM kv_table
-            WHERE stepid IN (SELECT id FROM steps_table WHERE name = ?);
+            WHERE stepid IN (SELECT id FROM step_table WHERE name = ?);
             """,
             (self.step_name,),
         )
@@ -151,12 +154,39 @@ class Sqlite3Store(BaseStore):
             """
             SELECT 1
             FROM kv_table
-            WHERE key = ? AND stepid IN (SELECT id from steps_table WHERE name = ?)
+            WHERE key = ? AND stepid IN (SELECT id from step_table WHERE name = ?)
             """,
             (key, self.step_name),
         ).fetchone()
 
         return res is not None
+
+    def store_pipeline(
+        self,
+        key: str,
+        steps: list[BaseStep],
+        volatile_store: list[BaseStore],
+        input_files: list[Path],
+    ):
+        s = steps
+        v = volatile_store
+        i = input_files
+        print(s, v, i)
+
+    def list_pipelines(self) -> list[str]:
+        cur = self.conn.cursor()
+
+        res = cur.execute(
+            """
+                SELECT name
+                FROM pipeline_table
+                """,
+        )
+
+        return [k[0] for k in res]
+
+    def load_pipeline(self, key: str) -> tuple[list[tuple[str, BaseIo]], list[str]]:
+        pass
 
     def _setup(self):
         """
@@ -167,7 +197,8 @@ class Sqlite3Store(BaseStore):
         cur.executescript(
             """
             BEGIN;
-            CREATE TABLE IF NOT EXISTS steps_table (
+            PRAGMA foreign_keys = ON;
+            CREATE TABLE IF NOT EXISTS step_table (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT UNIQUE
             );
@@ -181,7 +212,7 @@ class Sqlite3Store(BaseStore):
                 boolean_value BOOLEAN,
                 blob_value BLOB,
                 PRIMARY KEY (stepid, key),
-                FOREIGN KEY (stepid) REFERENCES steps_table(id)
+                FOREIGN KEY (stepid) REFERENCES step_table(id)
             );
             COMMIT;
             """
@@ -189,7 +220,7 @@ class Sqlite3Store(BaseStore):
 
         cur.execute(
             """
-            INSERT OR IGNORE INTO steps_table(name) VALUES (?);
+            INSERT OR IGNORE INTO step_table(name) VALUES (?);
             """,
             (self.step_name,),
         )

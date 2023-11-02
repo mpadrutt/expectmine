@@ -1,12 +1,12 @@
 from pathlib import Path
 
 from ..base_storage import BaseStore
-from ..base_storage_adapter import BaseStorageAdapter
+from ..base_storage_adapter import BaseStoreAdapter
 from ..stores.sqlite3_store import Sqlite3Store
 from ..utils import validate_adapter_init, validate_step_name
 
 
-class Sqlite3StorageAdapter(BaseStorageAdapter):
+class Sqlite3StoreAdapter(BaseStoreAdapter):
     """
     Pipeline storage adapter for Sqlite3Storage.
     """

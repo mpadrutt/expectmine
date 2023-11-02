@@ -10,15 +10,19 @@ from .utils import (
 
 from ..io import BaseIo
 from ..steps import BaseStep, get_registered_steps
-from ..storage import BaseStorageAdapter, BaseStore
+from ..storage import BaseStoreAdapter, BaseStore
 from ..logger import BaseLoggerAdapter, BaseLogger
 
 
 class Pipeline:
+    _registered_steps: list[Type[BaseStep]] = [
+        step[1] for step in get_registered_steps()
+    ]
+
     def __init__(
         self,
-        persistent_adapter: BaseStorageAdapter,
-        volatile_adapter: BaseStorageAdapter,
+        persistent_adapter: BaseStoreAdapter,
+        volatile_adapter: BaseStoreAdapter,
         logger_adapter: BaseLoggerAdapter,
         output_directory: Path,
         **kwargs,
@@ -27,9 +31,9 @@ class Pipeline:
         Initializes the pipeline. Needs 3 adapters to work.
 
         :param persistent_adapter: Persistent storage adapter to the pipeline
-        :type persistent_adapter: BaseStorageAdapter
+        :type persistent_adapter: BaseStoreAdapter
         :param volatile_adapter: Volatile storage adapter to the pipeline
-        :type volatile_adapter: BaseStorageAdapter
+        :type volatile_adapter: BaseStoreAdapter
         :param logger_adapter: Logging adapter to the pipeline
         :type logger_adapter: BaseLoggerAdapter
         :param output_directory: Path to where the pipeline should output to.
@@ -60,10 +64,6 @@ class Pipeline:
         self._input_files: list[Path] = list()
         self._current_input_filetypes: list[str] | None = None
         self._current_output_filetypes: list[str] | None = None
-
-        self._registered_steps: list[Type[BaseStep]] = [
-            step[1] for step in get_registered_steps()
-        ]
 
     def set_input(self, input_files: list[Path]):
         """
@@ -186,7 +186,7 @@ class Pipeline:
             if step.can_run(self._current_output_filetypes)
         ]
 
-    def get_all_steps(self) -> list[Type[BaseStep]]:
+    def get_registered_steps(self) -> list[Type[BaseStep]]:
         """
         Returns a list of all steps registered with the pipeline.
 
@@ -195,7 +195,7 @@ class Pipeline:
 
         :Example:
 
-        >>> get_all_steps()
+        >>> get_registered_steps()
         [Step1, Step2, Step3]
         """
         return self._registered_steps

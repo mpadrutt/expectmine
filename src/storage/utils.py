@@ -3,6 +3,10 @@ import pickle
 import sys
 from pathlib import Path
 
+from src.io import BaseIo
+from src.steps import BaseStep
+from src.storage import BaseStore
+
 
 def validate_adapter_init(persistent_path: Path, working_directory: Path):
     """
@@ -79,6 +83,31 @@ def validate_storage_init(
         )
 
 
+def validate_pipeline_store_init(persistent_path: Path):
+    """
+    Validates that the init arguments are of valid format. Throws an error
+    if not.
+
+    :param persistent_path: The path which the storage can use to persist
+        data.
+    :type persistent_path: Path
+
+    :Example:
+
+    >>> validate_pipeline_store_init(Path("path1"))
+
+
+    >>> validate_pipeline_store_init()
+    TypeError("Persistent path needs to be of type Path")
+
+
+    :raises TypeError: If the arguments have the wrong type.
+    """
+
+    if not isinstance(persistent_path, Path):
+        raise TypeError("persistent_path needs to be of type Path.")
+
+
 def validate_key(key: str):
     """
     Validates that the given key is of valid format. Throws an error
@@ -151,6 +180,25 @@ def validate_value(value: object):
 
 
 def validate_step_name(step_name: str):
+    """
+    Validates that the given step_name is of valid format. Throws an error
+    if not.
+
+    :param step_name: The key to associate with the value. A key cannot be
+        empty. Keys have a maximum length of 255 characters.
+    :type step_name: str
+
+    :Example:
+
+    >>> validate_step_name("hello")
+
+
+    >>> validate_step_name("")
+    ValueError("step_name can not be empty")
+
+    :raises TypeError: If the arguments have the wrong type.
+    :raises ValueError: If the key is empty or too long.
+    """
     if not isinstance(step_name, str):
         raise TypeError("Step_name should be of type string.")
 
@@ -159,3 +207,59 @@ def validate_step_name(step_name: str):
 
     if len(step_name) < 1:
         raise ValueError("Step name can not be empty.")
+
+
+def validate_pipeline(
+    key: str,
+    steps: list[BaseStep],
+    io: list[BaseIo],
+    input_files: list[Path],
+):
+    """
+    Validates that the given key and pipeline are valid and can be stored in the
+    persistent store.
+
+    :param key: The key to associate with the pipeline. A key cannot be
+        empty. Keys have a maximum length of 255 characters.
+    :type key: str
+    :param steps: List of BaseSteps that make up the pipeline.
+    :type steps: list[BaseStep]
+    :param io: List of io objects that where used to configure
+        each individual step.
+    :type io: list[BaseStore]
+    :param input_files: List of input files to the pipeline.
+    :type input_files: list[Path]
+
+    :Example:
+
+    >>> validate_pipeline("Hello", [Step(...)], [Io(...)], [Path('text.txt')])
+
+
+    >>> validate_pipeline("")
+    ValueError("Key can not be empty")
+
+    :raises TypeError: If the arguments have the wrong type.
+    :raises ValueError: If the key is empty or longer than 255 characters. If Steps
+        and volatile_stores do not match in length or input files are not files
+        but contain directories.
+    """
+    validate_key(key)
+
+    if not isinstance(steps, list) and not all(
+        isinstance(step, BaseStep) for step in steps
+    ):
+        raise TypeError("Steps need to be of type list[BaseStep].")
+
+    if not isinstance(io, list) and not all(isinstance(store, BaseIo) for store in io):
+        raise TypeError("Volatile_store need to be of type list[BaseStore].")
+
+    if not isinstance(input_files, list) and not all(
+        isinstance(file, Path) for file in input_files
+    ):
+        raise TypeError("Input_files need to be of type list[Path].")
+
+    if len(steps) != len(io):
+        raise ValueError("Steps and Volatile_store lists do not have same length.")
+
+    if not all(path.is_file() for path in input_files):
+        raise ValueError("Input_files should be files and not paths.")

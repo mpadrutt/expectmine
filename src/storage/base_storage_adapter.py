@@ -4,7 +4,7 @@ from pathlib import Path
 from src.storage.base_storage import BaseStore
 
 
-class BaseStorageAdapter(ABC):
+class BaseStoreAdapter(ABC):
     @abstractmethod
     def __init__(self, persistent_path: Path, working_directory: Path, **kwargs):
         """
