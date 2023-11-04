@@ -103,9 +103,8 @@ class Sqlite3Store(BaseStore):
                 return_object = (
                     self.working_directory / f"{self.step_name}-{key}{res[3]}"
                 )
-                f = open(return_object, "wb")
-                f.write(res[5])
-                f.close()
+                with open(return_object, "wb") as f:
+                    f.write(res[5])
             case "blob":
                 return_object = pickle.loads(bytes(res[5]))
             case _:

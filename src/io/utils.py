@@ -64,7 +64,7 @@ def parse_number(number: str) -> int | float:
     """
     try:
         return int(number)
-    except ValueError as _:
+    except ValueError:
         return float(number)
 
 

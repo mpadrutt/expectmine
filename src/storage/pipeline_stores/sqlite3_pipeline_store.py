@@ -9,7 +9,7 @@ from typing import Optional
 from src.io import BaseIo
 from src.io.io import DictIo
 from src.steps import BaseStep
-from src.storage import BasePipelineStore, BaseStore
+from src.storage import BasePipelineStore
 from src.storage.utils import (
     validate_pipeline_store_init,
     validate_pipeline,
@@ -108,8 +108,8 @@ class Sqlite3PipelineStore(BasePipelineStore):
 
         res = cur.execute(
             """
-            SELECT pipeline_step.stepid, pipeline_step.step_name, pipeline_step.step_number, 
-            pipeline_step.python_version, pipeline_step.pickle_version, 
+            SELECT pipeline_step.stepid, pipeline_step.step_name, pipeline_step.step_number,
+            pipeline_step.python_version, pipeline_step.pickle_version,
             pipeline_step.blob_value
             FROM pipeline_step
             INNER JOIN pipeline_table ON pipeline_step.stepid = pipeline_table.id

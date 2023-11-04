@@ -31,7 +31,7 @@ class InMemoryStore(BaseStore):
     def get(self, key: str, returning: Type[T]) -> Optional[T]:
         validate_key(key)
 
-        return_object = self.storage.get(key, None)
+        return_object = self.storage.get(key)
 
         if not isinstance(return_object, returning | None):
             raise ValueError("Value and return type do not match.")

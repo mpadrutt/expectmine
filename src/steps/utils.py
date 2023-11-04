@@ -1,6 +1,6 @@
 from typing import Type
 
-import src.steps.steps as steps
+from src.steps import steps
 import inspect
 
 from . import BaseStep
