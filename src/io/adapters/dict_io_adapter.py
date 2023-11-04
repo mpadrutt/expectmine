@@ -1,5 +1,5 @@
-from .. import BaseIo, BaseIoAdapter
-from ..io import DictIo
+from src.io import BaseIo, BaseIoAdapter
+from src.io.io import DictIo
 
 
 class DictIoAdapter(BaseIoAdapter):

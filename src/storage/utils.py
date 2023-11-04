@@ -5,7 +5,6 @@ from pathlib import Path
 
 from src.io import BaseIo
 from src.steps import BaseStep
-from src.storage import BaseStore
 
 
 def validate_adapter_init(persistent_path: Path, working_directory: Path):
@@ -226,7 +225,7 @@ def validate_pipeline(
     :type steps: list[BaseStep]
     :param io: List of io objects that where used to configure
         each individual step.
-    :type io: list[BaseStore]
+    :type io: list[BaseIo]
     :param input_files: List of input files to the pipeline.
     :type input_files: list[Path]
 
@@ -251,7 +250,7 @@ def validate_pipeline(
         raise TypeError("Steps need to be of type list[BaseStep].")
 
     if not isinstance(io, list) and not all(isinstance(store, BaseIo) for store in io):
-        raise TypeError("Volatile_store need to be of type list[BaseStore].")
+        raise TypeError("Volatile_store need to be of type list[BaseIo].")
 
     if not isinstance(input_files, list) and not all(
         isinstance(file, Path) for file in input_files

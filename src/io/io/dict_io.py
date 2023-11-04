@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Callable
 
-from ..base_io import BaseIo, K, T
+from src.io.base_io import BaseIo, K, T
 
 
 class DictIo(BaseIo):
@@ -20,7 +20,7 @@ class DictIo(BaseIo):
         self, key: str, message: str, validate: Callable[[str], bool] = None
     ) -> str:
         if key not in self.answers:
-            raise ValueError(f"Key not found.")
+            raise ValueError("Key not found.")
 
         temp_result = self.answers.get(key)
 
@@ -36,7 +36,7 @@ class DictIo(BaseIo):
         self, key: str, message: str, validate: Callable[[int | float], bool] = None
     ) -> int | float:
         if key not in self.answers:
-            raise ValueError(f"Key not found.")
+            raise ValueError("Key not found.")
 
         temp_result = self.answers.get(key)
 
@@ -50,7 +50,7 @@ class DictIo(BaseIo):
 
     def boolean(self, key: str, message: str) -> bool:
         if key not in self.answers:
-            raise ValueError(f"Key not found.")
+            raise ValueError("Key not found.")
 
         temp_result = self.answers.get(key)
 
@@ -63,7 +63,7 @@ class DictIo(BaseIo):
         self, key: str, message: str, validate: Callable[[Path], bool] = None
     ) -> Path:
         if key not in self.answers:
-            raise ValueError(f"Key not found.")
+            raise ValueError("Key not found.")
 
         temp_result = self.answers.get(key)
 
@@ -83,7 +83,7 @@ class DictIo(BaseIo):
         list_validate: Callable[[list[Path]], bool] = None,
     ) -> list[Path]:
         if key not in self.answers:
-            raise ValueError(f"Key not found.")
+            raise ValueError("Key not found.")
 
         temp_result = self.answers.get(key)
 
@@ -102,7 +102,7 @@ class DictIo(BaseIo):
 
     def single_choice(self, key: str, message: str, options: list[tuple[str, K]]) -> K:
         if key not in self.answers:
-            raise ValueError(f"Key not found.")
+            raise ValueError("Key not found.")
 
         temp_result = self.answers.get(key)
 
@@ -120,7 +120,7 @@ class DictIo(BaseIo):
         allow_no_choice: bool = False,
     ) -> list[T] | None:
         if key not in self.answers:
-            raise ValueError(f"Key not found.")
+            raise ValueError("Key not found.")
 
         temp_result = self.answers.get(key)
 

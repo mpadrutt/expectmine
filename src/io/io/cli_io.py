@@ -4,8 +4,8 @@ from typing import Callable
 from InquirerPy import inquirer
 from InquirerPy.base.control import Choice
 
-from ..base_io import BaseIo, K, T
-from ..utils import parse_number, parse_path
+from src.io.base_io import BaseIo, K, T
+from src.io.utils import parse_number, parse_path
 
 
 class CliIo(BaseIo):
