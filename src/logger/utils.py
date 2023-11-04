@@ -41,7 +41,7 @@ def validate_init(log_level: LogLevel, write: bool, path: Path | None):
     if write and not path:
         raise ValueError("Path can not be empty if write has been set to true.")
 
-    if log_level not in LogLevel or not isinstance(log_level, str):
+    if log_level not in LogLevel:
         raise ValueError("Invalid LogLevel.")
 
 
@@ -74,5 +74,5 @@ def validate_adapter_init(log_level: LogLevel, write_logfile: bool):
     if not isinstance(write_logfile, bool):
         raise TypeError("Write needs to be of type bool.")
 
-    if log_level not in LogLevel or not isinstance(log_level, str):
+    if log_level not in LogLevel:
         raise ValueError("Invalid LogLevel.")

@@ -22,7 +22,7 @@ class CliLogger(BaseLogger):
     ):
         validate_init(log_level, write_logfile, path)
 
-        self.log_level = str(log_level)
+        self.log_level = log_level.value
         self.write_logfile = write_logfile
         self.path = path
 

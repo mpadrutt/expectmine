@@ -27,7 +27,7 @@ deps: requirements.txt
 
 .PHONY: test
 test: $(VENV)
-	$(BIN)/pytest -rA --cov=src/storage/persistent tests/
+	$(BIN)/pytest -rA --cov=src tests
 
 .PHONY: lint
 lint: $(VENV)

@@ -4,10 +4,10 @@ import sqlite3
 from pathlib import Path
 from typing import Optional, Type
 
-from ..base_storage import BaseStore, T
-from ..utils import validate_key, validate_storage_init, validate_value
 from ...io import BaseIo
 from ...steps import BaseStep
+from ..base_storage import BaseStore, T
+from ..utils import validate_key, validate_storage_init, validate_value
 
 
 class Sqlite3Store(BaseStore):
