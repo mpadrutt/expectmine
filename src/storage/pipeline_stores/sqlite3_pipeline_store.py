@@ -1,8 +1,8 @@
 import atexit
 import json
 import pickle
-import sys
 import sqlite3
+import sys
 from pathlib import Path
 from typing import Optional
 
@@ -11,9 +11,9 @@ from src.io.io import DictIo
 from src.steps import BaseStep
 from src.storage import BasePipelineStore, BaseStore
 from src.storage.utils import (
-    validate_pipeline_store_init,
-    validate_pipeline,
     validate_key,
+    validate_pipeline,
+    validate_pipeline_store_init,
 )
 
 

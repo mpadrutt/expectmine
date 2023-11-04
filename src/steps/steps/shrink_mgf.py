@@ -1,11 +1,10 @@
 from pathlib import Path
 from typing import Type, Union
 
-from .. import BaseStep
-
 from ...io import BaseIo
 from ...logger import BaseLogger
 from ...storage import BaseStore
+from .. import BaseStep
 
 
 class ShrinkMgf(BaseStep):

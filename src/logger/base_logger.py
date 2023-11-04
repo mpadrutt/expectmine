@@ -20,7 +20,9 @@ class LogLevel(Enum):
 
 class BaseLogger(ABC):
     @abstractmethod
-    def __init__(self, log_level: LogLevel, write_logfile: bool, path: Path | None, **kwargs):
+    def __init__(
+        self, log_level: LogLevel, write_logfile: bool, path: Path | None, **kwargs
+    ):
         """
         Produces a scoped instance of type BaseLogger.
 

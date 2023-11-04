@@ -1,9 +1,9 @@
 from pathlib import Path
 from typing import Type
 
-from src.steps import BaseStep
 from src.io import BaseIo
 from src.logger import BaseLoggerAdapter
+from src.steps import BaseStep
 from src.storage import BaseStoreAdapter
 
 

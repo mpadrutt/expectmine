@@ -1,0 +1,25 @@
+<batchstep method="io.github.mzmine.modules.io.export_features_sirius.SiriusExportModule" parameter_version="1">
+        <parameter name="Feature lists" type="BATCH_LAST_FEATURELISTS"/>
+        <parameter name="Filename">
+        </parameter>
+        <parameter name="Merge MS/MS" selected="true">
+            <parameter name="Select spectra to merge">across samples</parameter>
+            <parameter name="m/z merge mode">weighted average (remove outliers)</parameter>
+            <parameter name="intensity merge mode">sum intensities</parameter>
+            <parameter name="Expected mass deviation">
+                <absolutetolerance>0.001</absolutetolerance>
+                <ppmtolerance>5.0</ppmtolerance>
+            </parameter>
+            <parameter name="Cosine threshold (%)">0.7</parameter>
+            <parameter name="Signal count threshold (%)">0.2</parameter>
+            <parameter name="Isolation window offset (m/z)">0.0</parameter>
+            <parameter name="Isolation window width (m/z)">3.0</parameter>
+        </parameter>
+        <parameter name="m/z tolerance">
+            <absolutetolerance>0.003</absolutetolerance>
+            <ppmtolerance>5.0</ppmtolerance>
+        </parameter>
+        <parameter name="Only rows with annotation">false</parameter>
+        <parameter name="Exclude multiple charge">false</parameter>
+        <parameter name="Exclude multimers">false</parameter>
+    </batchstep>

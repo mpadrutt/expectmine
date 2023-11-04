@@ -165,4 +165,9 @@ cython_debug/
 # MS-Data
 testdata
 generated
+
+# Storage files
 *.db
+*.sqlite
+*.pickle
+*.pkl

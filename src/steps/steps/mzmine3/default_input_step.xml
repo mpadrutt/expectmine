@@ -1,0 +1,110 @@
+<batchstep method="io.github.mzmine.modules.io.import_rawdata_all.AllSpectralDataImportModule" parameter_version="1">
+        <parameter name="File names">
+        </parameter>
+        <parameter name="Advanced import" selected="false">
+            <parameter name="MS1 detector (Advanced)" selected="false" selected_item="Factor of lowest signal">
+                <module name="Factor of lowest signal">
+                    <parameter name="Noise factor">2.5</parameter>
+                </module>
+                <module name="Centroid">
+                    <parameter name="Noise level">1000.0</parameter>
+                    <parameter name="Detect isotope signals below noise level" selected="false">
+                        <parameter name="Chemical elements">H,C,N,O,S</parameter>
+                        <parameter name="m/z tolerance">
+                            <absolutetolerance>5.0E-4</absolutetolerance>
+                            <ppmtolerance>10.0</ppmtolerance>
+                        </parameter>
+                        <parameter name="Maximum charge of isotope m/z">1</parameter>
+                    </parameter>
+                </module>
+                <module name="Exact mass">
+                    <parameter name="Noise level"/>
+                    <parameter name="Detect isotope signals below noise level" selected="false">
+                        <parameter name="Chemical elements">H,C,N,O,S</parameter>
+                        <parameter name="m/z tolerance">
+                            <absolutetolerance>5.0E-4</absolutetolerance>
+                            <ppmtolerance>10.0</ppmtolerance>
+                        </parameter>
+                        <parameter name="Maximum charge of isotope m/z">1</parameter>
+                    </parameter>
+                </module>
+                <module name="Local maxima">
+                    <parameter name="Noise level"/>
+                </module>
+                <module name="Recursive threshold">
+                    <parameter name="Noise level"/>
+                    <parameter name="Min m/z peak width"/>
+                    <parameter name="Max m/z peak width"/>
+                </module>
+                <module name="Wavelet transform">
+                    <parameter name="Noise level"/>
+                    <parameter name="Scale level"/>
+                    <parameter name="Wavelet window size (%)"/>
+                </module>
+                <module name="Auto">
+                    <parameter name="Noise level">1000.0</parameter>
+                    <parameter name="Detect isotope signals below noise level" selected="false">
+                        <parameter name="Chemical elements">H,C,N,O,S</parameter>
+                        <parameter name="m/z tolerance">
+                            <absolutetolerance>5.0E-4</absolutetolerance>
+                            <ppmtolerance>10.0</ppmtolerance>
+                        </parameter>
+                        <parameter name="Maximum charge of isotope m/z">1</parameter>
+                    </parameter>
+                </module>
+            </parameter>
+            <parameter name="MS2 detector (Advanced)" selected="false" selected_item="Factor of lowest signal">
+                <module name="Factor of lowest signal">
+                    <parameter name="Noise factor">2.5</parameter>
+                </module>
+                <module name="Centroid">
+                    <parameter name="Noise level">1000.0</parameter>
+                    <parameter name="Detect isotope signals below noise level" selected="false">
+                        <parameter name="Chemical elements">H,C,N,O,S</parameter>
+                        <parameter name="m/z tolerance">
+                            <absolutetolerance>5.0E-4</absolutetolerance>
+                            <ppmtolerance>10.0</ppmtolerance>
+                        </parameter>
+                        <parameter name="Maximum charge of isotope m/z">1</parameter>
+                    </parameter>
+                </module>
+                <module name="Exact mass">
+                    <parameter name="Noise level"/>
+                    <parameter name="Detect isotope signals below noise level" selected="false">
+                        <parameter name="Chemical elements">H,C,N,O,S</parameter>
+                        <parameter name="m/z tolerance">
+                            <absolutetolerance>5.0E-4</absolutetolerance>
+                            <ppmtolerance>10.0</ppmtolerance>
+                        </parameter>
+                        <parameter name="Maximum charge of isotope m/z">1</parameter>
+                    </parameter>
+                </module>
+                <module name="Local maxima">
+                    <parameter name="Noise level"/>
+                </module>
+                <module name="Recursive threshold">
+                    <parameter name="Noise level"/>
+                    <parameter name="Min m/z peak width"/>
+                    <parameter name="Max m/z peak width"/>
+                </module>
+                <module name="Wavelet transform">
+                    <parameter name="Noise level"/>
+                    <parameter name="Scale level"/>
+                    <parameter name="Wavelet window size (%)"/>
+                </module>
+                <module name="Auto">
+                    <parameter name="Noise level">1000.0</parameter>
+                    <parameter name="Detect isotope signals below noise level" selected="false">
+                        <parameter name="Chemical elements">H,C,N,O,S</parameter>
+                        <parameter name="m/z tolerance">
+                            <absolutetolerance>5.0E-4</absolutetolerance>
+                            <ppmtolerance>10.0</ppmtolerance>
+                        </parameter>
+                        <parameter name="Maximum charge of isotope m/z">1</parameter>
+                    </parameter>
+                </module>
+            </parameter>
+            <parameter name="Denormalize fragment scans (traps)">false</parameter>
+        </parameter>
+        <parameter name="Spectral library files"/>
+    </batchstep>
