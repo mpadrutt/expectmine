@@ -1,1 +1,1 @@
-from .shrink_mgf import ShrinkMgf
+from src.steps.steps.shrink_mgf import ShrinkMgf

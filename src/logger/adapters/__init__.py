@@ -1,1 +1,1 @@
-from .cli_logger_adapter import CliLoggerAdapter
+from src.logger.adapters.cli_logger_adapter import CliLoggerAdapter

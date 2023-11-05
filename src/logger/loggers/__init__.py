@@ -1,1 +1,1 @@
-from .cli_logger import CliLogger
+from src.logger.loggers.cli_logger import CliLogger

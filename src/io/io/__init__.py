@@ -1,2 +1,2 @@
-from .cli_io import CliIo
-from .dict_io import DictIo
+from src.io.io.cli_io import CliIo
+from src.io.io.dict_io import DictIo
