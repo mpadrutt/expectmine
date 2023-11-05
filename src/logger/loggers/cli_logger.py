@@ -18,7 +18,6 @@ class CliLogger(BaseLogger):
         ],
         write_logfile: bool,
         path: Path | None,
-        **kwargs
     ):
         validate_init(log_level, write_logfile, path)
 
