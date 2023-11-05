@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from .base_logger import LogLevel
+from src.logger.base_logger import LogLevel
 
 
 def validate_init(log_level: LogLevel, write: bool, path: Path | None):

@@ -1,2 +1,0 @@
-from src.storage.adapters.in_memory_adapter import InMemoryStoreAdapter
-from src.storage.adapters.sqlite3_adapter import Sqlite3StoreAdapter

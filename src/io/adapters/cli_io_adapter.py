@@ -1,7 +1,8 @@
-from typing import Dict, Any
+from typing import Any, Dict
 
-from src.io import BaseIo, BaseIoAdapter
-from src.io.io import CliIo
+from src.io.base_io import BaseIo
+from src.io.base_io_adapter import BaseIoAdapter
+from src.io.io.cli_io import CliIo
 
 
 class CliIoAdapter(BaseIoAdapter):

@@ -1,8 +1,8 @@
 from pathlib import Path
 from typing import Any, Dict, Optional, Type
 
+from src.storage.utils import validate_key, validate_storage_init, validate_value
 from src.storage.base_storage import BaseStore, T
-from src.storage import validate_key, validate_storage_init, validate_value
 
 
 class InMemoryStore(BaseStore):

@@ -1,10 +1,10 @@
 from pathlib import Path
 from typing import Any, Dict
 
-from src.logger import BaseLogger, LogLevel
-from src.logger import BaseLoggerAdapter
-from src.logger.loggers import CliLogger
-from src.logger import validate_adapter_init
+from src.logger.base_logger import BaseLogger, LogLevel
+from src.logger.base_logger_adapter import BaseLoggerAdapter
+from src.logger.utils import validate_adapter_init
+from src.logger.loggers.cli_logger import CliLogger
 
 
 class CliLoggerAdapter(BaseLoggerAdapter):

@@ -1,9 +1,9 @@
+import inspect
 from typing import Type
 
 from src.steps import steps
-import inspect
 
-from . import BaseStep
+from src.steps.base_step import BaseStep
 
 
 def get_registered_steps() -> list[tuple[str, Type[BaseStep]]]:

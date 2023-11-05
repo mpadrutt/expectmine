@@ -1,7 +1,7 @@
 import requests
 from requests.exceptions import RequestException
 
-from src.logger import BaseLogger
+from src.logger.base_logger import BaseLogger
 
 
 def current_release_number(owner: str, name: str, logger: BaseLogger) -> str | None:

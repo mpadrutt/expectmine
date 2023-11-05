@@ -1,8 +1,8 @@
 import logging
 from pathlib import Path
 
-from src.logger import BaseLogger, LogLevel
-from src.logger import validate_init
+from src.logger.base_logger import BaseLogger, LogLevel
+from src.logger.utils import validate_init
 
 
 class CliLogger(BaseLogger):

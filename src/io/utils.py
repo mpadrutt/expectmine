@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import TypeVar, Any
+from typing import Any, TypeVar
 
 K = TypeVar("K")
 

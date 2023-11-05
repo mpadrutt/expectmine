@@ -1,10 +1,10 @@
 from pathlib import Path
 from typing import Type
 
-from src.steps import BaseStep
-from src.io import BaseIo
-from src.logger import BaseLoggerAdapter
-from src.storage import BaseStoreAdapter
+from src.io.base_io import BaseIo
+from src.logger.base_logger_adapter import BaseLoggerAdapter
+from src.steps.base_step import BaseStep
+from src.storage.base_storage_adapter import BaseStoreAdapter
 
 
 def validate_init(

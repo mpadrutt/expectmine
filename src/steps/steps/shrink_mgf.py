@@ -1,10 +1,9 @@
 from pathlib import Path
 
-from src.steps import BaseStep
-
-from src.io import BaseIo
-from src.logger import BaseLogger
-from src.storage import BaseStore
+from src.io.base_io import BaseIo
+from src.logger.base_logger import BaseLogger
+from src.steps.base_step import BaseStep
+from src.storage.base_storage import BaseStore
 
 
 class ShrinkMgf(BaseStep):

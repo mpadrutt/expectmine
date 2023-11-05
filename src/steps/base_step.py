@@ -2,9 +2,9 @@ from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Any, Dict
 
-from src.io import BaseIo
-from src.logger import BaseLogger
-from src.storage import BaseStore
+from src.io.base_io import BaseIo
+from src.logger.base_logger import BaseLogger
+from src.storage.base_storage import BaseStore
 
 
 class BaseStep(ABC):
