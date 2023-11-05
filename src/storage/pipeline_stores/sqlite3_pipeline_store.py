@@ -127,8 +127,8 @@ class Sqlite3PipelineStore(BasePipelineStore):
                     "Pickle version mismatch in store and execution environment."
                 )
 
-            step_name = step[1]
-            step_io_dict = step[5]
+            step_name: str = step[1]
+            step_io_dict: dict[str, object] = step[5]
 
             if (
                 not isinstance(step_name, str)

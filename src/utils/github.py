@@ -66,7 +66,7 @@ def all_release_numbers(owner: str, name: str, logger: BaseLogger) -> list[str] 
 
         json = response.json()
 
-        releases = []
+        releases: list[str] = []
 
         for release in json:
             if "tag_name" in release:

@@ -26,7 +26,7 @@ class CliIo(BaseIo):
             if isinstance(temp_result, str) and validate(temp_result):
                 return temp_result
 
-        response = inquirer.text(message, validate=validate).execute()
+        response = inquirer.text(message, validate=validate).execute()  # type: ignore
 
         self.answers[key] = response
         return response
@@ -43,7 +43,7 @@ class CliIo(BaseIo):
             if isinstance(temp_result, int | float) and validate(temp_result):
                 return temp_result
 
-        response = inquirer.number(
+        response = inquirer.number(  # type: ignore
             message, float_allowed=True, validate=lambda x: validate(parse_number(x))
         ).execute()
 
@@ -57,7 +57,7 @@ class CliIo(BaseIo):
             if isinstance(temp_result, bool):
                 return temp_result
 
-        response = inquirer.confirm(message).execute()
+        response = inquirer.confirm(message).execute()  # type: ignore
 
         self.answers[key] = response
         return response
@@ -71,7 +71,7 @@ class CliIo(BaseIo):
             if isinstance(temp_result, Path) and validate(temp_result):
                 return temp_result
 
-        response = inquirer.filepath(
+        response = inquirer.filepath(  # type: ignore
             message, validate=lambda x: validate(parse_path(x))
         ).execute()
         self.answers[key] = response
@@ -98,13 +98,13 @@ class CliIo(BaseIo):
         response: list[Path] = []
 
         while True:
-            base_path = inquirer.filepath(
+            base_path = inquirer.filepath(  # type: ignore
                 f"{message} (First select base path)",
                 validate=lambda x: parse_path(x).is_dir(),
                 only_directories=True,
             ).execute()
 
-            response = inquirer.checkbox(
+            response = inquirer.checkbox(  # type: ignore
                 f"{message} (Now select the desired files)",
                 choices=[
                     Choice(name=file.name, value=file)
@@ -129,7 +129,7 @@ class CliIo(BaseIo):
                 if temp_result == option[1]:
                     return temp_result  # type: ignore
 
-        response = inquirer.select(
+        response = inquirer.select(  # type: ignore
             message,
             [Choice(option[1], option[0]) for option in options],
         ).execute()
@@ -157,7 +157,7 @@ class CliIo(BaseIo):
         response: list[T] = []
 
         while True:
-            response = inquirer.checkbox(
+            response = inquirer.checkbox(  # type: ignore
                 f"{message} (Use space to select values)",
                 [Choice(option[1], option[0]) for option in options],
             ).execute()

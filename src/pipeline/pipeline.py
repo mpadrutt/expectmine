@@ -132,7 +132,7 @@ class Pipeline:
         temp_step.setup(temp_volatile_store, io, temp_logger)
 
         self._current_output_filetypes = temp_step.output_filetypes(
-            self._current_output_filetypes
+            self._current_output_filetypes  # type: ignore as it is checked before
         )
 
         self._steps.append(

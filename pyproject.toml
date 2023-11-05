@@ -1,9 +1,23 @@
 [tool.isort]
 profile = "black"
+sections = [
+    "STDLIB",
+    "THIRDPARTY",
+    "FIRSTPARTY",
+    "LOCALFOLDER",
+]
+
+[tool.isort.imports]
+"src.io" = "src.io"
+"src.logger" = "src.logger"
+"src.storage" = "src.storage"
+"src.steps" = "src.steps"
+"src.pipeline" = "src.pipeline"
+"src.utils" = "src.utils"
 
 [tool.pyright]
 extraPaths = ["src"]
-exclude = ["*/__init__.py"]
+exclude = ["**/__init__.py"]
 venv = "env"
 typeCheckingMode = "strict"
 reportMissingTypeStubs = false
