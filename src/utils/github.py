@@ -1,7 +1,7 @@
 import requests
 from requests.exceptions import RequestException
 
-from ..logger import BaseLogger
+from src.logger.base_logger import BaseLogger
 
 
 def current_release_number(owner: str, name: str, logger: BaseLogger) -> str | None:
@@ -66,7 +66,7 @@ def all_release_numbers(owner: str, name: str, logger: BaseLogger) -> list[str] 
 
         json = response.json()
 
-        releases = []
+        releases: list[str] = []
 
         for release in json:
             if "tag_name" in release:

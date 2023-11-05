@@ -1,12 +1,15 @@
 from abc import ABC, abstractmethod
 from pathlib import Path
+from typing import Any, Dict
 
-from .base_logger import BaseLogger, LogLevel
+from src.logger.base_logger import BaseLogger, LogLevel
 
 
 class BaseLoggerAdapter(ABC):
     @abstractmethod
-    def __init__(self, log_level: LogLevel, write_logfile: bool, **kwargs):
+    def __init__(
+        self, log_level: LogLevel, write_logfile: bool, **kwargs: Dict[Any, Any]
+    ):
         """
         Creates a factory for producing scoped loggers.
 

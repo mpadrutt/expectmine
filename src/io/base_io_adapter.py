@@ -1,18 +1,19 @@
 from abc import ABC, abstractmethod
+from typing import Any, Dict
 
 from .base_io import BaseIo
 
 
 class BaseIoAdapter(ABC):
     @abstractmethod
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Dict[Any, Any]):
         """
         Creates a factory for producing scoped io.
         """
         raise NotImplementedError
 
     @abstractmethod
-    def get_instance(self, step_name: str, **kwargs) -> "BaseIo":
+    def get_instance(self, step_name: str, **kwargs: Dict[Any, Any]) -> "BaseIo":
         """
         Produces a scoped instance of type BaseIo.
 

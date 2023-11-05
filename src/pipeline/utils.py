@@ -1,10 +1,10 @@
 from pathlib import Path
 from typing import Type
 
-from src.io import BaseIo
-from src.logger import BaseLoggerAdapter
-from src.steps import BaseStep
-from src.storage import BaseStoreAdapter
+from src.io.base_io import BaseIo
+from src.logger.base_logger_adapter import BaseLoggerAdapter
+from src.steps.base_step import BaseStep
+from src.storage.base_storage_adapter import BaseStoreAdapter
 
 
 def validate_init(
@@ -48,7 +48,9 @@ def validate_init(
         )
 
 
-def validate_input_files(input_files: list[Path], current_input_filetypes: list[str]):
+def validate_input_files(
+    input_files: list[Path], current_input_filetypes: list[str] | None
+):
     """
     Validates the input files to the pipeline. The list can only contain
     Path objects and those must point to files.
@@ -83,6 +85,9 @@ def validate_input_files(input_files: list[Path], current_input_filetypes: list[
 
     if not all(file.is_file() for file in input_files):
         raise ValueError("input_files need to exclusively contain files.")
+
+    if not current_input_filetypes:
+        return
 
     if not all(file.suffix in current_input_filetypes for file in input_files):
         raise ValueError(

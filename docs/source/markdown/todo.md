@@ -1,5 +1,3 @@
-# Preprocessing pipeline
-
 ## Things still to do:
 
 ### Migrations
@@ -19,8 +17,3 @@
 - [x] Finish pipeline storing
 - [x] Finish pipeline loading from store
 - [ ] Maybe add more adapters 🤷🏽‍
-
-# Getting started
-
-Go to [install](docs/source/markdown/installing.md) section.
-Go to [src](../modules/src.rst)

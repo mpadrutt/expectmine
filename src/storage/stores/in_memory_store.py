@@ -1,8 +1,8 @@
 from pathlib import Path
-from typing import Optional, Type
+from typing import Any, Dict, Optional, Type
 
-from ..base_storage import BaseStore, T
-from ..utils import validate_key, validate_storage_init, validate_value
+from src.storage.base_storage import BaseStore, T
+from src.storage.utils import validate_key, validate_storage_init, validate_value
 
 
 class InMemoryStore(BaseStore):
@@ -14,7 +14,11 @@ class InMemoryStore(BaseStore):
     """
 
     def __init__(
-        self, step_name: str, persistent_path: Path, working_directory: Path, **kwargs
+        self,
+        step_name: str,
+        persistent_path: Path,
+        working_directory: Path,
+        **kwargs: Dict[Any, Any]
     ):
         validate_storage_init(step_name, persistent_path, working_directory)
         self.step_name = step_name
@@ -31,7 +35,7 @@ class InMemoryStore(BaseStore):
     def get(self, key: str, returning: Type[T]) -> Optional[T]:
         validate_key(key)
 
-        return_object = self.storage.get(key, None)
+        return_object = self.storage.get(key)
 
         if not isinstance(return_object, returning | None):
             raise ValueError("Value and return type do not match.")

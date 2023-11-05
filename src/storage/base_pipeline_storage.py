@@ -1,15 +1,14 @@
 from abc import ABC, abstractmethod
 from pathlib import Path
-from typing import Optional
+from typing import Any, Dict, Optional
 
-from src.io import BaseIo
-from src.steps import BaseStep
-from src.storage import BaseStore
+from src.io.base_io import BaseIo
+from src.steps.base_step import BaseStep
 
 
 class BasePipelineStore(ABC):
     @abstractmethod
-    def __init__(self, persistent_path: Path, **kwargs):
+    def __init__(self, persistent_path: Path, **kwargs: Dict[Any, Any]):
         """
         Creates an instance of a pipeline store. It requires a path to the
         persistant directory where data can be stored.
@@ -36,9 +35,9 @@ class BasePipelineStore(ABC):
         self,
         key: str,
         steps: list[BaseStep],
-        volatile_store: list[BaseStore],
+        io: list[BaseIo],
         input_files: list[Path],
-    ):
+    ) -> None:
         """
         Saves the given key-pipeline pair to the store.
 
@@ -47,9 +46,8 @@ class BasePipelineStore(ABC):
         :type key: str
         :param steps: List of BaseSteps that make up the pipeline.
         :type steps: list[BaseStep]
-        :param volatile_store: List of volatile stores that where used to configure
-            each individual step.
-        :type volatile_store: list[BaseStore]
+        :param io: List of all Io objects used to configure the steps.
+        :type io: list[BaseIo]
         :param input_files: List of input files to the pipeline.
         :type input_files: list[Path]
 

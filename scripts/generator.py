@@ -1,16 +1,19 @@
 from pathlib import Path
+import os
 
 from inflection import camelize, underscore
 from InquirerPy import inquirer
 from InquirerPy.validator import EmptyInputValidator
 from jinja2 import Environment, FileSystemLoader
 
-IO_PATH = Path("../io")
-LOGGER_PATH = Path("../logger")
-PIPELINE_PATH = Path("../pipeline")
-STEPS_PATH = Path("../steps")
-STORAGE_PATH = Path("../storage")
-TEMPLATES_PATH = Path()
+os.chdir("./scripts")
+
+IO_PATH = Path("../src/io")
+LOGGER_PATH = Path("../src/logger")
+PIPELINE_PATH = Path("../src/pipeline")
+STEPS_PATH = Path("../src/steps")
+STORAGE_PATH = Path("../src/storage")
+TEMPLATES_PATH = Path("templates")
 
 
 def custom_camelize(string: str):

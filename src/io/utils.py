@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import TypeVar
+from typing import Any, TypeVar
 
 K = TypeVar("K")
 
@@ -31,9 +31,12 @@ def validate_arguments(key: str, message: str):
         raise ValueError("Key can not be empty.")
 
 
-def validate_choice(options: list[tuple[str, K]]):
+def validate_choice(options: list[tuple[str, Any]]):
     if not isinstance(options, list):
         raise TypeError("Options need to be of type list.")
+
+    if not all(isinstance(option, tuple) for option in options):
+        raise TypeError("Options need to be of type tuple.")
 
 
 def validate_step_name(step_name: str):
@@ -64,7 +67,7 @@ def parse_number(number: str) -> int | float:
     """
     try:
         return int(number)
-    except:
+    except ValueError:
         return float(number)
 
 

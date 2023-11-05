@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from pathlib import Path
-from typing import Callable, TypeVar
+from typing import Any, Callable, Dict, TypeVar
 
 K = TypeVar("K")
 T = TypeVar("T")
@@ -8,7 +8,7 @@ T = TypeVar("T")
 
 class BaseIo(ABC):
     @abstractmethod
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Dict[Any, Any]):
         """
         Creates an instance of the scoped io. Each io instance is
         scoped to an individual step.
@@ -17,7 +17,7 @@ class BaseIo(ABC):
 
     @abstractmethod
     def string(
-        self, key: str, message: str, validate: Callable[[str], bool] = None
+        self, key: str, message: str, validate: Callable[[str], bool] = lambda _: True
     ) -> str:
         """
         Presents the user with a message and returns the inputted string. Can
@@ -52,7 +52,10 @@ class BaseIo(ABC):
 
     @abstractmethod
     def number(
-        self, key: str, message: str, validate: Callable[[int | float], bool] = None
+        self,
+        key: str,
+        message: str,
+        validate: Callable[[int | float], bool] = lambda _: True,
     ) -> int | float:
         """
         Presents the user with a message and returns the inputted number. Can
@@ -115,7 +118,7 @@ class BaseIo(ABC):
 
     @abstractmethod
     def filepath(
-        self, key: str, message: str, validate: Callable[[Path], bool] = None
+        self, key: str, message: str, validate: Callable[[Path], bool] = lambda _: True
     ) -> Path:
         """
         Presents the user with a message and returns the inputted filepath. Can
@@ -153,8 +156,8 @@ class BaseIo(ABC):
         self,
         key: str,
         message: str,
-        file_validate: Callable[[Path], bool] = None,
-        list_validate: Callable[[list[Path]], bool] = None,
+        file_validate: Callable[[Path], bool] = lambda _: True,
+        list_validate: Callable[[list[Path] | None], bool] = lambda _: True,
     ) -> list[Path]:
         """
         Presents the user with a message and returns the inputted filepaths. Can

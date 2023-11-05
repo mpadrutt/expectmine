@@ -1,16 +1,19 @@
 from pathlib import Path
-from typing import Type
+from typing import Any, Dict, Type
 
-from ..io import BaseIo
-from ..logger import BaseLogger, BaseLoggerAdapter
-from ..steps import BaseStep, get_registered_steps
-from ..storage import BaseStore, BaseStoreAdapter
-from .utils import (
+from src.io.base_io import BaseIo
+from src.logger.base_logger import BaseLogger
+from src.logger.base_logger_adapter import BaseLoggerAdapter
+from src.pipeline.utils import (
     validate_add_step,
     validate_init,
     validate_input_files,
     validate_step_can_run,
 )
+from src.steps.base_step import BaseStep
+from src.steps.utils import get_registered_steps
+from src.storage.base_storage import BaseStore
+from src.storage.base_storage_adapter import BaseStoreAdapter
 
 
 class Pipeline:
@@ -24,7 +27,7 @@ class Pipeline:
         volatile_adapter: BaseStoreAdapter,
         logger_adapter: BaseLoggerAdapter,
         output_directory: Path,
-        **kwargs,
+        **kwargs: Dict[Any, Any],
     ):
         """
         Initializes the pipeline. Needs 3 adapters to work.
@@ -131,7 +134,7 @@ class Pipeline:
         temp_step.setup(temp_volatile_store, io, temp_logger)
 
         self._current_output_filetypes = temp_step.output_filetypes(
-            self._current_output_filetypes
+            self._current_output_filetypes  # type: ignore as it is checked before
         )
 
         self._steps.append(
@@ -178,6 +181,10 @@ class Pipeline:
         >>> get_possible_steps()
         [Step1, Step3]
         """
+
+        if not self._current_output_filetypes:
+            return [step for step in self._registered_steps if step.can_run([])]
+
         return [
             step
             for step in self._registered_steps

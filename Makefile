@@ -45,8 +45,12 @@ clean:
 	rm -rf .pytest_cache
 
 # Code generation
+.PHONY: step
 step: $(VENV)
-	cd src/templates && python -c "from generator import generate_step; generate_step()"
+	$(BIN)/python -c "from scripts.generator import generate_step; generate_step()"
+
+readme: $(VENV)
+	$(BIN)/python -c "from scripts.markdown import process_markdown; process_markdown()"
 
 docs-rst: $(VENV)
 	$(BIN)/sphinx-apidoc -o docs/source/modules src

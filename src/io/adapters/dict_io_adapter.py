@@ -1,5 +1,8 @@
-from .. import BaseIo, BaseIoAdapter
-from ..io import DictIo
+from typing import Any, Dict
+
+from src.io.base_io import BaseIo
+from src.io.base_io_adapter import BaseIoAdapter
+from src.io.io.dict_io import DictIo
 
 
 class DictIoAdapter(BaseIoAdapter):
@@ -10,14 +13,17 @@ class DictIoAdapter(BaseIoAdapter):
     it will create instances accordingly; otherwise, it will raise an error.
     """
 
-    def __init__(self, answers: dict[str, dict[str, object]], **kwargs):
+    def __init__(self, answers: dict[str, dict[str, object]], **kwargs: Dict[Any, Any]):
         self.answers = answers
         self.kwargs = kwargs
 
-    def get_instance(self, step_name: str, **kwargs) -> "BaseIo":
+    def get_instance(self, step_name: str, **kwargs: Dict[Any, Any]) -> "BaseIo":
         if step_name not in self.answers:
             raise ValueError("Step name not found in DictIoAdapter")
-        if not isinstance(self.answers.get(step_name), dict):
+
+        step_dict = self.answers.get(step_name)
+
+        if not isinstance(step_dict, dict):
             raise ValueError("Value associated with step_name is not a dict.")
 
-        return DictIo(self.answers.get(step_name), **self.kwargs, **kwargs)
+        return DictIo(step_dict, **self.kwargs, **kwargs)

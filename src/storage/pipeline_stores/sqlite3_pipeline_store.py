@@ -4,12 +4,12 @@ import pickle
 import sqlite3
 import sys
 from pathlib import Path
-from typing import Optional
+from typing import Any, Dict, Optional
 
-from src.io import BaseIo
-from src.io.io import DictIo
-from src.steps import BaseStep
-from src.storage import BasePipelineStore, BaseStore
+from src.io.base_io import BaseIo
+from src.io.io.dict_io import DictIo
+from src.steps.base_step import BaseStep
+from src.storage.base_pipeline_storage import BasePipelineStore
 from src.storage.utils import (
     validate_key,
     validate_pipeline,
@@ -18,7 +18,7 @@ from src.storage.utils import (
 
 
 class Sqlite3PipelineStore(BasePipelineStore):
-    def __init__(self, persistent_path: Path, **kwargs):
+    def __init__(self, persistent_path: Path, **kwargs: Dict[Any, Any]):
         validate_pipeline_store_init(persistent_path)
 
         self.persistent_path = persistent_path
@@ -35,7 +35,7 @@ class Sqlite3PipelineStore(BasePipelineStore):
         steps: list[BaseStep],
         io: list[BaseIo],
         input_files: list[Path],
-    ):
+    ) -> None:
         validate_pipeline(key, steps, io, input_files)
 
         cur = self.conn.cursor()
@@ -55,7 +55,7 @@ class Sqlite3PipelineStore(BasePipelineStore):
 
         pipeline_id = next(res)[0]
         python_version = f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"
-        pickle_version = pickle.format_version
+        pickle_version: str = pickle.format_version  # type: ignore
 
         data = [
             (
@@ -63,7 +63,7 @@ class Sqlite3PipelineStore(BasePipelineStore):
                 d[0].step_name(),
                 index,
                 python_version,
-                pickle_version,
+                pickle_version if isinstance(pickle_version, str) else "0.0",
                 pickle.dumps(d[1].all_answers()),
             )
             for index, d in enumerate(zip(steps, io))
@@ -108,8 +108,8 @@ class Sqlite3PipelineStore(BasePipelineStore):
 
         res = cur.execute(
             """
-            SELECT pipeline_step.stepid, pipeline_step.step_name, pipeline_step.step_number, 
-            pipeline_step.python_version, pipeline_step.pickle_version, 
+            SELECT pipeline_step.stepid, pipeline_step.step_name, pipeline_step.step_number,
+            pipeline_step.python_version, pipeline_step.pickle_version,
             pipeline_step.blob_value
             FROM pipeline_step
             INNER JOIN pipeline_table ON pipeline_step.stepid = pipeline_table.id
@@ -122,13 +122,13 @@ class Sqlite3PipelineStore(BasePipelineStore):
         steps: list[tuple[str, BaseIo]] = list()
 
         for step in res:
-            if step[4] != pickle.format_version:
+            if step[4] != pickle.format_version:  # type: ignore
                 raise RuntimeError(
                     "Pickle version mismatch in store and execution environment."
                 )
 
-            step_name = step[1]
-            step_io_dict = step[5]
+            step_name: str = step[1]
+            step_io_dict: dict[str, object] = step[5]
 
             if (
                 not isinstance(step_name, str)

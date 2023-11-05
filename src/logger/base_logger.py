@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from enum import Enum
 from pathlib import Path
+from typing import Any, Dict
 
 
 class LogLevel(Enum):
@@ -21,7 +22,11 @@ class LogLevel(Enum):
 class BaseLogger(ABC):
     @abstractmethod
     def __init__(
-        self, log_level: LogLevel, write_logfile: bool, path: Path | None, **kwargs
+        self,
+        log_level: LogLevel,
+        write_logfile: bool,
+        path: Path | None,
+        **kwargs: Dict[Any, Any]
     ):
         """
         Produces a scoped instance of type BaseLogger.
@@ -52,7 +57,7 @@ class BaseLogger(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def log(self, message: str | Exception):
+    def log(self, message: str | Exception) -> None:
         """
         Writes a message to the log.
 
@@ -65,7 +70,7 @@ class BaseLogger(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def debug(self, message: str | Exception):
+    def debug(self, message: str | Exception) -> None:
         """
         Writes debug info to the log.
 
@@ -78,7 +83,7 @@ class BaseLogger(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def info(self, message: str | Exception):
+    def info(self, message: str | Exception) -> None:
         """
         Writes info to the log.
 
@@ -91,7 +96,7 @@ class BaseLogger(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def warn(self, message: str | Exception):
+    def warn(self, message: str | Exception) -> None:
         """
         Writes a warning to the log.
 
@@ -104,7 +109,7 @@ class BaseLogger(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def error(self, message: str | Exception):
+    def error(self, message: str | Exception) -> None:
         """
         Writes an error to the log.
 

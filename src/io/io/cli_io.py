@@ -1,11 +1,11 @@
 from pathlib import Path
-from typing import Callable
+from typing import Any, Callable, Dict
 
 from InquirerPy import inquirer
 from InquirerPy.base.control import Choice
 
-from ..base_io import BaseIo, K, T
-from ..utils import parse_number, parse_path
+from src.io.base_io import BaseIo, K, T
+from src.io.utils import parse_number, parse_path
 
 
 class CliIo(BaseIo):
@@ -13,40 +13,37 @@ class CliIo(BaseIo):
     CLI based io. Interacts with the user directly from the CLI interface.
     """
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Dict[Any, Any]):
         self.kwargs = kwargs
         self.answers: dict[str, object] = dict()
 
     def string(
-        self, key: str, message: str, validate: Callable[[str], bool] = None
+        self, key: str, message: str, validate: Callable[[str], bool] = lambda _: True
     ) -> str:
         if key in self.answers:
             temp_result = self.answers.get(key)
 
-            if isinstance(temp_result, str):
-                if not validate:
-                    return temp_result
-                if validate(temp_result):
-                    return temp_result
+            if isinstance(temp_result, str) and validate(temp_result):
+                return temp_result
 
-        response = inquirer.text(message, validate=validate).execute()
+        response = inquirer.text(message, validate=validate).execute()  # type: ignore
 
         self.answers[key] = response
         return response
 
     def number(
-        self, key: str, message: str, validate: Callable[[int | float], bool] = None
+        self,
+        key: str,
+        message: str,
+        validate: Callable[[int | float], bool] = lambda _: True,
     ) -> int | float:
         if key in self.answers:
             temp_result = self.answers.get(key)
 
-            if isinstance(temp_result, int | float):
-                if not validate:
-                    return temp_result
-                if validate(temp_result):
-                    return temp_result
+            if isinstance(temp_result, int | float) and validate(temp_result):
+                return temp_result
 
-        response = inquirer.number(
+        response = inquirer.number(  # type: ignore
             message, float_allowed=True, validate=lambda x: validate(parse_number(x))
         ).execute()
 
@@ -60,24 +57,21 @@ class CliIo(BaseIo):
             if isinstance(temp_result, bool):
                 return temp_result
 
-        response = inquirer.confirm(message).execute()
+        response = inquirer.confirm(message).execute()  # type: ignore
 
         self.answers[key] = response
         return response
 
     def filepath(
-        self, key: str, message: str, validate: Callable[[Path], bool] = None
+        self, key: str, message: str, validate: Callable[[Path], bool] = lambda _: True
     ) -> Path:
         if key in self.answers:
             temp_result = self.answers.get(key)
 
-            if isinstance(temp_result, Path):
-                if not validate:
-                    return temp_result
-                if validate(temp_result):
-                    return temp_result
+            if isinstance(temp_result, Path) and validate(temp_result):
+                return temp_result
 
-        response = inquirer.filepath(
+        response = inquirer.filepath(  # type: ignore
             message, validate=lambda x: validate(parse_path(x))
         ).execute()
         self.answers[key] = response
@@ -87,32 +81,30 @@ class CliIo(BaseIo):
         self,
         key: str,
         message: str,
-        file_validate: Callable[[Path], bool] = None,
-        list_validate: Callable[[list], bool] = None,
+        file_validate: Callable[[Path], bool] = lambda _: True,
+        list_validate: Callable[[list[Path] | None], bool] = lambda _: True,
     ) -> list[Path]:
         if key in self.answers:
-            temp_result = self.answers.get(key)
+            temp_result: list[Path] = self.answers.get(key)  # type: ignore
 
-            if isinstance(temp_result, list) and all(
-                isinstance(x, Path) for x in temp_result
+            if (
+                isinstance(temp_result, list)
+                and all(isinstance(x, Path) for x in temp_result)
+                and all(file_validate(path) for path in temp_result)
+                and list_validate(temp_result)
             ):
-                if not file_validate and not list_validate:
-                    return temp_result
-                if file_validate and all(file_validate(path) for path in temp_result):
-                    return temp_result
-                if list_validate and list_validate(temp_result):
-                    return temp_result
+                return temp_result
 
         response: list[Path] = []
 
         while True:
-            base_path = inquirer.filepath(
+            base_path = inquirer.filepath(  # type: ignore
                 f"{message} (First select base path)",
                 validate=lambda x: parse_path(x).is_dir(),
                 only_directories=True,
             ).execute()
 
-            response = inquirer.checkbox(
+            response = inquirer.checkbox(  # type: ignore
                 f"{message} (Now select the desired files)",
                 choices=[
                     Choice(name=file.name, value=file)
@@ -135,11 +127,11 @@ class CliIo(BaseIo):
 
             for option in options:
                 if temp_result == option[1]:
-                    return temp_result
+                    return temp_result  # type: ignore
 
-        response = inquirer.select(
+        response = inquirer.select(  # type: ignore
             message,
-            [Choice(option[0], option[1]) for option in options],
+            [Choice(option[1], option[0]) for option in options],
         ).execute()
 
         self.answers[key] = response
@@ -157,7 +149,7 @@ class CliIo(BaseIo):
 
             for option in options:
                 if temp_result == option[1]:
-                    return temp_result
+                    return temp_result  # type: ignore
 
             if temp_result is None:
                 return None
@@ -165,9 +157,9 @@ class CliIo(BaseIo):
         response: list[T] = []
 
         while True:
-            response = inquirer.checkbox(
+            response = inquirer.checkbox(  # type: ignore
                 f"{message} (Use space to select values)",
-                [Choice(option[0], option[1]) for option in options],
+                [Choice(option[1], option[0]) for option in options],
             ).execute()
 
             if allow_no_choice:

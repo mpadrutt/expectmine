@@ -2,17 +2,19 @@ import atexit
 import pickle
 import sqlite3
 from pathlib import Path
-from typing import Optional, Type
+from typing import Any, Dict, Optional, Type
 
-from ...io import BaseIo
-from ...steps import BaseStep
-from ..base_storage import BaseStore, T
-from ..utils import validate_key, validate_storage_init, validate_value
+from src.storage.base_storage import BaseStore, T
+from src.storage.utils import validate_key, validate_storage_init, validate_value
 
 
 class Sqlite3Store(BaseStore):
     def __init__(
-        self, step_name: str, persistent_path: Path, working_directory: Path, **kwargs
+        self,
+        step_name: str,
+        persistent_path: Path,
+        working_directory: Path,
+        **kwargs: Dict[Any, Any],
     ):
         validate_storage_init(step_name, persistent_path, working_directory)
 
@@ -60,16 +62,12 @@ class Sqlite3Store(BaseStore):
                 value if value_type == "boolean" else None,
                 value
                 if value_type == "string"
-                else value.suffix
-                if value_type == "file"
-                else None,
+                else (value.suffix if isinstance(value, Path) else None),
                 value if value_type == "int" else None,
                 value if value_type == "float" else None,
                 pickle.dumps(value)
                 if value_type == "blob"
-                else value.read_bytes()
-                if value_type == "file"
-                else None,
+                else (value.read_bytes() if isinstance(value, Path) else None),
                 self.step_name,
             ),
         )
@@ -105,9 +103,8 @@ class Sqlite3Store(BaseStore):
                 return_object = (
                     self.working_directory / f"{self.step_name}-{key}{res[3]}"
                 )
-                f = open(return_object, "wb")
-                f.write(res[5])
-                f.close()
+                with open(return_object, "wb") as f:
+                    f.write(res[5])
             case "blob":
                 return_object = pickle.loads(bytes(res[5]))
             case _:
