@@ -1,9 +1,9 @@
 from pathlib import Path
 
-from ..base_storage import BaseStore
-from ..base_storage_adapter import BaseStoreAdapter
-from ..stores.sqlite3_store import Sqlite3Store
-from ..utils import validate_adapter_init, validate_step_name
+from src.storage import BaseStore
+from src.storage import BaseStoreAdapter
+from src.storage.stores import Sqlite3Store
+from src.storage import validate_adapter_init, validate_step_name
 
 
 class Sqlite3StoreAdapter(BaseStoreAdapter):

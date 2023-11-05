@@ -1,9 +1,9 @@
 from pathlib import Path
 
-from ..base_logger import BaseLogger, LogLevel
-from ..base_logger_adapter import BaseLoggerAdapter
-from ..loggers.cli_logger import CliLogger
-from ..utils import validate_adapter_init
+from src.logger import BaseLogger, LogLevel
+from src.logger import BaseLoggerAdapter
+from src.logger.loggers import CliLogger
+from src.logger import validate_adapter_init
 
 
 class CliLoggerAdapter(BaseLoggerAdapter):

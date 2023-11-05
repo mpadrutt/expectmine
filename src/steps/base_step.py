@@ -1,9 +1,9 @@
 from abc import ABC, abstractmethod
 from pathlib import Path
 
-from ..io import BaseIo
-from ..logger import BaseLogger
-from ..storage import BaseStore
+from src.io import BaseIo
+from src.logger import BaseLogger
+from src.storage import BaseStore
 
 
 class BaseStep(ABC):
