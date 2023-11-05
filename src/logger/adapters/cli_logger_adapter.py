@@ -3,8 +3,8 @@ from typing import Any, Dict
 
 from src.logger.base_logger import BaseLogger, LogLevel
 from src.logger.base_logger_adapter import BaseLoggerAdapter
-from src.logger.utils import validate_adapter_init
 from src.logger.loggers.cli_logger import CliLogger
+from src.logger.utils import validate_adapter_init
 
 
 class CliLoggerAdapter(BaseLoggerAdapter):

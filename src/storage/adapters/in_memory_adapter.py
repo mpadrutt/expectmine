@@ -3,8 +3,8 @@ from typing import Any, Dict, List
 
 from src.storage.base_storage import BaseStore
 from src.storage.base_storage_adapter import BaseStoreAdapter
-from src.storage.utils import validate_adapter_init, validate_step_name
 from src.storage.stores.in_memory_store import InMemoryStore
+from src.storage.utils import validate_adapter_init, validate_step_name
 
 
 class InMemoryStoreAdapter(BaseStoreAdapter):
