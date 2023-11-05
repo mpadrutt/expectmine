@@ -1,12 +1,15 @@
 from abc import ABC, abstractmethod
 from pathlib import Path
+from typing import Any, Dict, List
 
 from src.storage.base_storage import BaseStore
 
 
 class BaseStoreAdapter(ABC):
     @abstractmethod
-    def __init__(self, persistent_path: Path, working_directory: Path, **kwargs):
+    def __init__(
+        self, persistent_path: Path, working_directory: Path, **kwargs: Dict[Any, Any]
+    ):
         """
         Creates a factory for producing scoped storages.
 
@@ -34,7 +37,9 @@ class BaseStoreAdapter(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def get_instance(self, step_name: str, *args, **kwargs) -> BaseStore:
+    def get_instance(
+        self, step_name: str, *args: List[Any], **kwargs: Dict[Any, Any]
+    ) -> BaseStore:
         """
         Produces a scoped instance of type BaseStorage.
 

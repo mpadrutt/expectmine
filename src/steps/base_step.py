@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from pathlib import Path
+from typing import Any, Dict
 
 from src.io import BaseIo
 from src.logger import BaseLogger
@@ -11,7 +12,7 @@ class BaseStep(ABC):
     Base class for processing steps the pipeline can use.
     """
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Dict[Any, Any]):
         self.kwargs = kwargs
 
     @classmethod
@@ -72,7 +73,9 @@ class BaseStep(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def install(self, persistent_store: BaseStore, io: BaseIo, logger: BaseLogger):
+    def install(
+        self, persistent_store: BaseStore, io: BaseIo, logger: BaseLogger
+    ) -> None:
         """
         Verifies that all necessary prerequisites to the method have been
         properly installed. If not the method can take action and install the
@@ -94,7 +97,7 @@ class BaseStep(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def setup(self, volatile_store: BaseStore, io: BaseIo, logger: BaseLogger):
+    def setup(self, volatile_store: BaseStore, io: BaseIo, logger: BaseLogger) -> None:
         """
         Sets the step up to run with a specific configuration only available to
         this step instance. Purpose of this method is to set parameters for the

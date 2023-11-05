@@ -244,15 +244,15 @@ def validate_pipeline(
     """
     validate_key(key)
 
-    if not isinstance(steps, list) and not all(
+    if not isinstance(steps, list) or not all(
         isinstance(step, BaseStep) for step in steps
     ):
         raise TypeError("Steps need to be of type list[BaseStep].")
 
-    if not isinstance(io, list) and not all(isinstance(store, BaseIo) for store in io):
+    if not isinstance(io, list) or not all(isinstance(store, BaseIo) for store in io):
         raise TypeError("Volatile_store need to be of type list[BaseIo].")
 
-    if not isinstance(input_files, list) and not all(
+    if not isinstance(input_files, list) or not all(
         isinstance(file, Path) for file in input_files
     ):
         raise TypeError("Input_files need to be of type list[Path].")

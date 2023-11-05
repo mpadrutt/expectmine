@@ -1,6 +1,5 @@
 import logging
 from pathlib import Path
-from typing import Literal
 
 from src.logger import BaseLogger, LogLevel
 from src.logger import validate_init
@@ -13,9 +12,7 @@ class CliLogger(BaseLogger):
 
     def __init__(
         self,
-        log_level: Literal[
-            LogLevel.ALL, LogLevel.DEBUG, LogLevel.INFO, LogLevel.WARN, LogLevel.ERROR
-        ],
+        log_level: LogLevel,
         write_logfile: bool,
         path: Path | None,
     ):
@@ -34,7 +31,7 @@ class CliLogger(BaseLogger):
         console_handler.setFormatter(formatter)
         self.logger.addHandler(console_handler)
 
-        if self.write_logfile:
+        if self.write_logfile and self.path:
             file_handler = logging.FileHandler(self.path / "log.log", encoding="utf-8")
             file_handler.setLevel(self.log_level)
             file_handler.setFormatter(formatter)

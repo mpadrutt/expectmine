@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from pathlib import Path
-from typing import Optional, Type, TypeVar
+from typing import Any, Dict, Optional, Type, TypeVar
 
 T = TypeVar("T", bound=object)
 
@@ -8,7 +8,11 @@ T = TypeVar("T", bound=object)
 class BaseStore(ABC):
     @abstractmethod
     def __init__(
-        self, step_name: str, persistent_path: Path, working_directory: Path, **kwargs
+        self,
+        step_name: str,
+        persistent_path: Path,
+        working_directory: Path,
+        **kwargs: Dict[Any, Any]
     ):
         """
         Creates an instance of the scoped storage. Each storage instance is
@@ -39,7 +43,7 @@ class BaseStore(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def put(self, key: str, value: object | Path):
+    def put(self, key: str, value: object | Path) -> None:
         """
         Inserts the key value pair into the store. If it does already exist,
         the previous value is overwritten, when the new value is inserted.
@@ -106,7 +110,7 @@ class BaseStore(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def delete(self, key: str):
+    def delete(self, key: str) -> None:
         """
         Deletes the value associated to the given key.
 

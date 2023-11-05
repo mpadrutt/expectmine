@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Type
+from typing import Any, Dict, Type
 
 from .utils import (
     validate_init,
@@ -25,7 +25,7 @@ class Pipeline:
         volatile_adapter: BaseStoreAdapter,
         logger_adapter: BaseLoggerAdapter,
         output_directory: Path,
-        **kwargs,
+        **kwargs: Dict[Any, Any],
     ):
         """
         Initializes the pipeline. Needs 3 adapters to work.
@@ -179,6 +179,10 @@ class Pipeline:
         >>> get_possible_steps()
         [Step1, Step3]
         """
+
+        if not self._current_output_filetypes:
+            return [step for step in self._registered_steps if step.can_run([])]
+
         return [
             step
             for step in self._registered_steps

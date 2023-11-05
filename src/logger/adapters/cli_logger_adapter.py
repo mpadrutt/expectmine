@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Any, Dict
 
 from src.logger import BaseLogger, LogLevel
 from src.logger import BaseLoggerAdapter
@@ -11,7 +12,9 @@ class CliLoggerAdapter(BaseLoggerAdapter):
     CliLogger Adapter for CliLogging.
     """
 
-    def __init__(self, log_level: LogLevel, write_logfile: bool, **kwargs):
+    def __init__(
+        self, log_level: LogLevel, write_logfile: bool, **kwargs: Dict[Any, Any]
+    ):
         validate_adapter_init(log_level, write_logfile)
 
         self.log_level = log_level

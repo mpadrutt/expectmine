@@ -19,8 +19,8 @@ def custom_camelize(string: str):
 
 # initialize jinja environment
 environment = Environment(loader=FileSystemLoader(TEMPLATES_PATH), trim_blocks=True)
-environment.globals["camelize"] = custom_camelize
-environment.globals["underscore"] = underscore
+environment.globals["camelize"] = custom_camelize  # type: ignore
+environment.globals["underscore"] = underscore  # type: ignore
 
 
 def generate_step():

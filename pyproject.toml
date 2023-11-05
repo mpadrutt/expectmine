@@ -3,7 +3,7 @@ profile = "black"
 
 [tool.pyright]
 extraPaths = ["src"]
-exclude = ["**/__init__.py"]
+exclude = ["*/__init__.py"]
 venv = "env"
 typeCheckingMode = "strict"
 reportMissingTypeStubs = false

@@ -48,7 +48,13 @@ class ShrinkMgf(BaseStep):
         volatile_store: BaseStore,
         logger: BaseLogger,
     ) -> list[Path]:
-        compounds_per_file = int(volatile_store.get("compounds_per_file", float))
+        compounds_per_file = volatile_store.get("compounds_per_file", float)
+
+        if not compounds_per_file:
+            raise ValueError(
+                "The compounds_per_file variable is not set in the volatile store."
+            )
+
         output_paths: list[Path] = []
 
         for file in input_files:
@@ -71,7 +77,7 @@ class ShrinkMgf(BaseStep):
     def metadata(
         self, persistent_store: BaseStore, volatile_store: BaseStore
     ) -> dict[str, object]:
-        pass
+        return {}
 
     @classmethod
     def citation_and_disclaimer(cls) -> str:

@@ -4,7 +4,7 @@ import pickle
 import sys
 import sqlite3
 from pathlib import Path
-from typing import Optional
+from typing import Any, Dict, Optional
 
 from src.io import BaseIo
 from src.io.io import DictIo
@@ -18,7 +18,7 @@ from src.storage.utils import (
 
 
 class Sqlite3PipelineStore(BasePipelineStore):
-    def __init__(self, persistent_path: Path, **kwargs):
+    def __init__(self, persistent_path: Path, **kwargs: Dict[Any, Any]):
         validate_pipeline_store_init(persistent_path)
 
         self.persistent_path = persistent_path
@@ -35,7 +35,7 @@ class Sqlite3PipelineStore(BasePipelineStore):
         steps: list[BaseStep],
         io: list[BaseIo],
         input_files: list[Path],
-    ):
+    ) -> None:
         validate_pipeline(key, steps, io, input_files)
 
         cur = self.conn.cursor()
@@ -55,7 +55,7 @@ class Sqlite3PipelineStore(BasePipelineStore):
 
         pipeline_id = next(res)[0]
         python_version = f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"
-        pickle_version = pickle.format_version
+        pickle_version: str = pickle.format_version  # type: ignore
 
         data = [
             (
@@ -63,7 +63,7 @@ class Sqlite3PipelineStore(BasePipelineStore):
                 d[0].step_name(),
                 index,
                 python_version,
-                pickle_version,
+                pickle_version if isinstance(pickle_version, str) else "0.0",
                 pickle.dumps(d[1].all_answers()),
             )
             for index, d in enumerate(zip(steps, io))
@@ -122,7 +122,7 @@ class Sqlite3PipelineStore(BasePipelineStore):
         steps: list[tuple[str, BaseIo]] = list()
 
         for step in res:
-            if step[4] != pickle.format_version:
+            if step[4] != pickle.format_version:  # type: ignore
                 raise RuntimeError(
                     "Pickle version mismatch in store and execution environment."
                 )

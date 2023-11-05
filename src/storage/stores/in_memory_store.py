@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Optional, Type
+from typing import Any, Dict, Optional, Type
 
 from src.storage.base_storage import BaseStore, T
 from src.storage import validate_key, validate_storage_init, validate_value
@@ -14,7 +14,11 @@ class InMemoryStore(BaseStore):
     """
 
     def __init__(
-        self, step_name: str, persistent_path: Path, working_directory: Path, **kwargs
+        self,
+        step_name: str,
+        persistent_path: Path,
+        working_directory: Path,
+        **kwargs: Dict[Any, Any]
     ):
         validate_storage_init(step_name, persistent_path, working_directory)
         self.step_name = step_name
