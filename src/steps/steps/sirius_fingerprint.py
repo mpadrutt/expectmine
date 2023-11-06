@@ -1,9 +1,8 @@
 from pathlib import Path
 
-from src.steps.base_step import BaseStep
-
 from src.io.base_io import BaseIo
 from src.logger.base_logger import BaseLogger
+from src.steps.base_step import BaseStep
 from src.storage.base_storage import BaseStore
 from src.utils.cmd import run_cmd
 
@@ -132,53 +131,60 @@ class SiriusFingerprint(BaseStep):
 
     @classmethod
     def citation_and_disclaimer(cls) -> str:
-        return """Please cite the following publications when using our tool:
+        return """
+        Please cite the following publications when using our tool:
 
         When using the SIRIUS Software please cite the following paper:
-        
-        Kai Dührkop, Markus Fleischauer, Marcus Ludwig, Alexander A. Aksenov, Alexey V. Melnik, Marvin Meusel, Pieter C. Dorrestein, Juho Rousu and Sebastian Böcker
+
+        Kai Dührkop, Markus Fleischauer, Marcus Ludwig, Alexander A. Aksenov, Alexey V. Melnik, Marvin Meusel,
+        Pieter C. Dorrestein, Juho Rousu and Sebastian Böcker
         SIRIUS4: a rapid tool for turning tandem mass spectra into metabolite structure information
         Nat Methods, 16, 2019.  https://doi.org/10.1038/s41592-019-0344-8
-        
-        
+
         Depending on the tools you have used please also cite:
-        
-        Kai Dührkop, Louis-Félix Nothias, Markus Fleischauer, Raphael Reher, Marcus Ludwig, Martin A. Hoffmann, Daniel Petras, William H. Gerwick, Juho Rousu, Pieter C. Dorrestein and Sebastian Böcker
+
+        Kai Dührkop, Louis-Félix Nothias, Markus Fleischauer, Raphael Reher, Marcus Ludwig, Martin A. Hoffmann,
+        Daniel Petras, William H. Gerwick, Juho Rousu, Pieter C. Dorrestein and Sebastian Böcker
         Systematic classification of unknown metabolites using high-resolution fragmentation mass spectra
         Nature Biotechnology, 2020.  https://doi.org/10.1038/s41587-020-0740-8
         (Cite if you are using: CANOPUS)
-        
-        Yannick Djoumbou Feunang, Roman Eisner, Craig Knox, Leonid Chepelev, Janna Hastings, Gareth Owen, Eoin Fahy, Christoph Steinbeck, Shankar Subramanian, Evan Bolton, Russell Greiner, David S. Wishart
+
+        Yannick Djoumbou Feunang, Roman Eisner, Craig Knox, Leonid Chepelev, Janna Hastings, Gareth Owen, Eoin Fahy,
+        Christoph Steinbeck, Shankar Subramanian, Evan Bolton, Russell Greiner, David S. Wishart
         ClassyFire: automated chemical classification with a comprehensive, computable taxonomy
         J Cheminf, 8, 2016.  https://doi.org/10.1186/s13321-016-0174-y
         (Cite if you are using: CANOPUS)
-        
-        Kim, Hyun Woo and Wang, Mingxun and Leber, Christopher A. and Nothias, Louis-Félix and Reher, Raphael and Kang, Kyo Bin and van der Hooft, Justin J. J. and Dorrestein, Pieter C. and Gerwick, William H. and Cottrell, Garrison W.
+
+        Kim, Hyun Woo and Wang, Mingxun and Leber, Christopher A. and Nothias, Louis-Félix and Reher,
+        Raphael and Kang,Kyo Bin and van der Hooft, Justin J. J. and Dorrestein, Pieter C. and Gerwick,
+        William H. and Cottrell, Garrison W.
         NPClassifier: A Deep Neural Network-Based Structural Classification Tool for Natural Products
         Journal of Natural Products, 84, 2021.  https://doi.org/10.1021/acs.jnatprod.1c00399
         (Cite if you are using: CANOPUS)
-        
+
         Kai Dührkop, Huibin Shen, Marvin Meusel, Juho Rousu and Sebastian Böcker
         Searching molecular structure databases with tandem mass spectra using CSI:FingerID
         Proc Natl Acad Sci U S A, 112, 2015.  https://doi.org/10.1073/pnas.1509788112
         (Cite if you are using: CSI:FingerID)
-        
-        Martin A. Hoffmann and Louis-Félix Nothias and Marcus Ludwig and Markus Fleischauer and Emily C. Gentry and Michael Witting and Pieter C. Dorrestein and Kai Dührkop and Sebastian Böcker
+
+        Martin A. Hoffmann and Louis-Félix Nothias and Marcus Ludwig and Markus Fleischauer and Emily C. Gentry
+        and Michael Witting and Pieter C. Dorrestein and Kai Dührkop and Sebastian Böcker
         Assigning confidence to structural annotations from mass spectra with COSMIC
         bioRxiv, 2021.  https://doi.org/10.1101/2021.03.18.435634
         (Cite if you are using: CSI:FingerID, COSMIC)
-        
+
         Sebastian Böcker and Kai Dührkop
         Fragmentation trees reloaded
         J Cheminform, 8, 2016.  https://doi.org/10.1186/s13321-016-0116-8
         (Cite if you are using: Fragmentation Trees)
-        
+
         Sebastian Böcker, Matthias Letzel, Zsuzsanna Lipták and Anton Pervukhin
         SIRIUS: Decomposing isotope patterns for metabolite identification
         Bioinformatics, 25, 2009.  https://doi.org/10.1093/bioinformatics/btn603
         (Cite if you are using: Isotope Pattern analysis)
-        
-        Marcus Ludwig, Louis-Félix Nothias, Kai Dührkop, Irina Koester, Markus Fleischauer, Martin A. Hoffmann, Daniel Petras, Fernando Vargas, Mustafa Morsy, Lihini Aluwihare, Pieter C. Dorrestein, Sebastian Böcker
+
+        Marcus Ludwig, Louis-Félix Nothias, Kai Dührkop, Irina Koester, Markus Fleischauer, Martin A. Hoffmann,
+        Daniel Petras, Fernando Vargas, Mustafa Morsy, Lihini Aluwihare, Pieter C. Dorrestein, Sebastian Böcker
         ZODIAC: database-independent molecular formula annotation using Gibbs sampling reveals unknown small molecules
         bioRxiv, 2019.  https://doi.org/10.1101/842740
         (Cite if you are using: ZODIAC)
