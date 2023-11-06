@@ -81,10 +81,14 @@ def run_cmd(
         full_cmd = f"{cmd} {options_string}"
 
     result = subprocess.run(
-        full_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True
+        full_cmd,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        shell=True,
+        text=True,
     )
 
-    stdout = result.stdout.decode("utf-8")
-    stderr = result.stderr.decode("utf-8")
+    stdout = result.stdout
+    stderr = result.stderr
 
     return result.returncode, stdout, stderr
