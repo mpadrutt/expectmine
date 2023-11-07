@@ -10,7 +10,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-pipeline = Pipeline(*get_quickstart_config(output_path=Path("output_5")))
+
+pipeline = Pipeline(*get_quickstart_config(output_path=Path(f"output")))
 
 pipeline.set_input([Path("testdata/1.mzML"), Path("testdata/2.mzML")])
 
@@ -21,7 +22,7 @@ pipeline.add_step(
             "mzmine3_path": Path(
                 "/Applications/MZmine.app/Contents/MacOS/MZmine", absolute=True
             ),
-            "batchfile": Path("testdata/1.xml"),
+            "batchfile": Path("testdata/2.xml"),
         }
     ),
 )
