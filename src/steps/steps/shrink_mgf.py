@@ -37,7 +37,7 @@ class ShrinkMgf(BaseStep):
 
         logger.info(f"Compounds per file is set to: {number_of_compounds}")
 
-        volatile_store.put("compounds_per_file", number_of_compounds)
+        volatile_store.put("compounds_per_file", int(number_of_compounds))
 
     def run(
         self,
@@ -47,7 +47,7 @@ class ShrinkMgf(BaseStep):
         volatile_store: BaseStore,
         logger: BaseLogger,
     ) -> list[Path]:
-        compounds_per_file = volatile_store.get("compounds_per_file", float)
+        compounds_per_file = volatile_store.get("compounds_per_file", int)
 
         if not compounds_per_file:
             raise ValueError(

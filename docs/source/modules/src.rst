@@ -5,6 +5,7 @@ Subpackages
 -----------
 
 .. toctree::
+   :hidden:
    :maxdepth: 4
 
    src.io

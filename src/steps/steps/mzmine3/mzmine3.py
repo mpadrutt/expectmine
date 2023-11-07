@@ -162,6 +162,17 @@ class MZmine3(BaseStep):
             root.append(output_root)
             sirius_steps.append(output_root)
 
+        multithreaded_gapfill = root.find(
+            ".//batchstep[@method='io.github.mzmine.modules.dataprocessing.gapfill_peakfinder.multithreaded.MultiThreadPeakFinderModule']"
+        )
+
+        # FIXME: Find a long term solution for this case.
+        if multithreaded_gapfill and len(input_files) > 1:
+            logger.warn(
+                "Multi-threaded gapfill is used. It is known to cause issues when exporting data as there is "
+                "some unvolentary data duplication. Please consider using the non-multi-threaded one"
+            )
+
         for step in sirius_steps:
             for parameter in step.findall(".//parameter[@name='Filename']"):
                 for file in parameter.findall(".//current_file"):
@@ -169,15 +180,30 @@ class MZmine3(BaseStep):
                 file = ElementTree.SubElement(parameter, "current_file")
                 file.text = str((output_path / "sirius_output.mgf").absolute())
 
-        tree.write(output_path / "modified_batchfile.xml")
+        tree.write(
+            output_path / "modified_batchfile.xml",
+            encoding="utf-8",
+            xml_declaration=True,
+            short_empty_elements=True,
+            method="xml",
+        )
+
+        with open(output_path / "input.txt", "w") as input_textfile:
+            for input_file in input_files:
+                input_textfile.write(f"{str(input_file.absolute())}\n")
 
         logger.info(
             f"Running {persistent_store.get('mzmine3_path', str)} with batchfile "
             f"{str((output_path / 'modified_batchfile.xml').absolute())}"
         )
+
         status, out, err = run_cmd(
             persistent_store.get("mzmine3_path", str),
-            [("-b", str((output_path / "modified_batchfile.xml").absolute()))],
+            [
+                ("-b", str((output_path / "modified_batchfile.xml").absolute())),
+                ("-i", str((output_path / "input.txt").absolute())),
+                ("-temp", str((output_path / "temp").absolute())),
+            ],
         )
         logger.info(out)
         logger.error(err)

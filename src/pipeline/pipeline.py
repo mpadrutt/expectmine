@@ -1,7 +1,11 @@
+import os
 from pathlib import Path
 from typing import Any, Dict, Type
 
+from dotenv import load_dotenv
+
 from src.io.base_io import BaseIo
+from src.io.io.dict_io import DictIo
 from src.logger.base_logger import BaseLogger
 from src.logger.base_logger_adapter import BaseLoggerAdapter
 from src.pipeline.utils import (
@@ -14,6 +18,8 @@ from src.steps.base_step import BaseStep
 from src.steps.utils import get_registered_steps
 from src.storage.base_storage import BaseStore
 from src.storage.base_storage_adapter import BaseStoreAdapter
+
+load_dotenv()
 
 
 class Pipeline:
@@ -95,7 +101,7 @@ class Pipeline:
         if not self._current_output_filetypes:
             self._current_output_filetypes = [file.suffix for file in self._input_files]
 
-    def add_step(self, step: Type[BaseStep], io: BaseIo):
+    def add_step(self, step: Type[BaseStep], io: BaseIo | Dict[str, object]):
         """
         Adds a step to the current pipeline but takes into consideration the
         output of the previous step. The io object is used to configure the
@@ -103,8 +109,8 @@ class Pipeline:
 
         :param step: Step that should be added to the pipeline
         :type step: Type[BaseStep]
-        :param io: Io object that will configure the step
-        :type io: BaseIo
+        :param io: Io object or dict that will configure the step
+        :type io: BaseIo | Dict[str, str]
 
         :Example:
 
@@ -118,6 +124,12 @@ class Pipeline:
         :raises ValueError: If the step can not run on previous output or if
             no input has been given to the pipeline yet.
         """
+        if isinstance(io, dict) and all(
+            isinstance(key, str) and isinstance(value, object)
+            for key, value in io.items()
+        ):
+            io = DictIo(io)
+
         validate_add_step(step, io)
         validate_step_can_run(step, self._current_output_filetypes)
 
@@ -125,16 +137,22 @@ class Pipeline:
         temp_persistent_store = self.persistent_adapter.get_instance(
             temp_step.step_name()
         )
+
         temp_volatile_store = self.volatile_adapter.get_instance(temp_step.step_name())
+
+        temp_logger_directory = (
+            self._output_directory / f"{len(self._steps)}_{temp_step.step_name()}"
+        )
+        os.makedirs(temp_logger_directory, exist_ok=True)
         temp_logger = self.logger_adapter.get_instance(
-            self._output_directory / f"{len(self._steps)}{temp_step.step_name()}"
+            self._output_directory / f"{len(self._steps)}_{temp_step.step_name()}"
         )
 
         temp_step.install(temp_persistent_store, io, temp_logger)
         temp_step.setup(temp_volatile_store, io, temp_logger)
 
         self._current_output_filetypes = temp_step.output_filetypes(
-            self._current_output_filetypes  # type: ignore as it is checked before
+            self._current_output_filetypes  # type: ignore
         )
 
         self._steps.append(
@@ -227,11 +245,3 @@ class Pipeline:
             raise TypeError("Step is not valid subclass of BaseStep")
 
         self._registered_steps.append(step)
-
-
-# Regular workflow in code
-"""
-Pipeline.get_stored(store) -> list[key]
-Pipeline.load(store, key) -> Pipeline
-Pipeline.store(store, key)
-"""

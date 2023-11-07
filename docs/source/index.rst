@@ -1,22 +1,44 @@
+
 .. include:: markdown/index.md
    :parser: myst_parser.sphinx_
 
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+
+
+..
+   DOCUMENTS:
+
 .. toctree::
-   :maxdepth: 2
    :hidden:
-   :caption: Getting Started
+   :caption: Pipeline
 
-   markdown/getting_started
+   markdown/pipeline/overview
+   markdown/pipeline/goals_and_non_goals
+   markdown/pipeline/todo
 
 .. toctree::
-   :maxdepth: 2
    :hidden:
-   :caption: Guides and stuff
+   :caption: Getting started
 
-   markdown/installing
+   markdown/getting_started/setup
+   markdown/getting_started/commands
+   markdown/getting_started/first_pipeline
 
 .. toctree::
-   :maxdepth: 2
+   :hidden:
+   :caption: Guides
+
+   markdown/guides/repo_structure
+   markdown/guides/custom_step
+   markdown/guides/custom_adapter
+   markdown/guides/other_modes
+
+.. toctree::
    :hidden:
    :caption: Code
 
@@ -28,7 +50,6 @@
    modules/src.utils
 
 .. toctree::
-   :maxdepth: 2
    :hidden:
    :caption: Sirius CLI documentation
 

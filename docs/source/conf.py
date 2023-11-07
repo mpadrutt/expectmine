@@ -25,7 +25,10 @@ extensions = [
     "sphinx.ext.napoleon",
     "myst_parser",
     "sphinx_design",
+    "sphinx_copybutton",
 ]
+
+myst_enable_extensions = ["linkify", "tasklist", "colon_fence"]
 
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]

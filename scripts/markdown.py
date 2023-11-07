@@ -46,6 +46,9 @@ def process_markdown():
         link_pattern = r"\[(.*?)\]\(([^)]+)\)"
 
         for j, temp_line in enumerate(temp_lines):
+            if temp_line.startswith("#"):
+                temp_lines[j] = "#" + temp_lines[j]
+
             temp_match = re.search(link_pattern, temp_line)
 
             if not temp_match:

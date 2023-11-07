@@ -1,9 +1,13 @@
 from pathlib import Path
-from typing import Type
+from typing import Tuple, Type
 
 from src.io.base_io import BaseIo
+from src.io.base_io_adapter import BaseIoAdapter
+from src.logger.adapters.cli_logger_adapter import CliLoggerAdapter
+from src.logger.base_logger import LogLevel
 from src.logger.base_logger_adapter import BaseLoggerAdapter
 from src.steps.base_step import BaseStep
+from src.storage.adapters.in_memory_adapter import InMemoryStoreAdapter
 from src.storage.base_storage_adapter import BaseStoreAdapter
 
 
@@ -150,3 +154,21 @@ def validate_step_can_run(step: Type[BaseStep], input_filetypes: list[str] | Non
 
     if not step.can_run(input_filetypes):
         raise ValueError(f"Step {step.step_name()} can not run on the given input.")
+
+
+def get_quickstart_config(
+    output_path: Path,
+) -> tuple[InMemoryStoreAdapter, InMemoryStoreAdapter, CliLoggerAdapter, Path]:
+    """
+
+    :param output_path: Where should the pipeline output its result?
+    :type output_path: Path
+
+    :return: 4-tuple containing all necessary configuration
+    """
+    return (
+        InMemoryStoreAdapter(output_path, output_path / "temp"),
+        InMemoryStoreAdapter(output_path, output_path / "temp"),
+        CliLoggerAdapter(LogLevel.ALL, write_logfile=True),
+        output_path,
+    )

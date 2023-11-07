@@ -49,15 +49,12 @@ clean:
 step: $(VENV)
 	$(BIN)/python -c "from scripts.generator import generate_step; generate_step()"
 
-.PHONY: env2
-env2: $(VENV)
+.PHONY: env-vars
+env-vars: $(VENV)
 	$(BIN)/python -c "from scripts.generator import generate_env; generate_env()"
 
 readme: $(VENV)
 	$(BIN)/python -c "from scripts.markdown import process_markdown; process_markdown()"
-
-docs-rst: $(VENV)
-	$(BIN)/sphinx-apidoc -o docs/source/modules src
 
 docs-html: $(VENV)
 	$(BIN)/sphinx-build -M html docs/source docs/build
