@@ -59,3 +59,10 @@ Indices and tables
    markdown/sirius_cli/sirius_fingerprint.md
    markdown/sirius_cli/sirius_structure.md
    markdown/sirius_cli/sirius_export.md
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
