@@ -49,6 +49,10 @@ clean:
 step: $(VENV)
 	$(BIN)/python -c "from scripts.generator import generate_step; generate_step()"
 
+.PHONY: env2
+env2: $(VENV)
+	$(BIN)/python -c "from scripts.generator import generate_env; generate_env()"
+
 readme: $(VENV)
 	$(BIN)/python -c "from scripts.markdown import process_markdown; process_markdown()"
 

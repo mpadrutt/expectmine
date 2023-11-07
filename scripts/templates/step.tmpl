@@ -1,10 +1,10 @@
 from pathlib import Path
 
-from .. import BaseStep
+from src.steps.base_step import BaseStep
 
-from ...io import BaseIo
-from ...logger import BaseLogger
-from ...storage import BaseStore
+from src.io.base_io import BaseIo
+from src.logger.base_logger import BaseLogger
+from src.storage.base_storage import BaseStore
 
 
 class {{camelize(step_name)}}(BaseStep):

@@ -22,4 +22,4 @@ class CliLoggerAdapter(BaseLoggerAdapter):
         self.kwargs = kwargs
 
     def get_instance(self, path: Path | None) -> "BaseLogger":
-        return CliLogger(self.log_level, self.write_logfile, path, **self.kwargs)
+        return CliLogger(self.log_level, self.write_logfile, path)
