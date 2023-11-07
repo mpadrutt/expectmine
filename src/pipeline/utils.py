@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Type, Tuple
+from typing import Tuple, Type
 
 from src.io.base_io import BaseIo
 from src.io.base_io_adapter import BaseIoAdapter

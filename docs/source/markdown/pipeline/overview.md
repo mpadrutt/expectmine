@@ -38,27 +38,23 @@ pipeline.set_input([Path("file1.mzml"), Path("file2.mzml")])
 
 pipeline.add_step(
     MZmine3,
-    DictIo(
-        {
-            "mzmine3_path": Path(
-                "/Applications/MZmine.app/Contents/MacOS/MZmine", absolute=True
-            ),
-            "batchfile": Path("batchfile.xml"),
-        }
-    ),
+    {
+        "mzmine3_path": Path(
+            "/Applications/MZmine.app/Contents/MacOS/MZmine", absolute=True
+        ),
+        "batchfile": Path("batchfile.xml"),
+    }
 )
 
 pipeline.add_step(
     SiriusFingerprint,
-    DictIo(
-        {
-            "sirius_path": Path(
-                "/Applications/sirius.app/Contents/MacOS/sirius", absolute=True
-            ),
-            "set_max_mz": False,
-            "instrument": "orbitrap",
-        }
-    ),
+    {
+        "sirius_path": Path(
+            "/Applications/sirius.app/Contents/MacOS/sirius", absolute=True
+        ),
+        "set_max_mz": False,
+        "instrument": "orbitrap",
+    }
 )
 
 pipeline.run()

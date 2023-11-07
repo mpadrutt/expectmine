@@ -29,14 +29,12 @@ object, which is used to configure the step.
 ```python
 pipeline.add_step(
     MZmine3,
-    DictIo(
-        {
-            "mzmine3_path": Path(
-                "/Applications/MZmine.app/Contents/MacOS/MZmine", absolute=True
-            ),
-            "batchfile": Path("batchfile.xml"),
-        }
-    ),
+    {
+        "mzmine3_path": Path(
+            "/Applications/MZmine.app/Contents/MacOS/MZmine", absolute=True
+        ),
+        "batchfile": Path("batchfile.xml"),
+    }
 )
 ```
 
@@ -45,5 +43,43 @@ After calling run the pipeline will then run and output files for each step
 in the directory you provided as `output_path`.
 
 ```python
+pipeline.run()
+```
+
+## Summary
+```python
+from pathlib import Path
+
+from src.io.io.dict_io import DictIo
+from src.pipeline.pipeline import Pipeline
+from src.pipeline.utils import get_quickstart_config
+from src.steps.steps import SiriusFingerprint
+from src.steps.steps.mzmine3.mzmine3 import MZmine3
+
+pipeline = Pipeline(*get_quickstart_config(output_path=Path("pipeline_output")))
+
+pipeline.set_input([Path("file1.mzml"), Path("file2.mzml")])
+
+pipeline.add_step(
+    MZmine3,
+    {
+        "mzmine3_path": Path(
+            "/Applications/MZmine.app/Contents/MacOS/MZmine", absolute=True
+        ),
+        "batchfile": Path("batchfile.xml"),
+    }
+)
+
+pipeline.add_step(
+    SiriusFingerprint,
+    {
+        "sirius_path": Path(
+            "/Applications/sirius.app/Contents/MacOS/sirius", absolute=True
+        ),
+        "set_max_mz": False,
+        "instrument": "orbitrap",
+    }
+)
+
 pipeline.run()
 ```
