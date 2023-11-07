@@ -29,10 +29,11 @@ lg = CliLogger(LogLevel.ALL, write_logfile=True, path=path)
 step = SiriusFingerprint()
 step.install(ps, io, lg)
 step.setup(vs, io, lg)
-step.run(
-    [Path("testdata/laudanosine.mgf"), Path("testdata/laudanosine1.mgf")],
-    path,
-    ps,
-    vs,
-    lg,
-)
+# step.run(
+#     [Path("testdata/laudanosine.mgf"), Path("testdata/laudanosine1.mgf")],
+#     path,
+#     ps,
+#     vs,
+#     lg,
+# )
+print(step.metadata(ps, vs))

@@ -1,7 +1,7 @@
 import os
 import sys
-from xml.etree import ElementTree
 from pathlib import Path
+from xml.etree import ElementTree
 
 from src.io.base_io import BaseIo
 from src.logger.base_logger import BaseLogger

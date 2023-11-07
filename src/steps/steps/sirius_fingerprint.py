@@ -77,13 +77,6 @@ class SiriusFingerprint(BaseStep):
         volatile_store: BaseStore,
         logger: BaseLogger,
     ) -> list[Path]:
-        """
-        TODO:   With the previously set stores (persistent_store, volatile_store) run
-                run your step now on the (input_files). You should write your output
-                to the output_path. If necessary you can use the (logger) to log
-                important messages.
-        """
-
         logger.info(f"Running {persistent_store.get('sirius_path', str)}")
 
         max_mz = volatile_store.get("max_mz", int)
@@ -111,23 +104,33 @@ class SiriusFingerprint(BaseStep):
 
         logger.info(out)
         logger.error(err)
-
         logger.info(f"Finished running cmd with status code {status}.")
-
-        logger.info(f"Returning path {str(output_path.absolute())} for next step.")
+        logger.info(
+            f"Returning path {str((output_path / 'output').absolute())} "
+            "for next step."
+        )
 
         return [output_path / "output"]
 
     def metadata(
         self, persistent_store: BaseStore, volatile_store: BaseStore
     ) -> dict[str, object]:
-        """
-        TODO:   Return all relevant metadata from the step back to the pipeline.
-                This can help reproducibility and make your execution more
-                transparent. For this you can access both stores
-                (persistent_store, volatile_store).
-        """
-        raise NotImplementedError
+        metadata: dict[str, object] = {}
+
+        status, out, err = run_cmd(
+            persistent_store.get("sirius_path", str),
+            ["--version"],
+        )
+
+        for line in out.split("\n"):
+            if "SIRIUS lib:" in line:
+                metadata["sirius_lib"] = line.split(" ")[-1]
+            elif "CSI:FingerID lib:" in line:
+                metadata["csifingerid_lib"] = line.split(" ")[-1]
+            elif "SIRIUS" in line:
+                metadata["sirius_version"] = line.split(" ")[-1]
+
+        return metadata
 
     @classmethod
     def citation_and_disclaimer(cls) -> str:
