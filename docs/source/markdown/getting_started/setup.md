@@ -34,6 +34,7 @@ make env-vars
 python -m venv env
 source env/bin/activate
 make deps
+make env-vars
 ```
 :::
 
@@ -44,6 +45,7 @@ make deps
 python -m venv env
 source env/bin/activate
 make deps
+make env-vars
 ```
 :::
 
