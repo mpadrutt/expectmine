@@ -130,11 +130,11 @@ class Pipeline:
         temp_volatile_store = self.volatile_adapter.get_instance(temp_step.step_name())
 
         temp_logger_directory = (
-            self._output_directory / f"{len(self._steps)}{temp_step.step_name()}"
+            self._output_directory / f"{len(self._steps)}_{temp_step.step_name()}"
         )
         os.makedirs(temp_logger_directory, exist_ok=True)
         temp_logger = self.logger_adapter.get_instance(
-            self._output_directory / f"{len(self._steps)}{temp_step.step_name()}"
+            self._output_directory / f"{len(self._steps)}_{temp_step.step_name()}"
         )
 
         temp_step.install(temp_persistent_store, io, temp_logger)
@@ -234,11 +234,3 @@ class Pipeline:
             raise TypeError("Step is not valid subclass of BaseStep")
 
         self._registered_steps.append(step)
-
-
-# Regular workflow in code
-"""
-Pipeline.get_stored(store) -> list[key]
-Pipeline.load(store, key) -> Pipeline
-Pipeline.store(store, key)
-"""

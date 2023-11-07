@@ -49,8 +49,8 @@ clean:
 step: $(VENV)
 	$(BIN)/python -c "from scripts.generator import generate_step; generate_step()"
 
-.PHONY: env_vars
-env_vars: $(VENV)
+.PHONY: env-vars
+env-vars: $(VENV)
 	$(BIN)/python -c "from scripts.generator import generate_env; generate_env()"
 
 readme: $(VENV)

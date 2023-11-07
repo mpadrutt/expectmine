@@ -169,7 +169,21 @@ class MZmine3(BaseStep):
                 file = ElementTree.SubElement(parameter, "current_file")
                 file.text = str((output_path / "sirius_output.mgf").absolute())
 
-        tree.write(output_path / "modified_batchfile.xml")
+        tree.write(
+            output_path / "modified_batchfile.xml",
+            encoding="utf-8",
+            xml_declaration=True,
+            short_empty_elements=True,
+            method="xml",
+        )
+
+        with open(output_path / "modified_batchfile.xml", "r") as file:
+            xml_data = file.read()
+
+        xml_data = xml_data.replace(" />", "/>").replace("'", '"')
+
+        with open(output_path / "modified_batchfile.xml", "w") as file:
+            file.write(xml_data)
 
         logger.info(
             f"Running {persistent_store.get('mzmine3_path', str)} with batchfile "
@@ -177,7 +191,10 @@ class MZmine3(BaseStep):
         )
         status, out, err = run_cmd(
             persistent_store.get("mzmine3_path", str),
-            [("-b", str((output_path / "modified_batchfile.xml").absolute()))],
+            [
+                ("-b", str((output_path / "modified_batchfile.xml").absolute())),
+                ("-temp", str((output_path / "temp").absolute())),
+            ],
         )
         logger.info(out)
         logger.error(err)

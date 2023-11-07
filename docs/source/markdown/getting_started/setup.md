@@ -23,6 +23,7 @@ or do this step manually by running `pip install --upgrade -r requirements.txt`
 python -m venv env
 .\env\Scripts\activate
 make deps
+make env-vars
 ```
 :::
 

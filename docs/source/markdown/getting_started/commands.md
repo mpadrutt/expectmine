@@ -18,7 +18,7 @@ Makefile. The commands can be grouped in the following groups:
 ## Code generation
 - `make step`: Starts the workflow of creating a new step.
 - `make readme`: Updates the `README.md` using the sphinx documentation.
-- `make env_vars`: Generates an empty .env file with all necessary 
+- `make env-vars`: Generates an empty .env file with all necessary 
   environment variables.
 - `make docs-html`: Generates the html documentation using .md and .rst files.
 

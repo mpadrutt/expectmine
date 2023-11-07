@@ -22,7 +22,7 @@ class CliLogger(BaseLogger):
         self.write_logfile = write_logfile
         self.path = path
 
-        self.logger = logging.getLogger()
+        self.logger = logging.Logger(str(path.absolute()))
         self.logger.setLevel(self.log_level)
         formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
 
@@ -32,7 +32,9 @@ class CliLogger(BaseLogger):
         self.logger.addHandler(console_handler)
 
         if self.write_logfile and self.path:
-            file_handler = logging.FileHandler(self.path / "log.log", encoding="utf-8")
+            file_handler = logging.FileHandler(
+                self.path / "log.log", encoding="utf-8", mode="w"
+            )
             file_handler.setLevel(self.log_level)
             file_handler.setFormatter(formatter)
             self.logger.addHandler(file_handler)

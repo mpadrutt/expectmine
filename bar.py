@@ -6,11 +6,13 @@ from src.pipeline.utils import get_quickstart_config
 from src.steps.steps import SiriusFingerprint, ShrinkMgf
 from src.steps.steps.mzmine3.mzmine3 import MZmine3
 
-pipeline = Pipeline(
-    *get_quickstart_config(output_path=Path("testdata/pipeline_output"))
-)
+from dotenv import load_dotenv
 
-pipeline.set_input([Path("testdata/1.mzml")])
+load_dotenv()
+
+pipeline = Pipeline(*get_quickstart_config(output_path=Path("output_5")))
+
+pipeline.set_input([Path("testdata/1.mzML"), Path("testdata/2.mzML")])
 
 pipeline.add_step(
     MZmine3,
