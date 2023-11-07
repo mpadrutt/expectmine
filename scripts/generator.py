@@ -8,11 +8,13 @@ from jinja2 import Environment, FileSystemLoader
 
 os.chdir("./scripts")
 
+ROOT_PATH = Path("..")
 IO_PATH = Path("../src/io")
 LOGGER_PATH = Path("../src/logger")
 PIPELINE_PATH = Path("../src/pipeline")
 STEPS_PATH = Path("../src/steps")
 STORAGE_PATH = Path("../src/storage")
+
 TEMPLATES_PATH = Path("templates")
 
 
@@ -42,4 +44,17 @@ def generate_step():
     generated_code = step_template.render(step_name=step_name)
 
     with open(STEPS_PATH / "steps" / f"{underscore(step_name)}.py", "w") as handle:
+        handle.write(generated_code)
+
+
+def generate_env():
+    env_template = environment.get_template(".env.tmpl")
+
+    generated_code = env_template.render()
+
+    if (ROOT_PATH / ".env").exists():
+        os.rename(ROOT_PATH / ".env", ROOT_PATH / "old.env")
+        print("Renamed existing .env file to old.env")
+
+    with open(ROOT_PATH / ".env", "w") as handle:
         handle.write(generated_code)

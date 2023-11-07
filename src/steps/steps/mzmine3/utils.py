@@ -1,5 +1,5 @@
 from pathlib import Path
-from xml.etree import ElementTree as ElementTree
+from xml.etree import ElementTree
 
 
 def batchfile_has_spectral_library_files(batchfile: Path) -> bool:

@@ -1,7 +1,7 @@
 import os
 import sys
-import xml.etree.ElementTree as ElementTree
 from pathlib import Path
+from xml.etree import ElementTree
 
 from src.io.base_io import BaseIo
 from src.logger.base_logger import BaseLogger
@@ -172,7 +172,8 @@ class MZmine3(BaseStep):
         tree.write(output_path / "modified_batchfile.xml")
 
         logger.info(
-            f"Running {persistent_store.get('mzmine3_path', str)} with batchfile {str((output_path / 'modified_batchfile.xml').absolute())}"
+            f"Running {persistent_store.get('mzmine3_path', str)} with batchfile "
+            f"{str((output_path / 'modified_batchfile.xml').absolute())}"
         )
         status, out, err = run_cmd(
             persistent_store.get("mzmine3_path", str),
@@ -216,9 +217,9 @@ class MZmine3(BaseStep):
 
     @classmethod
     def citation_and_disclaimer(cls) -> str:
-        return """        
+        return """
         Please cite the following publication if you use MZmine to analyze your data:
-        
+
         Schmid, R., Heuckeroth, S., Korf, A. et al. Integrative analysis of multimodal mass spectrometry
         data in MZmine 3. Nature Biotechnology (2023). https://doi.org/10.1038/s41587-023-01690-2
         """
