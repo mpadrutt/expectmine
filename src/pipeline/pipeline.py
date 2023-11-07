@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 from typing import Any, Dict, Type
 
@@ -125,7 +126,13 @@ class Pipeline:
         temp_persistent_store = self.persistent_adapter.get_instance(
             temp_step.step_name()
         )
+
         temp_volatile_store = self.volatile_adapter.get_instance(temp_step.step_name())
+
+        temp_logger_directory = (
+            self._output_directory / f"{len(self._steps)}{temp_step.step_name()}"
+        )
+        os.makedirs(temp_logger_directory, exist_ok=True)
         temp_logger = self.logger_adapter.get_instance(
             self._output_directory / f"{len(self._steps)}{temp_step.step_name()}"
         )
@@ -134,7 +141,7 @@ class Pipeline:
         temp_step.setup(temp_volatile_store, io, temp_logger)
 
         self._current_output_filetypes = temp_step.output_filetypes(
-            self._current_output_filetypes  # type: ignore as it is checked before
+            self._current_output_filetypes  # type: ignore
         )
 
         self._steps.append(
