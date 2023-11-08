@@ -50,7 +50,6 @@ pipeline.run()
 ```python
 from pathlib import Path
 
-from src.io.io.dict_io import DictIo
 from src.pipeline.pipeline import Pipeline
 from src.pipeline.utils import get_quickstart_config
 from src.steps.steps import SiriusFingerprint

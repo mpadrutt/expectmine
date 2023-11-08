@@ -16,9 +16,6 @@ INCLUDE_RE = re.compile(r"!\[\[(.*\.md)]]")
 ALIAS_DICT = {"@docs": "docs/source/markdown", "@code": "src"}
 
 
-# print(os.path.normpath(root_directory / included_file_path))
-
-
 def process_markdown():
     with open(TEMPLATE_PATH, "r") as template:
         lines = template.readlines()
