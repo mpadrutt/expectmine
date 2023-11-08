@@ -40,14 +40,14 @@ Indices and tables
 
 .. toctree::
    :hidden:
-   :caption: Code
+   :caption: Concepts
 
-   modules/src.io
-   modules/src.logger
-   modules/src.pipeline
-   modules/src.steps
-   modules/src.storage
-   modules/src.utils
+   markdown/concepts/pipeline
+   markdown/concepts/steps
+   markdown/concepts/io
+   markdown/concepts/store
+   markdown/concepts/logger
+   markdown/concepts/utils
 
 .. toctree::
    :hidden:
