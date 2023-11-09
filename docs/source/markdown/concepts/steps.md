@@ -1,10 +1,16 @@
 # Steps Module
 
+## Lifecycle of a step
+
+
 ```{toctree}
 ---
-maxdepth: 1
+maxdepth: 2
 hidden:
 ---
-../../modules/src.steps
-../../modules/src.steps.steps
+../../modules/steps/base_step
+../../modules/steps/utils
+
+../../modules/steps/mzmine3/index
+../../modules/steps/sirius_fingerprint/index
 ```

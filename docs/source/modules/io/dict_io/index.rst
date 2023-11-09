@@ -1,5 +1,5 @@
 Dict IO
-======
+=======
 
 The DictIo is a wrapper around a basic dict to make a very simple adapter and io class
 to quickly configure steps on the run.
@@ -30,7 +30,7 @@ to provide to the individual step.
    )
 
 Further Info
-___________
+____________
 .. toctree::
    :maxdepth: 3
 

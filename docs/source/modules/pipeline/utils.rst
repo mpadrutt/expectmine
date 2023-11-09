@@ -1,5 +1,5 @@
 Pipeline Helper Functions
-=======================
+=========================
 
 .. automodule:: src.pipeline.utils
    :members:

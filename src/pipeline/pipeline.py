@@ -12,7 +12,7 @@ from src.pipeline.utils import (
     validate_add_step,
     validate_init,
     validate_input_files,
-    validate_step_can_run,
+    validate_step_can_run, validate_output_directory,
 )
 from src.steps.base_step import BaseStep
 from src.steps.utils import get_registered_steps
@@ -59,6 +59,7 @@ class Pipeline:
         :raises TypeError: If the arguments have the wrong type.
         """
         validate_init(persistent_adapter, volatile_adapter, logger_adapter)
+        validate_output_directory(output_directory)
 
         self.persistent_adapter = persistent_adapter
         self.volatile_adapter = volatile_adapter

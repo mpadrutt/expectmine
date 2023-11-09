@@ -1,29 +1,27 @@
-Cli IO
-======
+# Cli IO
 
-Basic Cli based input class. It uses `InquirerPy <https://inquirerpy.readthedocs.io/en/latest>`_
+Basic Cli based input class. It uses [InquirerPy](https://inquirerpy.readthedocs.io/en/latest)
 under the hood to query the user for information. It should be used if you want
 to provide the user with an interactive experience. The CliIo step does not need
 to know all query keys in advance.
 
-Usage
-_____
+## Usage
 To create a new CliIo instance, simply import the Class and create an instance.
 Same holds true for the CliIoAdapter.
 
-.. code-block:: python
+```python
+from src.io.io.cli_io import CliIo
+from src.io.adapters.cli_io_adapter import CliIoAdapter
 
-   from src.io.io.cli_io import CliIo
-   from src.io.adapters.cli_io_adapter import CliIoAdapter
+io_object = CliIo()
+adapter = CliIoAdapter()
+```
 
-   io_object = CliIo()
-   adapter = CliIoAdapter()
-
-
-Further Info
-____________
-.. toctree::
-   :maxdepth: 3
-
-   cli_io
-   cli_io_adapter
+## Further Info
+```{toctree}
+---
+maxdepth: 3
+---
+cli_io
+cli_io_adapter
+```

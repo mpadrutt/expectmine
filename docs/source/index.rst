@@ -28,6 +28,7 @@ Indices and tables
    markdown/getting_started/setup
    markdown/getting_started/commands
    markdown/getting_started/first_pipeline
+   markdown/getting_started/troubleshooting
 
 .. toctree::
    :hidden:

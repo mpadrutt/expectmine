@@ -1,9 +1,4 @@
 # Preprocessing pipeline
-It is recommended to open the documentation in your 
-browser. To open run:
-- `start docs/build/html/index.html` on Windows
-- `open docs/build/html/index.html` on macOS
-- `xdg-open docs/build/html/index.html` on Linux
 
 ## Project setup
 To get started, we first create a virtual environment and install the 
