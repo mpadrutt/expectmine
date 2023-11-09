@@ -21,7 +21,7 @@ Same holds true for the CliIoAdapter.
 
 
 Further Info
-___________
+____________
 .. toctree::
    :maxdepth: 3
 
