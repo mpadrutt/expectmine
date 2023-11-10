@@ -1,4 +1,8 @@
 # MZmine3
+**Processes:** {bdg-primary}`.mzML`
+
+**Returns:** {bdg-info}`.mgf`
+
 This step serves as a python interface to the batch process of the MZmine3 CLI.
 The general functionality of the step is simple; The step takes a batchfile (XML)
 adds the input of the previous step of the pipeline, applies the batchfile to it and
@@ -27,6 +31,14 @@ To step requires the following arguments (if combined with DictIO):
 - (Optional) `spectral_library_files`: Python list of `Path` If spectral 
   library files where included in the batchfile, provide paths to the files
   used.
+
+## Data
+This step is processing regular `.mzML` files. It requires a batchfile to 
+then process the given data using the recipe given by the batch file. After 
+processing, the step outputs a `.mgf` file produced by the regular `Export for 
+SIRIUS` function from MZmine3. As all input files are imported 
+simultaneously by MZmine3, the output will be a single `.mgf` file, regardless
+on how many input files where provided.
 
 ## Usage
 

@@ -1,9 +1,9 @@
-# Store Module
+# Utils Module
 
+## Further reading
 ```{toctree}
 ---
 maxdepth: 1
-hidden:
 ---
 ../../modules/src.utils
 ```

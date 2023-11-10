@@ -36,10 +36,10 @@ initialized using input from the Cli
 pipeline.add_step(MZmine3, CliIo())
 ```
 
+## Further reading
 ```{toctree}
 ---
-maxdepth: 2
-hidden:
+maxdepth: 1
 ---
 ../../modules/io/base_io
 ../../modules/io/base_io_adapter

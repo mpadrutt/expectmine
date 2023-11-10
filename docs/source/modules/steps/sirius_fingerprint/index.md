@@ -1,4 +1,8 @@
 # Sirius Fingerprint
+**Processes:** {bdg-primary}`.mgf`
+
+**Returns:** {bdg-info}`CSI:FingerID (.tsv)`
+
 This step serves as a python interface to the Cli mode of Sirius. The 
 general functionality of the step is simple; The step takes a list of .mgf 
 files and creates `CSI:FingerID` for all compounds.
@@ -22,6 +26,22 @@ To step requires the following arguments (if combined with DictIO):
   (and required!). Otherwise, the value is skipped. When set only consider 
   compounds with a precursor m/z lower or equal `max_mz`. All other 
   compounds in the input will be skipped. Default value is `Infinity`
+
+## Data processing
+```{note}
+*All step descriptions are directly copied from the SIRIUS CLI `--help` command*
+```
+This step imports all provided `.mgf` files. It then does the following 
+steps:
+1. Compound Tool: Identify molecular formulas for each compound individually 
+   using fragmentation trees and isotope patterns.
+2. Compound Tool: Predict molecular fingerprints from MS/MS and 
+   fragmentation trees for each compound individually using CSI: FingerID 
+   fingerprint prediction.
+3. Compound Tool: Search in molecular structure db for each compound 
+   individually using CSI: FingerID structure database search.
+4. Write summary files from a given project space into the given project 
+   space or a custom location.
 
 ## Usage
 ::::{tab-set}

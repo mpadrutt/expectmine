@@ -1,3 +1,4 @@
+import json
 import os
 from pathlib import Path
 from typing import Any, Dict, Type
@@ -12,7 +13,8 @@ from src.pipeline.utils import (
     validate_add_step,
     validate_init,
     validate_input_files,
-    validate_step_can_run, validate_output_directory,
+    validate_step_can_run,
+    validate_output_directory,
 )
 from src.steps.base_step import BaseStep
 from src.steps.utils import get_registered_steps
@@ -185,6 +187,18 @@ class Pipeline:
                 temp_volatile_store,
                 temp_logger,
             )
+
+            with open(
+                self._output_directory
+                / f"{i}_{temp_step.step_name()}"
+                / "metadata.json",
+                "w",
+            ) as metadata:
+                json_object = json.dumps(
+                    temp_step.metadata(temp_persistent_store, temp_volatile_store),
+                    indent=4,
+                )
+                metadata.write(json_object)
 
     def get_possible_steps(self) -> list[Type[BaseStep]]:
         """

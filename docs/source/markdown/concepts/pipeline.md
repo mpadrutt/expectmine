@@ -44,7 +44,7 @@ pipeline.run()
 ## Further reading
 ```{toctree}
 ---
-maxdepth: 3
+maxdepth: 1
 ---
 ../../modules/pipeline/pipeline
 ../../modules/pipeline/utils
