@@ -27,7 +27,7 @@ deps: requirements.txt
 
 .PHONY: test
 test: $(VENV)
-	$(BIN)/pytest -rA --cov=src tests
+	cd tests && ../$(BIN)/pytest -rA --cov=src .
 
 .PHONY: lint
 lint: $(VENV)
