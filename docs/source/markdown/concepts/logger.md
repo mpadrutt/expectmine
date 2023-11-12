@@ -1,6 +1,6 @@
 # Logger Module
 
-## Function
+## Functionality
 The Logger module is tasked with creating a uniform `log.log` file for each 
 step. The primary goal is to have each step execute as transparent as possible.
 Each logfile is scoped to each individual step, so if you look into logfile 

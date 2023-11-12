@@ -1,6 +1,6 @@
 # Pipeline Module
 
-## Function
+## Functionality
 The pipeline serves as the core element of the library. It creates a simple 
 interface to add input, steps and config to run a specific set of tasks.
 

@@ -1,6 +1,6 @@
 # IO Module
 
-## Function
+## Functionality
 The IO module serves as a communication layer between the user and the 
 pipeline. It standardizes the input through a base class which makes the 
 reasoning about input easier when implementing steps.

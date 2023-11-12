@@ -1,4 +1,6 @@
 # Steps Module
+
+## Functionality
 The step is the core functionality of the pipeline. By chaining steps after 
 each other, you can create processing queues. We first show the available 
 steps and then look at the lifecycle of a step.

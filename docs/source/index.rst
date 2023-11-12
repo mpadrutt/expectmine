@@ -52,14 +52,11 @@ Indices and tables
 
 .. toctree::
    :hidden:
-   :caption: Sirius CLI documentation
+   :caption: Quick Links
 
-   markdown/sirius_cli/sirius.md
-   markdown/sirius_cli/sirius_login.md
-   markdown/sirius_cli/sirius_formula_identification.md
-   markdown/sirius_cli/sirius_fingerprint.md
-   markdown/sirius_cli/sirius_structure.md
-   markdown/sirius_cli/sirius_export.md
+   Sirius <https://boecker-lab.github.io/docs.sirius.github.io/>
+   markdown/sirius_cli/sirius_cli.md
+   MZmine3 <https://mzmine.github.io/mzmine_documentation/index.html>
 
 Indices and tables
 ==================

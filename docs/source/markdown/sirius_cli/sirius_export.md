@@ -1,6 +1,11 @@
-# `sirius write-summaries` Command
+# Sirius Export
+{bdg-info}`STANDALONE` {bdg-primary}`POSTPROCESSING`
 
-<STANDALONE, POSTPROCESSING> Write Summary files from a given project-space into the given project-space or a custom location.
+## Functionality
+Write Summary files from a given project-space into the given project-space or
+a custom location.
+
+## Options
 
 | Option                               | Description                                                                                                                                       |
 |--------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|

@@ -1,6 +1,11 @@
-# Sirius Structure search (`structure`)
+# Sirius structure search 
+{bdg-success}`COMPOUND TOOL`
 
-<COMPOUND_TOOL> Search in molecular structure db for each compound individually using CSI:FingerID structure database search.
+## Functionality
+Search in molecular structure db for each compound individually using
+CSI:FingerID structure database search.
+
+## Options
 
 | Option                                                            | Description                                                                                                                                                                                                                                                                                                                                                                                                                        |
 |-------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -9,7 +14,7 @@
 | `-l, --elgordo, tag-lipids, flag-lipids=<injectElGordoCompounds>` | Tag candidates that are matching lipid class determined by El Gordo in CSI:FingerID candidate list. Default: True                                                                                                                                                                                                                                                                                                                  |
 | `-V, --version`                                                   | Print version information and exit.                                                                                                                                                                                                                                                                                                                                                                                                |
 
-## Commands
+## Follow-up commands
 
-- `canopus, compound-classes` - <COMPOUND_TOOL> Predict compound categories for each compound individually based on its predicted molecular fingerprint (CSI:FingerID) using CANOPUS.
-- `write-summaries, W` - <STANDALONE, POSTPROCESSING> Write Summary files from a given project-space into the given project-space or a custom location.
+- `canopus, compound-classes` - Predict compound categories for each compound individually based on its predicted molecular fingerprint (CSI:FingerID) using CANOPUS.
+- [`write-summaries, W`](sirius_export) - Write Summary files from a given project-space into the given project-space or a custom location.
