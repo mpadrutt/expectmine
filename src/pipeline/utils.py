@@ -1,14 +1,14 @@
 from pathlib import Path
-from typing import Tuple, Type
+from typing import Type
 
 from src.io.base_io import BaseIo
-from src.io.base_io_adapter import BaseIoAdapter
 from src.logger.adapters.cli_logger_adapter import CliLoggerAdapter
 from src.logger.base_logger import LogLevel
 from src.logger.base_logger_adapter import BaseLoggerAdapter
 from src.steps.base_step import BaseStep
 from src.storage.adapters.in_memory_adapter import InMemoryStoreAdapter
 from src.storage.base_storage_adapter import BaseStoreAdapter
+from os import listdir
 
 
 def validate_init(
@@ -154,6 +154,37 @@ def validate_step_can_run(step: Type[BaseStep], input_filetypes: list[str] | Non
 
     if not step.can_run(input_filetypes):
         raise ValueError(f"Step {step.step_name()} can not run on the given input.")
+
+
+def validate_output_directory(output_directory: Path):
+    """
+    Validates that the path given is either an empty directory or not
+    used taken yet.
+
+
+    :param output_directory: Step that should be added to the pipeline
+    :type output_directory: Path
+
+    :Example:
+
+    >>> validate_output_directory(Path("empty_dir"))
+
+
+    >>> validate_output_directory(Path("not_empty_dir"))
+    ValueError("Output directory is not empty.")
+
+
+    :raises ValueError: If the directory is not empty or a file.
+    """
+    if output_directory.is_file():
+        raise ValueError("Output directory can not be a file.")
+
+    if (
+        output_directory.exists()
+        and output_directory.is_dir()
+        and len(listdir(output_directory)) > 0
+    ):
+        raise ValueError("Output directory is not empty.")
 
 
 def get_quickstart_config(

@@ -1,6 +1,5 @@
 from pathlib import Path
 
-from src.io.io.dict_io import DictIo
 from src.pipeline.pipeline import Pipeline
 from src.pipeline.utils import get_quickstart_config
 from src.steps.steps import SiriusFingerprint, ShrinkMgf
@@ -21,7 +20,7 @@ pipeline.add_step(
     },
 )
 
-pipeline.add_step(ShrinkMgf, DictIo({"compounds_per_file": 5}))
+pipeline.add_step(ShrinkMgf, {"compounds_per_file": 5})
 
 pipeline.add_step(
     SiriusFingerprint,

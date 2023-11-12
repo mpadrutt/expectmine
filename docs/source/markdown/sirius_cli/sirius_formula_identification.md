@@ -1,6 +1,11 @@
-# Sirius formula identification (`formula, tree, sirius`)
+# Sirius formula identification 
+{bdg-success}`COMPOUND TOOL`
 
-<COMPOUND_TOOL> Identify molecular formula for each compound individually using fragmentation trees and isotope patterns.
+## Functionality
+Identify molecular formula for each compound individually using fragmentation
+trees and isotope patterns.
+
+## Options
 
 | Option                                            | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 |---------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -26,9 +31,9 @@
 | `--ppm-max=<ppmMax>`                              | Maximum allowed mass deviation in ppm for decomposing masses. Default: 10.0 ppm                                                                                                                                                                                                                                                                                                                                                                                           |
 | `-p, --profile=<profile>`                         | Name of the configuration profile. Predefined profiles are: `default`, 'qtof', 'orbitrap', 'fticr'. Default: default                                                                                                                                                                                                                                                                                                                                                      |
 
-## Commands
+## Follow-up commands
 
-- `passatutto` - <COMPOUND_TOOL> Compute a decoy spectra based on the fragmentation trees of the given input spectra. If no molecular formula is provided in the input, the top-scoring computed formula is used.
-- `zodiac, rerank-formulas` - <DATASET_TOOL> Identify molecular formulas of all compounds in a dataset together using ZODIAC.
-- `fingerprint` - <COMPOUND_TOOL> Predict molecular fingerprint from MS/MS and fragmentation trees for each compound individually using CSI:FingerID fingerprint prediction.
-- `write-summaries, W` - <STANDALONE, POSTPROCESSING> Write summary files from a given project-space into the given project-space or a custom location.
+- `passatutto` - Compute a decoy spectra based on the fragmentation trees of the given input spectra. If no molecular formula is provided in the input, the top-scoring computed formula is used.
+- `zodiac, rerank-formulas` - Identify molecular formulas of all compounds in a dataset together using ZODIAC.
+- [`fingerprint`](sirius_fingerprint) - Predict molecular fingerprint from MS/MS and fragmentation trees for each compound individually using CSI:FingerID fingerprint prediction.
+- [`write-summaries, W`](sirius_export) - Write summary files from a given project-space into the given project-space or a custom location.

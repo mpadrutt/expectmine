@@ -1,6 +1,11 @@
-# `sirius login` Command
+# Sirius CLI Login 
+{bdg-info}`STANDALONE`
 
-<STANDALONE> Allows a user to log in for SIRIUS Web Services (e.g. CSI:FingerID or CANOPUS) and securely store a personal access token.
+## Functionality
+Allows a user to log in for SIRIUS Web Services (e.g. CSI:FingerID or CANOPUS)
+and securely store a personal access token.
+
+## Options
 
 | Option                                          | Description                                                                                                                                                                                                                                                                                                                                                                                  |
 |-------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

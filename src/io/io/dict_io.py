@@ -13,6 +13,12 @@ class DictIo(BaseIo):
     """
 
     def __init__(self, answers: dict[str, object], **kwargs: Dict[Any, Any]):
+        """
+        Foo BAR
+        :param answers: Dict containing all necessary keys for the step you want
+            to configure
+        :type answers: dict[str, object]
+        """
         self.answers = answers
         self.kwargs = kwargs
 
