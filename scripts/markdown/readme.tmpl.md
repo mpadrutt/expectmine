@@ -1,9 +1,5 @@
 # Preprocessing pipeline
-It is recommended to open the documentation in your 
-browser. To open run:
-- `start docs/build/html/index.html` on Windows
-- `open docs/build/html/index.html` on macOS
-- `xdg-open docs/build/html/index.html` on Linux
+It is recommended to visit the [documentation](https://preprocessing-pipeline.pages.dev/)
 
 ## Project setup
 To get started, we first create a virtual environment and install the 
@@ -17,6 +13,7 @@ source env/bin/activate
 make deps
 make env-vars
 ```
+
 ### Windows
 ```bat
 python -m venv env

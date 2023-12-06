@@ -1,4 +1,5 @@
 # Preprocessing pipeline
+It is recommended to visit the [documentation](https://preprocessing-pipeline.pages.dev/)
 
 ## Project setup
 To get started, we first create a virtual environment and install the 
@@ -12,6 +13,7 @@ source env/bin/activate
 make deps
 make env-vars
 ```
+
 ### Windows
 ```bat
 python -m venv env
@@ -120,7 +122,6 @@ pipeline.run()
 ```python
 from pathlib import Path
 
-from src.io.io.dict_io import DictIo
 from src.pipeline.pipeline import Pipeline
 from src.pipeline.utils import get_quickstart_config
 from src.steps.steps import SiriusFingerprint

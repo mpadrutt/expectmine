@@ -1,6 +1,10 @@
 # Setup
 
 ## 1. Clone this repository
+```{warning}
+This project uses type-unions introduced in python 3.10. Make sure you are using at least python
+version 3.10. This can be done by running `python --version`
+```
 
 ```bash
 git clone https://gitlab.renkulab.io/expectmine/processing-pipeline
@@ -15,8 +19,9 @@ cd processing-pipeline
 :sync: key1
 
 ```{note}
-As this step relies on Make, you either have to install [Make for Windows](https://gnuwin32.sourceforge.net/packages/make.htm)
-or do this step manually by running `pip install --upgrade -r requirements.txt`
+As this step relies on Make, which is only available as default through linux-based systems. To still use
+the following guide either install make through [choco](https://chocolatey.org/install) or use the
+linux sub system and follow the linux guide.
 ```
 
 ```bat
