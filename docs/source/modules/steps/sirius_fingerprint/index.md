@@ -43,6 +43,13 @@ steps:
 4. Write summary files from a given project space into the given project 
    space or a custom location.
 
+
+## Default paths
+The default mzmine3_path is depending on the operating system you use:
+- Windows: -
+- Mac: /Applications/sirius.app/Contents/MacOS/sirius
+- Linux: /home/{username}/sirius/bin/sirius
+
 ## Usage
 ::::{tab-set}
 

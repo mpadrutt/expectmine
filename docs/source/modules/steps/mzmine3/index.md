@@ -40,6 +40,12 @@ SIRIUS` function from MZmine3. As all input files are imported
 simultaneously by MZmine3, the output will be a single `.mgf` file, regardless
 on how many input files where provided.
 
+## Default paths
+The default mzmine3_path is depending on the operating system you use:
+- Windows: -
+- Mac: /Applications/MZmine.app/Contents/MacOS/MZmine
+- Linux: /opt/mzmine-linux-installer/bin/MZmine
+
 ## Usage
 
 ::::{tab-set}

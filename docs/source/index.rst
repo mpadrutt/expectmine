@@ -3,13 +3,6 @@
    :parser: myst_parser.sphinx_
 
 
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-
-
 ..
    DOCUMENTS:
 
@@ -57,10 +50,3 @@ Indices and tables
    Sirius <https://boecker-lab.github.io/docs.sirius.github.io/>
    markdown/sirius_cli/sirius_cli.md
    MZmine3 <https://mzmine.github.io/mzmine_documentation/index.html>
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
