@@ -1,3 +1,10 @@
+image: python:latest
+
+before_script:
+  - python -m venv env
+  - source env/bin/activate
+  - make deps
+
 stages:
   - test
   - deploy
