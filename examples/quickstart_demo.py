@@ -6,7 +6,7 @@ from src.steps.steps import SiriusFingerprint, ShrinkMgf
 from src.steps.steps.mzmine3.mzmine3 import MZmine3
 
 
-pipeline = Pipeline(*get_quickstart_config(output_path=Path(f"output")))
+pipeline = Pipeline(*get_quickstart_config(output_path=Path("output")))
 
 pipeline.set_input([Path("testdata/1.mzML"), Path("testdata/2.mzML")])
 

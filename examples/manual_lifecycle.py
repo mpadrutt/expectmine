@@ -13,8 +13,8 @@ load_dotenv()
 
 path = Path("testdata/sirius")
 
-ps = InMemoryStore("Sirius", path, path)
-vs = InMemoryStore("Sirius", path, path)
+persistent_storage = InMemoryStore("Sirius", path, path)
+volatile_storage = InMemoryStore("Sirius", path, path)
 io = DictIo(
     {
         "sirius_path": Path(
@@ -24,16 +24,17 @@ io = DictIo(
         "instrument": "orbitrap",
     }
 )
-lg = CliLogger(LogLevel.ALL, write_logfile=True, path=path)
+
+logger = CliLogger(LogLevel.ALL, write_logfile=True, path=path)
 
 step = SiriusFingerprint()
-step.install(ps, io, lg)
-step.setup(vs, io, lg)
-# step.run(
-#     [Path("testdata/laudanosine.mgf"), Path("testdata/laudanosine1.mgf")],
-#     path,
-#     ps,
-#     vs,
-#     lg,
-# )
-print(step.metadata(ps, vs))
+step.install(persistent_storage, io, logger)
+step.setup(volatile_storage, io, logger)
+step.run(
+    [Path("testdata/laudanosine.mgf"), Path("testdata/laudanosine1.mgf")],
+    path,
+    persistent_storage,
+    volatile_storage,
+    logger,
+)
+print(step.metadata(persistent_storage, volatile_storage))
