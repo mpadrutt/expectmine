@@ -1,0 +1,9 @@
+index	2
+name	sirius_output_12369
+ionMass	101.09609
+ionType	[M + ?]+
+detectedAdducts	MS1_PREPROCESSOR:{}
+rt	1015.23:NaN,NaN
+confidenceScore	0.08800446565004999
+featureId	12369
+rankingScoreType	sirius.scores.SiriusScore

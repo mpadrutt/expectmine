@@ -13,8 +13,8 @@ from src.pipeline.utils import (
     validate_add_step,
     validate_init,
     validate_input_files,
-    validate_step_can_run,
     validate_output_directory,
+    validate_step_can_run,
 )
 from src.steps.base_step import BaseStep
 from src.steps.utils import get_registered_steps

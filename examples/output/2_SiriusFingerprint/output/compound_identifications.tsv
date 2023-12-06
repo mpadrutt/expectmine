@@ -1,0 +1,2 @@
+confidenceRank	structurePerIdRank	formulaRank	#adducts	#predictedFPs	ConfidenceScore	CSI:FingerIDScore	ZodiacScore	SiriusScore	molecularFormula	adduct	InChIkey2D	InChI	name	smiles	xlogp	pubchemids	links	dbflags	ionMass	retentionTimeInSeconds	id	featureId
+1	1	1	1	1	0.08800446565004999	-64.32019957652498	N/A	35.49657770876149	C6H12O	[M + H]+	LRCSSKKJLMMNER	InChI=1S/C6H12O/c1-3-5-6-7-4-2/h2H,3-6H2,1H3	null	CCCCOC[CH]	1.96141386	59054988	PubChem:(59054988)	2	101.09609	1015.23	2_sirius_output_12369	12369

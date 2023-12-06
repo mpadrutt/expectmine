@@ -1,0 +1,2 @@
+/Users/mpadrutt/Documents/BachelorThesis/preprocessing-pipeline/testdata/1.mzML
+/Users/mpadrutt/Documents/BachelorThesis/preprocessing-pipeline/testdata/2.mzML

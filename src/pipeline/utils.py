@@ -1,3 +1,4 @@
+from os import listdir
 from pathlib import Path
 from typing import Type
 
@@ -8,7 +9,6 @@ from src.logger.base_logger_adapter import BaseLoggerAdapter
 from src.steps.base_step import BaseStep
 from src.storage.adapters.in_memory_adapter import InMemoryStoreAdapter
 from src.storage.base_storage_adapter import BaseStoreAdapter
-from os import listdir
 
 
 def validate_init(
