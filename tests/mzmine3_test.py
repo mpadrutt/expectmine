@@ -45,7 +45,7 @@ def test_setup_mzmine3():
         store,
         DictIo(
             {
-                "batchfile": Path("../testdata/2.xml"),
+                "batchfile": Path("testdata/2.xml"),
             }
         ),
         logger,
@@ -60,7 +60,7 @@ def test_metadata_mzmine3():
             "mzmine3_path": Path(
                 "/Applications/MZmine.app/Contents/MacOS/MZmine", absolute=True
             ),
-            "batchfile": Path("../testdata/2.xml"),
+            "batchfile": Path("testdata/2.xml"),
         }
     )
 
