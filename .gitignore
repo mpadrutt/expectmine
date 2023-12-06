@@ -165,6 +165,7 @@ cython_debug/
 
 # MS-Data
 generated
+output
 
 # Storage files
 *.db

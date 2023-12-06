@@ -1,4 +1,5 @@
 import atexit
+import os
 import pickle
 import sqlite3
 from pathlib import Path
@@ -23,6 +24,7 @@ class Sqlite3Store(BaseStore):
         self.working_directory = working_directory
         self.kwargs = kwargs
 
+        os.makedirs(persistent_path, exist_ok=True)
         self.conn = sqlite3.connect(persistent_path / "sqlite.db", isolation_level=None)
 
         self._setup()
