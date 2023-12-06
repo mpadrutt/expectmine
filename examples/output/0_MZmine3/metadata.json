@@ -1,7 +1,0 @@
-{
-    "java_version": "20.0.1",
-    "java_runtime": "Temurin-20.0.1+9 (build 20.0.1+9)",
-    "java_server": "VM Temurin-20.0.1+9 (build 20.0.1+9, mixed mode)",
-    "mzmine_version": "3.9.0",
-    "python_version": "3.11.6 (main, Oct  2 2023, 13:45:54) [Clang 15.0.0 (clang-1500.0.40.1)]"
-}

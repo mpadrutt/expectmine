@@ -1,8 +1,0 @@
-index	1
-name	sirius_output_26393
-ionMass	101.0083
-ionType	[M + ?]+
-detectedAdducts	MS1_PREPROCESSOR:{}
-rt	1441.83:NaN,NaN
-featureId	26393
-rankingScoreType	sirius.scores.SiriusScore
