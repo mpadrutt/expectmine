@@ -1,4 +1,6 @@
 import subprocess
+import os
+from pathlib import Path
 from typing import Optional
 
 
@@ -74,11 +76,17 @@ def run_cmd(
 
         for option in options:
             if isinstance(option, str):
+                if Path(option).exists():
+                    option = f'"{option}"'
+
                 options_string += f" {option}"
             else:
-                options_string += f" {option[0]} {option[1]}"
+                if Path(option[1]).exists():
+                    options_string += f' {option[0]} "{option[1]}"'
+                else:
+                    options_string += f" {option[0]} {option[1]}"
 
-        full_cmd = f"{cmd} {options_string}"
+        full_cmd = f"'{cmd}' {options_string}"
 
     result = subprocess.run(
         full_cmd,
