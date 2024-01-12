@@ -1,5 +1,5 @@
 # Preprocessing pipeline
-It is recommended to visit the [documentation](https://preprocessing-pipeline.pages.dev/)
+It is recommended to visit the [documentation](https://mpadrutt.github.io/preprocessing-pipeline/)
 
 ## Project setup
 To get started, we first create a virtual environment and install the 
