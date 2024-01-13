@@ -6,7 +6,7 @@ IO Base Adapter Class
     for other IO classes to build upon. You should never import BaseIoAdapter to use
     as IO for your pipeline steps.
 
-.. automodule:: src.io.base_io_adapter
+.. automodule:: expectmine.io.base_io_adapter
    :members:
    :undoc-members:
    :show-inheritance:

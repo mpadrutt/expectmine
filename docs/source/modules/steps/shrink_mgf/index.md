@@ -24,7 +24,7 @@ The step reads through all provided files and only returns the first
 :::{tab-item} Using Dict
 :sync: key1
 ```python
-from src.steps.steps.shrink_mgf import ShrinkMgf
+from expectmine.steps.steps.shrink_mgf import ShrinkMgf
 
 pipeline.add_step(ShrinkMgf, {"compounds_per_file": 5})
 ```
@@ -34,8 +34,8 @@ pipeline.add_step(ShrinkMgf, {"compounds_per_file": 5})
 :sync: key2
 
 ```python
-from src.steps.steps.shrink_mgf import ShrinkMgf
-from src.io.io.dict_io import DictIo
+from expectmine.steps.steps.shrink_mgf import ShrinkMgf
+from expectmine.io.io.dict_io import DictIo
 
 pipeline.add_step(ShrinkMgf, DictIo({"compounds_per_file": 5}))
 ```
@@ -45,8 +45,8 @@ pipeline.add_step(ShrinkMgf, DictIo({"compounds_per_file": 5}))
 :sync: key3
 
 ```python
-from src.steps.steps.shrink_mgf import ShrinkMgf
-from src.io.io.cli_io import CliIo
+from expectmine.steps.steps.shrink_mgf import ShrinkMgf
+from expectmine.io.io.cli_io import CliIo
 
 pipeline.add_step(
     ShrinkMgf,

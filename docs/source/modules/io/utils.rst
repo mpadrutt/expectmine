@@ -1,7 +1,7 @@
 IO Helper Functions
 ===================
 
-.. automodule:: src.io.utils
+.. automodule:: expectmine.io.utils
    :members:
    :undoc-members:
    :show-inheritance:

@@ -6,7 +6,7 @@ Store Base Adapter Class
     for other IO classes to build upon. You should never import BaseIoAdapter to use
     as IO for your pipeline steps.
 
-.. automodule:: src.storage.base_storage_adapter
+.. automodule:: expectmine.storage.base_storage_adapter
    :members:
    :undoc-members:
    :show-inheritance:

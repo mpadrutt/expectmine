@@ -1,7 +1,7 @@
 Steps Helper Functions
 =======================
 
-.. automodule:: src.steps.utils
+.. automodule:: expectmine.steps.utils
    :members:
    :undoc-members:
    :show-inheritance:

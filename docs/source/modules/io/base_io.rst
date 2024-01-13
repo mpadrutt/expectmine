@@ -6,7 +6,7 @@ IO Base Class
     for other IO classes to build upon. You should never import BaseIo to use as
     IO for your pipeline steps.
 
-.. automodule:: src.io.base_io
+.. automodule:: expectmine.io.base_io
    :members:
    :undoc-members:
    :show-inheritance:

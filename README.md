@@ -1,12 +1,15 @@
-# Preprocessing pipeline
-It is recommended to visit the [documentation](https://mpadrutt.github.io/preprocessing-pipeline/)
+# Expectmine pipeline
+
+It is recommended to visit the [documentation](https://mpadrutt.github.io/expectmine/)
 
 ## Project setup
-To get started, we first create a virtual environment and install the 
-necessary dependencies. We can then use the makefile commands to navigate in 
+
+To get started, we first create a virtual environment and install the
+necessary dependencies. We can then use the makefile commands to navigate in
 the project.
 
 ### Linux or macOS
+
 ```bash
 python -m venv env
 source env/bin/activate
@@ -15,6 +18,7 @@ make env-vars
 ```
 
 ### Windows
+
 ```bat
 python -m venv env
 .\env\Scripts\activate
@@ -57,7 +61,7 @@ The repository is divided into the following parts:
   - `build/` Contains the html output of the generated documentation
   - `source/` Used to build the documentation
 - `scripts/` Contains all scripts used for code generation
-- `src/` Contains the entire pipeline
+- `expectmine/` Contains the entire pipeline
   - `io/` All Io logic, concerned with getting user input to the pipeline and 
     steps.
   - `logger/` Contains all loggers
@@ -80,8 +84,8 @@ the `get_quickstart_config` method and initialize a pipeline directly from it.
 ```python
 from pathlib import Path
 
-from src.pipeline.pipeline import Pipeline
-from src.pipeline.utils import get_quickstart_config
+from expectmine.pipeline.pipeline import Pipeline
+from expectmine.pipeline.utils import get_quickstart_config
 
 pipeline = Pipeline(*get_quickstart_config(output_path=Path("pipeline_output")))
 ```
@@ -122,10 +126,10 @@ pipeline.run()
 ```python
 from pathlib import Path
 
-from src.pipeline.pipeline import Pipeline
-from src.pipeline.utils import get_quickstart_config
-from src.steps.steps import SiriusFingerprint
-from src.steps.steps.mzmine3.mzmine3 import MZmine3
+from expectmine.pipeline.pipeline import Pipeline
+from expectmine.pipeline.utils import get_quickstart_config
+from expectmine.steps.steps import SiriusFingerprint
+from expectmine.steps.steps.mzmine3.mzmine3 import MZmine3
 
 pipeline = Pipeline(*get_quickstart_config(output_path=Path("pipeline_output")))
 
@@ -154,6 +158,3 @@ pipeline.add_step(
 
 pipeline.run()
 ```
-
-
-

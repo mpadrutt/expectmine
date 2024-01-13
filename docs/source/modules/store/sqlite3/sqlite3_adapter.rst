@@ -1,7 +1,7 @@
 Sqlite3 Adapter Class
 ========================
 
-.. automodule:: src.storage.adapters.sqlite3_adapter
+.. automodule:: expectmine.storage.adapters.sqlite3_adapter
    :members:
    :undoc-members:
    :show-inheritance:

@@ -1,12 +1,12 @@
 from pathlib import Path
 
 import pytest
-from src.logger.adapters.cli_logger_adapter import CliLoggerAdapter
-from src.logger.base_logger import LogLevel
-from src.pipeline.pipeline import Pipeline
-from src.pipeline.utils import get_quickstart_config
-from src.storage.adapters.in_memory_adapter import InMemoryStoreAdapter
-from src.storage.adapters.sqlite3_adapter import Sqlite3StoreAdapter
+from expectmine.logger.adapters.cli_logger_adapter import CliLoggerAdapter
+from expectmine.logger.base_logger import LogLevel
+from expectmine.pipeline.pipeline import Pipeline
+from expectmine.pipeline.utils import get_quickstart_config
+from expectmine.storage.adapters.in_memory_adapter import InMemoryStoreAdapter
+from expectmine.storage.adapters.sqlite3_adapter import Sqlite3StoreAdapter
 
 from .utils import PERSISTENT_PATH, WORKING_DIRECTORY, with_directory
 

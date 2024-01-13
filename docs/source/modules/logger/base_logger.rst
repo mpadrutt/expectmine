@@ -6,7 +6,7 @@ Logger Base Class
     for other IO classes to build upon. You should never import BaseIo to use as
     IO for your pipeline steps.
 
-.. automodule:: src.logger.base_logger
+.. automodule:: expectmine.logger.base_logger
    :members:
    :undoc-members:
    :show-inheritance:

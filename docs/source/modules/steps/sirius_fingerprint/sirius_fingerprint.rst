@@ -1,7 +1,7 @@
 Sirius Fingerprint Class
 ==========================
 
-.. automodule:: src.steps.steps.sirius_fingerprint
+.. automodule:: expectmine.steps.steps.sirius_fingerprint
    :members:
    :undoc-members:
    :show-inheritance:

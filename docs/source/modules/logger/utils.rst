@@ -1,7 +1,7 @@
 Logger Helper Functions
 ========================
 
-.. automodule:: src.logger.utils
+.. automodule:: expectmine.logger.utils
    :members:
    :undoc-members:
    :show-inheritance:

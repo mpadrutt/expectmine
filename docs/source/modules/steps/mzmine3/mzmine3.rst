@@ -1,7 +1,7 @@
 MZmine3 Class
 ==============
 
-.. automodule:: src.steps.steps.mzmine3.mzmine3
+.. automodule:: expectmine.steps.steps.mzmine3.mzmine3
    :members:
    :undoc-members:
    :show-inheritance:

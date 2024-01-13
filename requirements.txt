@@ -34,3 +34,9 @@ InquirerPy==0.3.4
 requests==2.31.0
 tqdm==4.66.1
 python-dotenv
+
+
+# package
+setuptools
+build
+

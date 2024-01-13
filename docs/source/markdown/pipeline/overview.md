@@ -1,7 +1,7 @@
 # Overview
 
-## What is Preprocessing-Pipeline?
-The Preprocessing-Pipeline aims to create a simple interface for researchers 
+## What is the expectmine-pipeline?
+The Expectmine-Pipeline aims to create a simple interface for researchers 
 to build processing pipelines for their workflows. It is built with reducing 
 the interface overhead from the start which tries to the process of integrating 
 new steps or adding library support as easy as possible.
@@ -14,8 +14,8 @@ the `get_quickstart_config` method and initialize a pipeline directly from it.
 ```python
 from pathlib import Path
 
-from src.pipeline.pipeline import Pipeline
-from src.pipeline.utils import get_quickstart_config
+from expectmine.pipeline.pipeline import Pipeline
+from expectmine.pipeline.utils import get_quickstart_config
 
 pipeline = Pipeline(*get_quickstart_config(output_path=Path("pipeline_output")))
 ```
@@ -26,10 +26,10 @@ shows the simplest pipeline in its entirety.
 ```python
 from pathlib import Path
 
-from src.pipeline.pipeline import Pipeline
-from src.pipeline.utils import get_quickstart_config
-from src.steps.steps import SiriusFingerprint
-from src.steps.steps.mzmine3.mzmine3 import MZmine3
+from expectmine.pipeline.pipeline import Pipeline
+from expectmine.pipeline.utils import get_quickstart_config
+from expectmine.steps.steps import SiriusFingerprint
+from expectmine.steps.steps.mzmine3.mzmine3 import MZmine3
 
 pipeline = Pipeline(*get_quickstart_config(output_path=Path("pipeline_output")))
 

@@ -16,8 +16,8 @@ arguments:
 ```python
 from pathlib import Path
 
-from src.storage.stores.in_memory_store import InMemoryStore
-from src.storage.adapters.in_memory_adapter import InMemoryStoreAdapter
+from expectmine.storage.stores.in_memory_store import InMemoryStore
+from expectmine.storage.adapters.in_memory_adapter import InMemoryStoreAdapter
 
 output_directory = Path("output")
 temp_directory = Path("output/temp")

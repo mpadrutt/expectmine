@@ -2,7 +2,7 @@ Cli Logger Adapter Class
 =========================
 
 
-.. automodule:: src.logger.adapters.cli_logger_adapter
+.. automodule:: expectmine.logger.adapters.cli_logger_adapter
    :members:
    :undoc-members:
    :show-inheritance:

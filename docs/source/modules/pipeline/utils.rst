@@ -1,7 +1,7 @@
 Pipeline Helper Functions
 =========================
 
-.. automodule:: src.pipeline.utils
+.. automodule:: expectmine.pipeline.utils
    :members:
    :undoc-members:
    :show-inheritance:

@@ -1,7 +1,7 @@
 Cli IO Adapter Class
 ====================
 
-.. automodule:: src.io.adapters.cli_io_adapter
+.. automodule:: expectmine.io.adapters.cli_io_adapter
    :members:
    :undoc-members:
    :show-inheritance:

@@ -1,7 +1,7 @@
 Pipeline Class
 ==============
 
-.. automodule:: src.pipeline.pipeline
+.. automodule:: expectmine.pipeline.pipeline
    :members:
    :undoc-members:
    :show-inheritance:

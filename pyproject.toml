@@ -1,8 +1,25 @@
+[project]
+name = "expectmine"
+version = "0.0.1"
+description = "Preprocessing Pipeline for the Expectmine framework"
+dependencies = [
+    "inflection",
+    "Jinja2",
+    "InquirerPy",
+    "tdqm",
+    "python-dotenv",
+    "requests",
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
 [tool.isort]
 profile = "black"
 
 [tool.pyright]
-extraPaths = ["src"]
+extraPaths = ["expectmine"]
 exclude = ["**/__init__.py"]
 venv = "env"
 typeCheckingMode = "strict"

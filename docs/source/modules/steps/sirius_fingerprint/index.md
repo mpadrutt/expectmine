@@ -56,7 +56,7 @@ The default mzmine3_path is depending on the operating system you use:
 :::{tab-item} Using Dict
 :sync: key1
 ```python
-from src.steps.steps.sirius_fingerprint import SiriusFingerprint
+from expectmine.steps.steps.sirius_fingerprint import SiriusFingerprint
 
 pipeline.add_step(
     SiriusFingerprint,
@@ -75,8 +75,8 @@ pipeline.add_step(
 :sync: key2
 
 ```python
-from src.steps.steps.sirius_fingerprint import SiriusFingerprint
-from src.io.io.dict_io import DictIo
+from expectmine.steps.steps.sirius_fingerprint import SiriusFingerprint
+from expectmine.io.io.dict_io import DictIo
 
 pipeline.add_step(
     SiriusFingerprint,
@@ -95,8 +95,8 @@ pipeline.add_step(
 :sync: key3
 
 ```python
-from src.steps.steps.sirius_fingerprint import SiriusFingerprint
-from src.io.io.cli_io import CliIo
+from expectmine.steps.steps.sirius_fingerprint import SiriusFingerprint
+from expectmine.io.io.cli_io import CliIo
 
 pipeline.add_step(
     SiriusFingerprint,
