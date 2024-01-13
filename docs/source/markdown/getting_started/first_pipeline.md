@@ -8,8 +8,8 @@ the `get_quickstart_config` method and initialize a pipeline directly from it.
 ```python
 from pathlib import Path
 
-from src.pipeline.pipeline import Pipeline
-from src.pipeline.utils import get_quickstart_config
+from expectmine.pipeline.pipeline import Pipeline
+from expectmine.pipeline.utils import get_quickstart_config
 
 pipeline = Pipeline(*get_quickstart_config(output_path=Path("pipeline_output")))
 ```
@@ -50,10 +50,10 @@ pipeline.run()
 ```python
 from pathlib import Path
 
-from src.pipeline.pipeline import Pipeline
-from src.pipeline.utils import get_quickstart_config
-from src.steps.steps import SiriusFingerprint
-from src.steps.steps.mzmine3.mzmine3 import MZmine3
+from expectmine.pipeline.pipeline import Pipeline
+from expectmine.pipeline.utils import get_quickstart_config
+from expectmine.steps.steps import SiriusFingerprint
+from expectmine.steps.steps.mzmine3.mzmine3 import MZmine3
 
 pipeline = Pipeline(*get_quickstart_config(output_path=Path("pipeline_output")))
 

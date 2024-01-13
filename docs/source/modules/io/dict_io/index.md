@@ -14,8 +14,8 @@ to provide to the individual step.
 ```python
 from pathlib import Path
 
-from src.io.io.dict_io import DictIo
-from src.io.adapters.dict_io_adapter import DictIoAdapter
+from expectmine.io.io.dict_io import DictIo
+from expectmine.io.adapters.dict_io_adapter import DictIoAdapter
 
 io_object = DictIo({"foo": "bar", "answer": 31})
 adapter = DictIoAdapter(

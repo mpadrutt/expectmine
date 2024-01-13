@@ -1,10 +1,10 @@
 from pathlib import Path
 from typing import Any, Dict, List
 
-from src.storage.base_storage import BaseStore
-from src.storage.base_storage_adapter import BaseStoreAdapter
-from src.storage.stores.sqlite3_store import Sqlite3Store
-from src.storage.utils import validate_adapter_init, validate_step_name
+from expectmine.storage.base_storage import BaseStore
+from expectmine.storage.base_storage_adapter import BaseStoreAdapter
+from expectmine.storage.stores.sqlite3_store import Sqlite3Store
+from expectmine.storage.utils import validate_adapter_init, validate_step_name
 
 
 class Sqlite3StoreAdapter(BaseStoreAdapter):

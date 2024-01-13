@@ -10,8 +10,8 @@ To create a new CliIo instance, simply import the Class and create an instance.
 Same holds true for the CliIoAdapter.
 
 ```python
-from src.io.io.cli_io import CliIo
-from src.io.adapters.cli_io_adapter import CliIoAdapter
+from expectmine.io.io.cli_io import CliIo
+from expectmine.io.adapters.cli_io_adapter import CliIoAdapter
 
 io_object = CliIo()
 adapter = CliIoAdapter()

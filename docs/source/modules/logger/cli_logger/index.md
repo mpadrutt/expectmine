@@ -12,10 +12,10 @@ the console.
 
 
 ```python
-from src.logger.base_logger import LogLevel
+from expectmine.logger.base_logger import LogLevel
 
-from src.logger.loggers.cli_logger import CliLogger
-from src.logger.adapters.cli_logger_adapter import CliLoggerAdapter
+from expectmine.logger.loggers.cli_logger import CliLogger
+from expectmine.logger.adapters.cli_logger_adapter import CliLoggerAdapter
 
 logger = CliLogger(LogLevel.ALL, write_logfile=True)
 adapter = CliLoggerAdapter(LogLevel.ALL, write_logfile=True)

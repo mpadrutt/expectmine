@@ -2,13 +2,13 @@ from os import listdir
 from pathlib import Path
 from typing import Type
 
-from src.io.base_io import BaseIo
-from src.logger.adapters.cli_logger_adapter import CliLoggerAdapter
-from src.logger.base_logger import LogLevel
-from src.logger.base_logger_adapter import BaseLoggerAdapter
-from src.steps.base_step import BaseStep
-from src.storage.adapters.in_memory_adapter import InMemoryStoreAdapter
-from src.storage.base_storage_adapter import BaseStoreAdapter
+from expectmine.io.base_io import BaseIo
+from expectmine.logger.adapters.cli_logger_adapter import CliLoggerAdapter
+from expectmine.logger.base_logger import LogLevel
+from expectmine.logger.base_logger_adapter import BaseLoggerAdapter
+from expectmine.steps.base_step import BaseStep
+from expectmine.storage.adapters.in_memory_adapter import InMemoryStoreAdapter
+from expectmine.storage.base_storage_adapter import BaseStoreAdapter
 
 
 def validate_init(

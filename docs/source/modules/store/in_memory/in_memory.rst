@@ -1,7 +1,7 @@
 In Memory Class
 =================
 
-.. automodule:: src.storage.stores.in_memory_store
+.. automodule:: expectmine.storage.stores.in_memory_store
    :members:
    :undoc-members:
    :show-inheritance:

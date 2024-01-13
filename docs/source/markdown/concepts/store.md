@@ -42,8 +42,8 @@ manually, which  implies that we also need to choose adapters logging.
 ```python
 from pathlib import Path
 
-from src.pipeline.pipeline import Pipeline
-from src.pipeline.utils import get_quickstart_config
+from expectmine.pipeline.pipeline import Pipeline
+from expectmine.pipeline.utils import get_quickstart_config
 
 pipeline = Pipeline(*get_quickstart_config(output_path=Path("output/")))
 ```
@@ -55,13 +55,13 @@ pipeline = Pipeline(*get_quickstart_config(output_path=Path("output/")))
 ```python
 from pathlib import Path
 
-from src.pipeline.pipeline import Pipeline
+from expectmine.pipeline.pipeline import Pipeline
 
-from src.storage.adapters.in_memory_adapter import InMemoryStoreAdapter
-from src.storage.adapters.sqlite3_adapter import Sqlite3StoreAdapter
+from expectmine.storage.adapters.in_memory_adapter import InMemoryStoreAdapter
+from expectmine.storage.adapters.sqlite3_adapter import Sqlite3StoreAdapter
 
-from src.logger.adapters.cli_logger_adapter import CliLoggerAdapter
-from src.logger.base_logger import LogLevel
+from expectmine.logger.adapters.cli_logger_adapter import CliLoggerAdapter
+from expectmine.logger.base_logger import LogLevel
 
 output_directory = Path("output")
 temp_directory = Path("output/temp")

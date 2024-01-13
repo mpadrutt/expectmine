@@ -16,8 +16,8 @@ arguments:
 ```python
 from pathlib import Path
 
-from src.storage.stores.sqlite3_store import Sqlite3Store
-from src.storage.adapters.sqlite3_adapter import Sqlite3StoreAdapter
+from expectmine.storage.stores.sqlite3_store import Sqlite3Store
+from expectmine.storage.adapters.sqlite3_adapter import Sqlite3StoreAdapter
 
 database_path = Path("output")
 temp_directory = Path("output/temp")

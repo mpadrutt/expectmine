@@ -1,7 +1,7 @@
 Store Helper Functions
 =======================
 
-.. automodule:: src.storage.utils
+.. automodule:: expectmine.storage.utils
    :members:
    :undoc-members:
    :show-inheritance:

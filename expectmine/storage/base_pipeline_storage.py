@@ -2,8 +2,8 @@ from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Any, Dict, Optional
 
-from src.io.base_io import BaseIo
-from src.steps.base_step import BaseStep
+from expectmine.io.base_io import BaseIo
+from expectmine.steps.base_step import BaseStep
 
 
 class BasePipelineStore(ABC):

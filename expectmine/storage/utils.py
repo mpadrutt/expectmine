@@ -3,8 +3,8 @@ import pickle
 import sys
 from pathlib import Path
 
-from src.io.base_io import BaseIo
-from src.steps.base_step import BaseStep
+from expectmine.io.base_io import BaseIo
+from expectmine.steps.base_step import BaseStep
 
 
 def validate_adapter_init(persistent_path: Path, working_directory: Path):

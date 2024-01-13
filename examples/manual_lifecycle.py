@@ -1,10 +1,10 @@
 from pathlib import Path
 
-from src.io.io.dict_io import DictIo
-from src.logger.base_logger import LogLevel
-from src.logger.loggers.cli_logger import CliLogger
-from src.steps.steps import SiriusFingerprint
-from src.storage.stores.in_memory_store import InMemoryStore
+from expectmine.io.io.dict_io import DictIo
+from expectmine.logger.base_logger import LogLevel
+from expectmine.logger.loggers.cli_logger import CliLogger
+from expectmine.steps.steps import SiriusFingerprint
+from expectmine.storage.stores.in_memory_store import InMemoryStore
 
 from dotenv import load_dotenv
 

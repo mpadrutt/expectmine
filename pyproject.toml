@@ -19,7 +19,7 @@ build-backend = "setuptools.build_meta"
 profile = "black"
 
 [tool.pyright]
-extraPaths = ["src"]
+extraPaths = ["expectmine"]
 exclude = ["**/__init__.py"]
 venv = "env"
 typeCheckingMode = "strict"

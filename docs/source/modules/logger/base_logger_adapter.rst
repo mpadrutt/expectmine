@@ -6,7 +6,7 @@ Logger Base Adapter Class
     for other IO classes to build upon. You should never import BaseIoAdapter to use
     as IO for your pipeline steps.
 
-.. automodule:: src.logger.base_logger_adapter
+.. automodule:: expectmine.logger.base_logger_adapter
    :members:
    :undoc-members:
    :show-inheritance:

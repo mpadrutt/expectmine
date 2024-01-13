@@ -5,21 +5,21 @@ from typing import Any, Dict, Type
 
 from dotenv import load_dotenv
 
-from src.io.base_io import BaseIo
-from src.io.io.dict_io import DictIo
-from src.logger.base_logger import BaseLogger
-from src.logger.base_logger_adapter import BaseLoggerAdapter
-from src.pipeline.utils import (
+from expectmine.io.base_io import BaseIo
+from expectmine.io.io.dict_io import DictIo
+from expectmine.logger.base_logger import BaseLogger
+from expectmine.logger.base_logger_adapter import BaseLoggerAdapter
+from expectmine.pipeline.utils import (
     validate_add_step,
     validate_init,
     validate_input_files,
     validate_output_directory,
     validate_step_can_run,
 )
-from src.steps.base_step import BaseStep
-from src.steps.utils import get_registered_steps
-from src.storage.base_storage import BaseStore
-from src.storage.base_storage_adapter import BaseStoreAdapter
+from expectmine.steps.base_step import BaseStep
+from expectmine.steps.utils import get_registered_steps
+from expectmine.storage.base_storage import BaseStore
+from expectmine.storage.base_storage_adapter import BaseStoreAdapter
 
 load_dotenv()
 

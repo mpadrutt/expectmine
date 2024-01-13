@@ -1,8 +1,8 @@
 import pytest
-from src.storage.adapters.in_memory_adapter import InMemoryStoreAdapter
-from src.storage.adapters.sqlite3_adapter import Sqlite3StoreAdapter
-from src.storage.stores.in_memory_store import InMemoryStore
-from src.storage.stores.sqlite3_store import Sqlite3Store
+from expectmine.storage.adapters.in_memory_adapter import InMemoryStoreAdapter
+from expectmine.storage.adapters.sqlite3_adapter import Sqlite3StoreAdapter
+from expectmine.storage.stores.in_memory_store import InMemoryStore
+from expectmine.storage.stores.sqlite3_store import Sqlite3Store
 
 from .utils import PERSISTENT_PATH, WORKING_DIRECTORY, with_directory
 

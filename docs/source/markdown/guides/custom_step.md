@@ -42,11 +42,11 @@ shows the filled out code which solves the previously stated task.
 ```python
 from pathlib import Path
 
-from src.steps.base_step import BaseStep
+from expectmine.steps.base_step import BaseStep
 
-from src.io.base_io import BaseIo
-from src.logger.base_logger import BaseLogger
-from src.storage.base_storage import BaseStore
+from expectmine.io.base_io import BaseIo
+from expectmine.logger.base_logger import BaseLogger
+from expectmine.storage.base_storage import BaseStore
 
 
 class ExampleStep(BaseStep):
@@ -132,11 +132,11 @@ class ExampleStep(BaseStep):
 ```python
 from pathlib import Path
 
-from src.steps.base_step import BaseStep
+from expectmine.steps.base_step import BaseStep
 
-from src.io.base_io import BaseIo
-from src.logger.base_logger import BaseLogger
-from src.storage.base_storage import BaseStore
+from expectmine.io.base_io import BaseIo
+from expectmine.logger.base_logger import BaseLogger
+from expectmine.storage.base_storage import BaseStore
 
 
 class ExampleStep(BaseStep):
@@ -237,8 +237,8 @@ step:
 ```python
 from pathlib import Path
 
-from src.pipeline.pipeline import Pipeline
-from src.pipeline.utils import get_quickstart_config
+from expectmine.pipeline.pipeline import Pipeline
+from expectmine.pipeline.utils import get_quickstart_config
 from example_step import ExampleStep
 
 pipeline = Pipeline(*get_quickstart_config(output_path=Path(f"output")))
@@ -261,8 +261,8 @@ To do this, the process is even easier:
 ```python
 from pathlib import Path
 
-from src.pipeline.pipeline import Pipeline
-from src.pipeline.utils import get_quickstart_config
+from expectmine.pipeline.pipeline import Pipeline
+from expectmine.pipeline.utils import get_quickstart_config
 from example_step import ExampleStep
 
 pipeline = Pipeline(*get_quickstart_config(output_path=Path(f"output")))
@@ -272,6 +272,6 @@ pipeline.register_step(ExampleStep)
 
 ### Option 3: Save the step as a default step
 
-For this, you just need to move your generated step to `src/steps/steps` and
-include the step in `src/steps/steps/__init__.py`, the step then gets
+For this, you just need to move your generated step to `expectmine/steps/steps` and
+include the step in `expectmine/steps/steps/__init__.py`, the step then gets
 automatically registered to the pipeline.

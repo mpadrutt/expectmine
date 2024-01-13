@@ -8,11 +8,11 @@ from jinja2 import Environment, FileSystemLoader
 
 
 ROOT_PATH = Path(".")
-IO_PATH = Path("./src/io")
-LOGGER_PATH = Path("./src/logger")
-PIPELINE_PATH = Path("./src/pipeline")
-STEPS_PATH = Path("./src/steps")
-STORAGE_PATH = Path("./src/storage")
+IO_PATH = Path("./expectmine/io")
+LOGGER_PATH = Path("./expectmine/logger")
+PIPELINE_PATH = Path("./expectmine/pipeline")
+STEPS_PATH = Path("./expectmine/steps")
+STORAGE_PATH = Path("./expectmine/storage")
 
 TEMPLATES_PATH = Path("./scripts/templates")
 

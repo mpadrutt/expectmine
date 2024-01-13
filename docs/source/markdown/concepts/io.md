@@ -19,11 +19,11 @@ inputs in the CLI.
 ```python
 from pathlib import Path
 
-from src.io.io.cli_io import CliIo
-from src.pipeline.pipeline import Pipeline
-from src.pipeline.utils import get_quickstart_config
+from expectmine.io.io.cli_io import CliIo
+from expectmine.pipeline.pipeline import Pipeline
+from expectmine.pipeline.utils import get_quickstart_config
 
-from src.steps.steps import MZmine3
+from expectmine.steps.steps import MZmine3
 
 pipeline = Pipeline(*get_quickstart_config(output_path=Path("output/")))
 

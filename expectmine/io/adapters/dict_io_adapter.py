@@ -1,8 +1,8 @@
 from typing import Any, Dict
 
-from src.io.base_io import BaseIo
-from src.io.base_io_adapter import BaseIoAdapter
-from src.io.io.dict_io import DictIo
+from expectmine.io.base_io import BaseIo
+from expectmine.io.base_io_adapter import BaseIoAdapter
+from expectmine.io.io.dict_io import DictIo
 
 
 class DictIoAdapter(BaseIoAdapter):

@@ -6,11 +6,11 @@ import sys
 from pathlib import Path
 from typing import Any, Dict, Optional
 
-from src.io.base_io import BaseIo
-from src.io.io.dict_io import DictIo
-from src.steps.base_step import BaseStep
-from src.storage.base_pipeline_storage import BasePipelineStore
-from src.storage.utils import (
+from expectmine.io.base_io import BaseIo
+from expectmine.io.io.dict_io import DictIo
+from expectmine.steps.base_step import BaseStep
+from expectmine.storage.base_pipeline_storage import BasePipelineStore
+from expectmine.storage.utils import (
     validate_key,
     validate_pipeline,
     validate_pipeline_store_init,

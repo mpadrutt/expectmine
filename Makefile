@@ -27,17 +27,17 @@ deps: requirements.txt
 
 .PHONY: test
 test: $(VENV)
-	cd tests && ../$(BIN)/pytest -rA --cov=src .
+	cd tests && ../$(BIN)/pytest -rA --cov=expectmine .
 
 .PHONY: lint
 lint: $(VENV)
-	$(BIN)/flake8 src
-	$(BIN)/pyright src
+	$(BIN)/flake8 expectmine
+	$(BIN)/pyright expectmine
 
 .PHONY: format
 format: $(VENV)
-	$(BIN)/isort src
-	$(BIN)/black src
+	$(BIN)/isort expectmine
+	$(BIN)/black expectmine
 
 .PHONY: clean
 clean:

@@ -1,9 +1,9 @@
 from pathlib import Path
 
-from src.io.base_io import BaseIo
-from src.logger.base_logger import BaseLogger
-from src.steps.base_step import BaseStep
-from src.storage.base_storage import BaseStore
+from expectmine.io.base_io import BaseIo
+from expectmine.logger.base_logger import BaseLogger
+from expectmine.steps.base_step import BaseStep
+from expectmine.storage.base_storage import BaseStore
 
 
 class ShrinkMgf(BaseStep):

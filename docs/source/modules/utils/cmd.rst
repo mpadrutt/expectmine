@@ -1,7 +1,7 @@
 Cmd Module
 =================
 
-.. automodule:: src.utils.cmd
+.. automodule:: expectmine.utils.cmd
    :members:
    :undoc-members:
    :show-inheritance:

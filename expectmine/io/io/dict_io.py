@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Any, Callable, Dict
 
-from src.io.base_io import BaseIo, K, T
+from expectmine.io.base_io import BaseIo, K, T
 
 
 class DictIo(BaseIo):

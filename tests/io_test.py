@@ -1,6 +1,6 @@
 import pytest
-from src.io.io.cli_io import CliIo
-from src.io.io.dict_io import DictIo
+from expectmine.io.io.cli_io import CliIo
+from expectmine.io.io.dict_io import DictIo
 
 
 def test_initialize_dict_io():

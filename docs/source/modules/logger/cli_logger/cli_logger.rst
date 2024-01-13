@@ -1,7 +1,7 @@
 Cli Logger Class
 =================
 
-.. automodule:: src.logger.loggers.cli_logger
+.. automodule:: expectmine.logger.loggers.cli_logger
    :members:
    :undoc-members:
    :show-inheritance:

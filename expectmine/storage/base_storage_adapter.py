@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Any, Dict, List
 
-from src.storage.base_storage import BaseStore
+from expectmine.storage.base_storage import BaseStore
 
 
 class BaseStoreAdapter(ABC):

@@ -13,7 +13,7 @@ TEMPLATE_PATH = Path("scripts/markdown/readme.tmpl.md")
 
 INCLUDE_RE = re.compile(r"!\[\[(.*\.md)]]")
 
-ALIAS_DICT = {"@docs": "docs/source/markdown", "@code": "src"}
+ALIAS_DICT = {"@docs": "docs/source/markdown", "@code": "expectmine"}
 
 
 def process_markdown():

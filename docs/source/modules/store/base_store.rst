@@ -6,7 +6,7 @@ Store Base Class
     for other IO classes to build upon. You should never import BaseIo to use as
     IO for your pipeline steps.
 
-.. automodule:: src.storage.base_storage
+.. automodule:: expectmine.storage.base_storage
    :members:
    :undoc-members:
    :show-inheritance:
