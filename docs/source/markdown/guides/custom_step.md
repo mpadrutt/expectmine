@@ -1,34 +1,38 @@
 # How to write a custom step
-In this example we write a custom step for the following function: 
 
-> For all input files, generate a single input.txt where each line contains 
-> the absolute path of one input file. At the last line, output the secret 
+In this example we write a custom step for the following function:
+
+> For all input files, generate a single input.txt where each line contains
+> the absolute path of one input file. At the last line, output the secret
 > message provided to the step when configuring it.
 
-This example is rather simple, but it highlights all necessary steps to 
+This example is rather simple, but it highlights all necessary steps to
 create any kind of step.
 
 ## 1. Generating the step
+
 For this, we can use the `make step` command from our Makefile.
 
 ```bash
-(env) ➜  preprocessing-pipeline git:(main) ✗ make step
+(env) ➜  expectmine git:(main) ✗ make step
 env/bin/python -c "from scripts.generator import generate_step; generate_step()"
 ? Enter the name of the step: ExampleStep
 ? Where do you want to create the step? .
 ```
 
-After answering the questions of the CLI, our new step `example_step.py` is 
+After answering the questions of the CLI, our new step `example_step.py` is
 generated at the root of the project.
 
 ## 2. Fill in the blanks
+
 ```{note}
 This does not serve as an in depth explanation of the lifecycle of each step,
-to get a more in-depth look at a Step, please consider looking into the 
-"Concepts" part of the documentation. 
+to get a more in-depth look at a Step, please consider looking into the
+"Concepts" part of the documentation.
 ```
-Now, we can inspect the file and fill out every `TODO:` in it. **Before** 
-shows you the automatically generated code by `make step`, while **After** 
+
+Now, we can inspect the file and fill out every `TODO:` in it. **Before**
+shows you the automatically generated code by `make step`, while **After**
 shows the filled out code which solves the previously stated task.
 
 ::::{tab-set}
@@ -120,6 +124,7 @@ class ExampleStep(BaseStep):
         """
 
 ```
+
 :::
 
 :::{tab-item} Before
@@ -213,18 +218,22 @@ class ExampleStep(BaseStep):
         """
         raise NotImplementedError
 ```
+
 :::
 
 ::::
 
 ## 3. Using the step
-To use the step we now have three possible options depending on where the step 
+
+To use the step we now have three possible options depending on where the step
 should be used:
 
 ### Option 1: Quickly add to pipeline.
-If you want to quickly import the step and use it in your existing pipeline 
-you can just import it and add it similarly to how you would import an other 
+
+If you want to quickly import the step and use it in your existing pipeline
+you can just import it and add it similarly to how you would import an other
 step:
+
 ```python
 from pathlib import Path
 
@@ -243,10 +252,12 @@ pipeline.run()
 ```
 
 ### Option 2: Make the step available to the CLI or GUI
-If you use a managed workflow of the pipeline, you might want to register 
+
+If you use a managed workflow of the pipeline, you might want to register
 the step such that it gets returned by `pipeline.get_registered_steps()`.
 
 To do this, the process is even easier:
+
 ```python
 from pathlib import Path
 
@@ -260,6 +271,7 @@ pipeline.register_step(ExampleStep)
 ```
 
 ### Option 3: Save the step as a default step
-For this, you just need to move your generated step to `src/steps/steps` and 
-include the step in `src/steps/steps/__init__.py`, the step then gets 
+
+For this, you just need to move your generated step to `src/steps/steps` and
+include the step in `src/steps/steps/__init__.py`, the step then gets
 automatically registered to the pipeline.

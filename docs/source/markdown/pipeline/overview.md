@@ -1,7 +1,7 @@
 # Overview
 
-## What is Preprocessing-Pipeline?
-The Preprocessing-Pipeline aims to create a simple interface for researchers 
+## What is the expectmine-pipeline?
+The Expectmine-Pipeline aims to create a simple interface for researchers 
 to build processing pipelines for their workflows. It is built with reducing 
 the interface overhead from the start which tries to the process of integrating 
 new steps or adding library support as easy as possible.

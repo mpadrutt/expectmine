@@ -1,12 +1,15 @@
-# Preprocessing pipeline
-It is recommended to visit the [documentation](https://mpadrutt.github.io/preprocessing-pipeline/)
+# Expectmine pipeline
+
+It is recommended to visit the [documentation](https://mpadrutt.github.io/expectmine/)
 
 ## Project setup
-To get started, we first create a virtual environment and install the 
-necessary dependencies. We can then use the makefile commands to navigate in 
+
+To get started, we first create a virtual environment and install the
+necessary dependencies. We can then use the makefile commands to navigate in
 the project.
 
 ### Linux or macOS
+
 ```bash
 python -m venv env
 source env/bin/activate
@@ -15,6 +18,7 @@ make env-vars
 ```
 
 ### Windows
+
 ```bat
 python -m venv env
 .\env\Scripts\activate
@@ -154,6 +158,3 @@ pipeline.add_step(
 
 pipeline.run()
 ```
-
-
-
