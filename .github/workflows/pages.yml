@@ -33,7 +33,7 @@ jobs:
       - name: Generate Sphinx Page
         run: make docs-html
 
-      - name: Upload artifact:w
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: docs/build/html
