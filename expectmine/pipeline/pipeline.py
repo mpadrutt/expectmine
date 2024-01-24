@@ -1,5 +1,6 @@
 import json
 import os
+import shutil
 from pathlib import Path
 from typing import Any, Dict, Type
 
@@ -312,4 +313,4 @@ class Pipeline:
         """
         Clears all files produced by the step.
         """
-        os.rmdir(self._output_directory)
+        shutil.rmtree(self._output_directory)
