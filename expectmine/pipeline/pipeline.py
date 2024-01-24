@@ -201,9 +201,14 @@ class Pipeline:
             )
         )
 
-    def run(self):
+    def run(self) -> list[Path]:
         """
-        Runs the previously added steps in the pipeline.
+        Runs the previously added steps in the pipeline and returns the output of the last step.
+
+
+        :return: Filepaths of output of last step.
+        :rtype: list[Path]
+
         """
         current_files = self._input_files
 
@@ -239,6 +244,8 @@ class Pipeline:
                         indent=4,
                     )
                     metadata.write(json_object)
+
+        return current_files
 
     def get_possible_steps(self) -> list[Type[BaseStep | SmallBaseStep]]:
         """
