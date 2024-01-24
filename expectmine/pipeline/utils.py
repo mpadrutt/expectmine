@@ -1,6 +1,8 @@
+import uuid
+
 from os import listdir
 from pathlib import Path
-from typing import Type
+from typing import Type, Optional
 
 from expectmine.io.base_io import BaseIo
 from expectmine.logger.adapters.cli_logger_adapter import CliLoggerAdapter
@@ -188,15 +190,18 @@ def validate_output_directory(output_directory: Path):
 
 
 def get_quickstart_config(
-    output_path: Path,
+    output_path: Optional[Path] = None,
 ) -> tuple[InMemoryStoreAdapter, InMemoryStoreAdapter, CliLoggerAdapter, Path]:
     """
 
     :param output_path: Where should the pipeline output its result?
-    :type output_path: Path
+    :type output_path: Optional[Path]
 
     :return: 4-tuple containing all necessary configuration
     """
+    if not output_path:
+        output_path = Path(str(uuid.uuid4()))
+
     return (
         InMemoryStoreAdapter(output_path, output_path / "temp"),
         InMemoryStoreAdapter(output_path, output_path / "temp"),

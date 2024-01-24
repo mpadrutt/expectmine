@@ -78,12 +78,15 @@ class Pipeline:
         self._current_input_filetypes: list[str] | None = None
         self._current_output_filetypes: list[str] | None = None
 
-    def set_input(self, input_files: list[Path]):
+    def set_input(self, input_files: list[Path]) -> "Pipeline":
         """
         Assigns input files to the pipeline
 
         :param input_files: File list to set as input
         :type input_files: list[Path]
+
+        :return: The pipeline itself
+        :rtype: Pipeline
 
         :Example:
 
@@ -106,9 +109,11 @@ class Pipeline:
         if not self._current_output_filetypes:
             self._current_output_filetypes = [file.suffix for file in self._input_files]
 
+        return self
+
     def add_step(
         self, step: Type[BaseStep | SmallBaseStep], io: BaseIo | Dict[str, object]
-    ):
+    ) -> "Pipeline":
         """
         Adds a step to the current pipeline but takes into consideration the
         output of the previous step. The io object is used to configure the
@@ -118,6 +123,9 @@ class Pipeline:
         :type step: Type[BaseStep | SmallBaseStep]
         :param io: Io object or dict that will configure the step
         :type io: BaseIo | Dict[str, str]
+
+        :return: The pipeline itself
+        :rtype: Pipeline
 
         :Example:
 
@@ -156,7 +164,7 @@ class Pipeline:
                 )
             )
 
-            return
+            return self
 
         if isinstance(io, dict):
             if all(
@@ -201,6 +209,8 @@ class Pipeline:
                 io,
             )
         )
+
+        return self
 
     def run(self) -> list[Path]:
         """
