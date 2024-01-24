@@ -9,10 +9,11 @@ dependencies = [
     "tdqm",
     "python-dotenv",
     "requests",
+    "click",
 ]
 
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.isort]
