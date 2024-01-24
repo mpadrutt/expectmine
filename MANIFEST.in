@@ -1,6 +1,4 @@
 recursive-include expectmine *
-recursive-include bin *
-
 global-exclude *.pyc
 global-exclude ._*
 global-exclude *.mo

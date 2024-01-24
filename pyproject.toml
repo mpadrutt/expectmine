@@ -9,12 +9,10 @@ dependencies = [
     "tdqm",
     "python-dotenv",
     "requests",
-    "click",
 ]
 
-[build-system]
-requires = ["setuptools", "wheel"]
-build-backend = "setuptools.build_meta"
+[project.scripts]
+cool2 = "expectmine.main:main"
 
 [tool.isort]
 profile = "black"
