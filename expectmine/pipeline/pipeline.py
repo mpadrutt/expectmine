@@ -17,6 +17,7 @@ from expectmine.pipeline.utils import (
     validate_step_can_run,
 )
 from expectmine.steps.base_step import BaseStep
+from expectmine.steps.small_base_step import SmallBaseStep
 from expectmine.steps.utils import get_registered_steps
 from expectmine.storage.base_storage import BaseStore
 from expectmine.storage.base_storage_adapter import BaseStoreAdapter
@@ -25,7 +26,7 @@ load_dotenv()
 
 
 class Pipeline:
-    _registered_steps: list[Type[BaseStep]] = [
+    _registered_steps: list[Type[BaseStep | SmallBaseStep]] = [
         step[1] for step in get_registered_steps()
     ]
 
@@ -70,7 +71,7 @@ class Pipeline:
         self.kwargs = kwargs
 
         self._steps: list[
-            tuple[BaseStep, BaseStore, BaseStore, BaseLogger, BaseIo]
+            tuple[BaseStep | SmallBaseStep, BaseStore, BaseStore, BaseLogger, BaseIo]
         ] = list()
         self._input_files: list[Path] = list()
         self._current_input_filetypes: list[str] | None = None
@@ -104,14 +105,16 @@ class Pipeline:
         if not self._current_output_filetypes:
             self._current_output_filetypes = [file.suffix for file in self._input_files]
 
-    def add_step(self, step: Type[BaseStep], io: BaseIo | Dict[str, object]):
+    def add_step(
+        self, step: Type[BaseStep | SmallBaseStep], io: BaseIo | Dict[str, object]
+    ):
         """
         Adds a step to the current pipeline but takes into consideration the
         output of the previous step. The io object is used to configure the
         base step.
 
         :param step: Step that should be added to the pipeline
-        :type step: Type[BaseStep]
+        :type step: Type[BaseStep | SmallBaseStep]
         :param io: Io object or dict that will configure the step
         :type io: BaseIo | Dict[str, str]
 
@@ -127,11 +130,41 @@ class Pipeline:
         :raises ValueError: If the step can not run on previous output or if
             no input has been given to the pipeline yet.
         """
-        if isinstance(io, dict) and all(
-            isinstance(key, str) and isinstance(value, object)
-            for key, value in io.items()
-        ):
-            io = DictIo(io)
+        if issubclass(step, SmallBaseStep):
+            temp_step = step()
+
+            temp_logger_directory = (
+                self._output_directory / f"{len(self._steps)}_{temp_step.step_name()}"
+            )
+            os.makedirs(temp_logger_directory, exist_ok=True)
+            temp_logger = self.logger_adapter.get_instance(
+                self._output_directory / f"{len(self._steps)}_{temp_step.step_name()}"
+            )
+
+            self._current_output_filetypes = temp_step.output_filetypes(
+                self._current_output_filetypes  # type: ignore
+            )
+
+            self._steps.append(
+                (  # type: ignore
+                    temp_step,
+                    None,
+                    None,
+                    temp_logger,
+                    io,
+                )
+            )
+
+            return
+
+        if isinstance(io, dict):
+            if all(
+                isinstance(key, str) and isinstance(value, object)
+                for key, value in io.items()
+            ):
+                io = DictIo(io)
+            else:
+                raise ValueError("All values of the config dict need to be strings.")
 
         validate_add_step(step, io)
         validate_step_can_run(step, self._current_output_filetypes)
@@ -180,34 +213,41 @@ class Pipeline:
             temp_volatile_store = step[2]
             temp_logger = step[3]
 
-            current_files = temp_step.run(
-                current_files,
-                self._output_directory / f"{i}_{temp_step.step_name()}",
-                temp_persistent_store,
-                temp_volatile_store,
-                temp_logger,
-            )
-
-            with open(
-                self._output_directory
-                / f"{i}_{temp_step.step_name()}"
-                / "metadata.json",
-                "w",
-            ) as metadata:
-                json_object = json.dumps(
-                    temp_step.metadata(temp_persistent_store, temp_volatile_store),
-                    indent=4,
+            if isinstance(temp_step, SmallBaseStep):
+                current_files = temp_step.run(
+                    current_files,
+                    self._output_directory / f"{i}_{temp_step.step_name()}",
+                    temp_logger,
                 )
-                metadata.write(json_object)
+            else:
+                current_files = temp_step.run(
+                    current_files,
+                    self._output_directory / f"{i}_{temp_step.step_name()}",
+                    temp_persistent_store,
+                    temp_volatile_store,
+                    temp_logger,
+                )
 
-    def get_possible_steps(self) -> list[Type[BaseStep]]:
+                with open(
+                    self._output_directory
+                    / f"{i}_{temp_step.step_name()}"
+                    / "metadata.json",
+                    "w",
+                ) as metadata:
+                    json_object = json.dumps(
+                        temp_step.metadata(temp_persistent_store, temp_volatile_store),
+                        indent=4,
+                    )
+                    metadata.write(json_object)
+
+    def get_possible_steps(self) -> list[Type[BaseStep | SmallBaseStep]]:
         """
         Returns a list of all possible steps that can run on the current
         output of the pipeline.
 
         :return: All steps that can be added to the pipeline in its current
             state.
-        :rtype: list[Type[BaseStep]]
+        :rtype: list[Type[BaseStep | SmallBaseStep]]
 
         :Example:
 
@@ -224,12 +264,12 @@ class Pipeline:
             if step.can_run(self._current_output_filetypes)
         ]
 
-    def get_registered_steps(self) -> list[Type[BaseStep]]:
+    def get_registered_steps(self) -> list[Type[BaseStep | SmallBaseStep]]:
         """
         Returns a list of all steps registered with the pipeline.
 
         :return: A list of all registered steps.
-        :rtype: list[Type[BaseStep]]
+        :rtype: list[Type[BaseStep | SmallBaseSteps]]
 
         :Example:
 
@@ -238,13 +278,13 @@ class Pipeline:
         """
         return self._registered_steps
 
-    def register_step(self, step: Type[BaseStep]):
+    def register_step(self, step: Type[BaseStep | SmallBaseStep]):
         """
         Registers a new step to the pipeline which will then be available
         through get_steps().
 
         :param step: Step that should be added to the pipeline
-        :type step: Type[BaseStep]
+        :type step: Type[BaseStep | SmallBaseStep]
 
         :Example:
 
@@ -260,3 +300,9 @@ class Pipeline:
             raise TypeError("Step is not valid subclass of BaseStep")
 
         self._registered_steps.append(step)
+
+    def clear(self):
+        """
+        Clears all files produced by the step.
+        """
+        os.rmdir(self._output_directory)
