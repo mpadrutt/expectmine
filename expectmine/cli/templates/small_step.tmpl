@@ -1,0 +1,43 @@
+from pathlib import Path
+
+from expectmine.steps.small_base_step import SmallBaseStep
+from expectmine.logger.base_logger import BaseLogger
+
+
+class {{camelize(step_name)}}(SmallBaseStep):
+    """
+    TODO: Write a good description about what the step does.
+    """
+
+    @classmethod
+    def step_name(cls) -> str:
+        return "{{camelize(step_name)}}"
+
+    @classmethod
+    def can_run(cls, input_files: list[str]) -> bool:
+        """
+        TODO:   Given a list of input files (or file endings), indicate
+                if your step can run these files.
+        """
+        raise NotImplementedError
+
+    @classmethod
+    def output_filetypes(cls, input_files: list[str]) -> list[str]:
+        """
+        TODO:   Given a list of input files (or file endings), indicate
+                what type of output files your step creates.
+        """
+        raise NotImplementedError
+
+    def run(
+        self,
+        input_files: list[Path],
+        output_path: Path,
+        logger: BaseLogger,
+    ) -> list[Path]:
+        """
+        TODO:   Run your step now on the (input_files). You should write your output
+                to the output_path. If necessary you can use the (logger) to log
+                important messages.
+        """
+        raise NotImplementedError

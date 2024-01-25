@@ -1,0 +1,86 @@
+from pathlib import Path
+
+from expectmine.steps.base_step import BaseStep
+from expectmine.io.base_io import BaseIo
+from expectmine.logger.base_logger import BaseLogger
+from expectmine.storage.base_storage import BaseStore
+
+
+class {{camelize(step_name)}}(BaseStep):
+    """
+    TODO: Write a good description about what the step does.
+    """
+
+    @classmethod
+    def step_name(cls) -> str:
+        return "{{camelize(step_name)}}"
+
+    @classmethod
+    def can_run(cls, input_files: list[str]) -> bool:
+        """
+        TODO:   Given a list of input files (or file endings), indicate
+                if your step can run these files.
+        """
+        raise NotImplementedError
+
+    @classmethod
+    def output_filetypes(cls, input_files: list[str]) -> list[str]:
+        """
+        TODO:   Given a list of input files (or file endings), indicate
+                what type of output files your step creates.
+        """
+        raise NotImplementedError
+
+    def install(self, persistent_store: BaseStore, io: BaseIo, logger: BaseLogger):
+        """
+        TODO:   Check if all the necessary parameters are already available in
+                the (persistent_store) if not set them up correctly. You can use
+                (io) to interact with the user and use (logger) to log important
+                messages.
+        """
+        raise NotImplementedError
+
+    def setup(self, volatile_store: BaseStore, io: BaseIo, logger: BaseLogger):
+        """
+        TODO:   Check if all the necessary parameters for a specific run of your
+                step are set in (volatile_store) if not set them up correctly. You
+                can use (io) to interact with the user and (logger) to log
+                important messages.
+        """
+        raise NotImplementedError
+
+    def run(
+        self,
+        input_files: list[Path],
+        output_path: Path,
+        persistent_store: BaseStore,
+        volatile_store: BaseStore,
+        logger: BaseLogger,
+    ) -> list[Path]:
+        """
+        TODO:   With the previously set stores (persistent_store, volatile_store) run
+                run your step now on the (input_files). You should write your output
+                to the output_path. If necessary you can use the (logger) to log
+                important messages.
+        """
+        raise NotImplementedError
+
+    def metadata(
+        self, persistent_store: BaseStore, volatile_store: BaseStore
+    ) -> dict[str, object]:
+        """
+        TODO:   Return all relevant metadata from the step back to the pipeline.
+                This can help reproducibility and make your execution more
+                transparent. For this you can access both stores
+                (persistent_store, volatile_store).
+        """
+        raise NotImplementedError
+
+    @classmethod
+    def citation_and_disclaimer(cls) -> str:
+        """
+        TODO:   Write all necessary disclaimers and citation requirements in here.
+                They will be presented on each execution of the step and
+                additionally exported with the output files.
+        """
+        raise NotImplementedError
