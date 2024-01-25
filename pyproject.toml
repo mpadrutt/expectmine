@@ -12,7 +12,7 @@ dependencies = [
 ]
 
 [project.scripts]
-cool2 = "expectmine.cli.main:main"
+expectmine = "expectmine.cli.main:main"
 
 [tool.isort]
 profile = "black"

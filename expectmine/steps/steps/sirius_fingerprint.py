@@ -39,7 +39,10 @@ class SiriusFingerprint(BaseStep):
             temp_path = io.filepath(
                 "sirius_path", "Enter the executable path for Sirius:"
             )
-            persistent_store.put("sirius_path", str(temp_path.absolute()))
+            if isinstance(temp_path, str):
+                persistent_store.put("sirius_path", temp_path)
+            else:
+                persistent_store.put("sirius_path", str(temp_path.absolute()))
 
         logger.info("Install step finished.")
 

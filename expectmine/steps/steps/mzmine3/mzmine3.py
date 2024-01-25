@@ -48,7 +48,10 @@ class MZmine3(BaseStep):
             temp_path = io.filepath(
                 "mzmine3_path", "Enter the executable path for MZmine3:"
             )
-            persistent_store.put("mzmine3_path", str(temp_path.absolute()))
+            if isinstance(temp_path, str):
+                persistent_store.put("mzmine3_path", temp_path)
+            else:
+                persistent_store.put("mzmine3_path", str(temp_path.absolute()))
         logger.info("Install step finished.")
 
     def setup(self, volatile_store: BaseStore, io: BaseIo, logger: BaseLogger):

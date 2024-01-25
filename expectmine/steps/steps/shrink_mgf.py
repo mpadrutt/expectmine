@@ -37,7 +37,7 @@ class ShrinkMgf(BaseStep):
 
         logger.info(f"Compounds per file is set to: {number_of_compounds}")
 
-        volatile_store.put("compounds_per_file", int(number_of_compounds))
+        volatile_store.put("compounds_per_file", int(float(number_of_compounds)))
 
     def run(
         self,

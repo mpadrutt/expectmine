@@ -37,6 +37,9 @@ class InMemoryStore(BaseStore):
 
         return_object = self.storage.get(key)
 
+        if issubclass(returning, Path) and isinstance(return_object, str):
+            return_object = Path(return_object)
+
         if not isinstance(return_object, returning | None):
             raise ValueError("Value and return type do not match.")
 
