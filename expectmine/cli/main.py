@@ -1,5 +1,6 @@
 import argparse
 
+from .run_cli import run_cli
 from .create import create
 
 parser = argparse.ArgumentParser(
@@ -18,6 +19,6 @@ def main():
 
     if args.create:
         create()
-        return
 
-    print("Normal")
+    else:
+        run_cli()
