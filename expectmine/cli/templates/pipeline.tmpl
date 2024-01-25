@@ -1,0 +1,39 @@
+from pathlib import Path
+
+from expectmine.pipeline.pipeline import Pipeline
+from expectmine.pipeline.utils import get_quickstart_config
+from expectmine.steps.steps import MZmine3, ShrinkMgf, SiriusFingerprint
+
+pipeline = Pipeline(*get_quickstart_config(output_path=Path("pipeline_output")))
+
+# TODO: Set input paths here
+pipeline.set_input([Path("testdata/1.mzML")])
+
+"""
+TODO: Configure the steps here correctly.
+"""
+pipeline.add_step(
+    MZmine3,
+    {
+        "mzmine3_path": Path(
+            "/Applications/MZmine.app/Contents/MacOS/MZmine", absolute=True
+        ),
+        "batchfile": Path("testdata/1.xml"),
+    },
+)
+
+pipeline.add_step(ShrinkMgf, {"compounds_per_file": 5})
+
+pipeline.add_step(
+    SiriusFingerprint,
+    {
+        "sirius_path": Path(
+            "/Applications/sirius.app/Contents/MacOS/sirius", absolute=True
+        ),
+        "set_max_mz": False,
+        "instrument": "orbitrap",
+    },
+)
+
+pipeline.run()
+

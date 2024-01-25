@@ -1,7 +1,7 @@
 from pathlib import Path
 import os
 
-from inflection import camelize, underscore, sna
+from inflection import camelize, underscore
 from InquirerPy import inquirer
 from InquirerPy.validator import EmptyInputValidator, PathValidator
 from jinja2 import Environment, FileSystemLoader
@@ -25,7 +25,7 @@ environment.globals["underscore"] = underscore
 
 def generate_step():
     """
-    Generates an empty step in steps/steps. Used as a good starting point as
+    Generates an empty step. Used as a good starting point as
     the generated file contains todos with information about what needs to be
     done to get the step running.
     """
@@ -49,7 +49,7 @@ def generate_step():
 
 def generate_small_step():
     """
-    Generates an empty step in steps/steps. Used as a good starting point as
+    Generates an empty small step. Used as a good starting point as
     the generated file contains todos with information about what needs to be
     done to get the step running.
     """
@@ -63,11 +63,48 @@ def generate_small_step():
         validate=PathValidator("Input should be a valid directory.", is_dir=True),
     ).execute()
 
-    step_template = environment.get_template("step.tmpl")
+    step_template = environment.get_template("small_step.tmpl")
 
     generated_code = step_template.render(step_name=step_name)
 
     with open(Path(step_path) / f"{underscore(step_name)}.py", "w") as handle:
+        handle.write(generated_code)
+
+
+def generate_pipeline():
+    """
+    Generates a example pipeline.
+    """
+    while True:
+        pipeline_file_name = inquirer.text(
+            message="How should the generated file be called?",
+            validate=EmptyInputValidator("Input should not be empty."),
+        ).execute()
+
+        pipeline_path = inquirer.filepath(
+            message="Where do you want to create the pipeline?",
+            validate=PathValidator("Input should be a valid directory.", is_dir=True),
+        ).execute()
+
+        file_name_with_extension = (
+            f"{pipeline_file_name}.py"
+            if not pipeline_file_name.endswith(".py")
+            else pipeline_file_name
+        )
+
+        file_path = Path(pipeline_path) / file_name_with_extension
+
+        if not file_path.exists():
+            break
+        else:
+            print(
+                f"The file '{file_path}' already exists. Please choose a different name."
+            )
+
+    pipeline_template = environment.get_template("pipeline.tmpl")
+    generated_code = pipeline_template.render()
+
+    with open(file_path, "w") as handle:
         handle.write(generated_code)
 
 
@@ -96,6 +133,7 @@ def create():
         choices=[
             "Regular Step",
             "Small Step",
+            "Starter Pipeline",
             "Env File",
         ],
         default=None,
@@ -106,6 +144,9 @@ def create():
 
     elif action == "Small Step":
         generate_small_step()
+
+    elif action == "Starter Pipeline":
+        generate_pipeline()
 
     elif action == "Env File":
         generate_env()
