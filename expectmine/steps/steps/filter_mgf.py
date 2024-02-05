@@ -1,6 +1,6 @@
 from pathlib import Path
 from InquirerPy import inquirer
-from typing import List, TypedDict, NotRequired, Set
+from typing import List, Tuple, TypedDict, NotRequired, Set
 
 from expectmine.io.base_io import BaseIo
 from expectmine.logger.base_logger import BaseLogger
@@ -150,6 +150,23 @@ class FilterMgf(BaseStep):
                 return_files.add(output_path / compound["origin"])
 
             return list(return_files)
+
+        if discard_filepath and error:
+            pepmass_intervals: List[Tuple[float, float]] = []
+
+            with open(discard_filepath, "r") as f:
+                exact_error = error / 1_000_000
+                for line in f.readlines():
+                    pepmass_intervals.append(
+                        (float(line) - exact_error, float(line) + exact_error)
+                    )
+
+            for i, compound in enumerate(compound_list):
+                if "pepmass" not in compound or not any(
+                    compound["pepmass"] > low and compound["pepmass"] < high
+                    for (low, high) in pepmass_intervals
+                ):
+                    del compound_list[i]
 
         if not compounds_per_file:
             raise ValueError(
