@@ -106,6 +106,7 @@ class FilterMgf(BaseStep):
 
         for file in input_files:
             compound: Compound = {}
+            compound["lines"] = []
 
             with open(file, "r") as f:
                 for line in f:
@@ -123,7 +124,7 @@ class FilterMgf(BaseStep):
                     elif "END IONS" in line:
                         compound["origin"] = file.name
                         compound_list.append(compound)
-                        compound = {}
+                        compound = {"lines": []}
 
             compound_list.sort(key=lambda x: x["id"])  # type: ignore
 
@@ -138,6 +139,7 @@ class FilterMgf(BaseStep):
             ]
 
             return_files: Set[Path] = set()
+            print(len(compounds))
 
             for compound in compounds:
                 if "origin" not in compound:
@@ -176,6 +178,9 @@ class FilterMgf(BaseStep):
                 found = False
 
                 for c in compound_list:
+                    if "id" in c and compound["id"] != c["id"]:
+                        continue
+
                     if "mslevel" in c and c["mslevel"] == 3 - compound["mslevel"]:  # type: ignore
                         found = True
                         break
