@@ -1,11 +1,20 @@
 from pathlib import Path
 from InquirerPy import inquirer
-from typing import Dict
+from typing import List, TypedDict, NotRequired, Set
 
 from expectmine.io.base_io import BaseIo
 from expectmine.logger.base_logger import BaseLogger
 from expectmine.steps.base_step import BaseStep
 from expectmine.storage.base_storage import BaseStore
+
+
+class Compound(TypedDict):
+    id: NotRequired[int]
+    lines: NotRequired[List[str]]
+    mslevel: NotRequired[int]
+    pepmass: NotRequired[float]
+    filename: NotRequired[str]
+    origin: NotRequired[str]
 
 
 class FilterMgf(BaseStep):
@@ -91,31 +100,30 @@ class FilterMgf(BaseStep):
         filter_missing_ms = volatile_store.get("filter_missing_ms", bool)
         filename_filter = volatile_store.get("filename_filter", Path)
 
-        compound_list = []  # type: ignore
+        compound_list: List[Compound] = []
+
+        compound: Compound = {}
 
         for file in input_files:
+            compound: Compound = {}
 
-            new_ion: Dict[str, unknown] = dict()  # type: ignore
-            new_ion["lines"] = []
-            new_lines: list[str] = []
             with open(file, "r") as f:
                 for line in f:
-                    new_ion["lines"].append(line)  # type: ignore
+                    compound["lines"].append(line)
 
                     if "FEATURE_ID" in line.upper():
-                        new_ion["id"] = int(line.split("=")[-1].strip())
+                        compound["id"] = int(line.split("=")[-1].strip())
                     elif "MSLEVEL" in line.upper():
-                        new_ion["mslevel"] = int(line.split("=")[-1].strip())
+                        compound["mslevel"] = int(line.split("=")[-1].strip())
                     elif "PEPMASS" in line.upper():
-                        new_ion["pepmass"] = float(line.split("=")[-1].strip())
+                        compound["pepmass"] = float(line.split("=")[-1].strip())
                     elif "FILENAME" in line.upper():
-                        new_ion["filename"] = line.split("=")[-1].strip()
+                        compound["filename"] = line.split("=")[-1].strip()
 
                     elif "END IONS" in line:
-                        new_ion["origin"] = file.name
-                        compound_list.add(new_ion)  # type: ignore
-                        new_ion = dict()  # type: ignore
-                        new_ion["lines"] = []
+                        compound["origin"] = file.name
+                        compound_list.append(compound)
+                        compound = {}
 
             compound_list.sort(key=lambda x: x["id"])  # type: ignore
 
@@ -125,12 +133,23 @@ class FilterMgf(BaseStep):
                 float_allowed=False,
             ).execute()
 
-            compounds = [c for c in compound_list if c["id"] == compound_id]  # type: ignore
+            compounds: List[Compound] = [
+                c for c in compound_list if "id" in c and c["id"] == compound_id
+            ]
 
-            for compound in compouds:
-                with open(compound["origin"], "a") as f:
-                    f.writelines(compound[lines])
+            return_files: Set[Path] = set()
+
+            for compound in compounds:
+                if "origin" not in compound:
+                    continue
+
+                with open(output_path / compound["origin"], "a") as f:
+                    f.writelines(compound["lines"])
                     f.write("\n")
+
+                return_files.add(output_path / compound["origin"])
+
+            return list(return_files)
 
         if not compounds_per_file:
             raise ValueError(
