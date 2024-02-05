@@ -168,6 +168,21 @@ class FilterMgf(BaseStep):
                 ):
                     del compound_list[i]
 
+        if filter_missing_ms:
+            for i, compound in enumerate(compound_list):
+                if "mslevel" not in compound:
+                    del compound_list[i]
+
+                found = False
+
+                for c in compound_list:
+                    if "mslevel" in c and c["mslevel"] == 3 - compound["mslevel"]:  # type: ignore
+                        found = True
+                        break
+
+                if not found:
+                    del compound_list[i]
+
         if not compounds_per_file:
             raise ValueError(
                 "The compounds_per_file variable is not set in the volatile store."
