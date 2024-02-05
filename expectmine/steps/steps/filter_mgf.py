@@ -54,6 +54,12 @@ class FilterMgf(BaseStep):
         should_stop = io.boolean("should_stop", "Should stop to ask for compound.")
         volatile_store.put("should_stop", should_stop)
 
+        filter_missing_ms = io.boolean(
+            "filter_missing_ms",
+            "Should ions be removed where either MS1 or MS2 is missing?",
+        )
+        volatile_store.put("filter_missing_ms", filter_missing_ms)
+
         if should_stop:
             logger.info("Step will stop once it recieves input.")
 
@@ -82,11 +88,13 @@ class FilterMgf(BaseStep):
         discard_filepath = volatile_store.get("discard_filepath", Path)
         error = volatile_store.get("error", float)
         should_stop = volatile_store.get("should_stop", bool)
+        filter_missing_ms = volatile_store.get("filter_missing_ms", bool)
         filename_filter = volatile_store.get("filename_filter", Path)
 
         compound_list = []  # type: ignore
 
         for file in input_files:
+
             new_ion: Dict[str, unknown] = dict()  # type: ignore
             new_ion["lines"] = []
             new_lines: list[str] = []
@@ -104,17 +112,25 @@ class FilterMgf(BaseStep):
                         new_ion["filename"] = line.split("=")[-1].strip()
 
                     elif "END IONS" in line:
+                        new_ion["origin"] = file.name
                         compound_list.add(new_ion)  # type: ignore
                         new_ion = dict()  # type: ignore
                         new_ion["lines"] = []
 
-        compound_list.sort(key=lambda x: x["id"])  # type: ignore
+            compound_list.sort(key=lambda x: x["id"])  # type: ignore
 
         if should_stop:
             compound_id = inquirer.number(  # type: ignore
-                "Enter the compound ID you would like to look at.",
+                "Enter the compound id you would like to look at.",
                 float_allowed=False,
             ).execute()
+
+            compounds = [c for c in compound_list if c["id"] == compound_id]  # type: ignore
+
+            for compound in compouds:
+                with open(compound["origin"], "a") as f:
+                    f.writelines(compound[lines])
+                    f.write("\n")
 
         if not compounds_per_file:
             raise ValueError(
