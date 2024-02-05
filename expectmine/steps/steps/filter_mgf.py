@@ -183,29 +183,30 @@ class FilterMgf(BaseStep):
                 if not found:
                     del compound_list[i]
 
-        if not compounds_per_file:
-            raise ValueError(
-                "The compounds_per_file variable is not set in the volatile store."
-            )
+        if filename_filter:
+            filename_list: List[str] = []
 
-        output_paths: list[Path] = []
+            with open(filename_filter, "r") as f:
+                filename_list = f.readlines()
 
-        for file in input_files:
-            num_compounds = 0
-            new_lines: list[str] = []
-            with open(file, "r") as f:
-                while num_compounds < compounds_per_file:
-                    line = next(f)
-                    new_lines.append(line)
-                    if "END IONS" in line:
-                        num_compounds += 1
+            for i, compound in enumerate(compound_list):
+                if "filename" in compound and compound["filename"] in filename_list:
+                    continue
+                del compound_list[i]
 
-            with open(output_path / file.name, "w") as f:
-                f.writelines(new_lines)
+        return_files: Set[Path] = set()
 
-            output_paths.append(output_path / file.name)
+        for compound in compound_list:
+            if "origin" not in compound:
+                continue
 
-        return output_paths
+            with open(output_path / compound["origin"], "a") as f:
+                f.writelines(compound["lines"])
+                f.write("\n")
+
+            return_files.add(output_path / compound["origin"])
+
+        return list(return_files)
 
     def metadata(
         self, persistent_store: BaseStore, volatile_store: BaseStore
