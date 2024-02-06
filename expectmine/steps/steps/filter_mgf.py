@@ -134,8 +134,10 @@ class FilterMgf(BaseStep):
                 float_allowed=False,
             ).execute()
 
+            print(len(compound_list))
+
             compounds: List[Compound] = [
-                c for c in compound_list if "id" in c and c["id"] == compound_id
+                c for c in compound_list if "id" in c and c["id"] == int(compound_id)
             ]
 
             return_files: Set[Path] = set()
