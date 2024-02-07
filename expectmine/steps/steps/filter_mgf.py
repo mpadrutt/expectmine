@@ -54,7 +54,7 @@ class FilterMgf(BaseStep):
             )
             error = io.number("error", "Enter the error in ppm.")
             volatile_store.put("discard_filepath", discard_filepath)
-            volatile_store.put("error", error)
+            volatile_store.put("error", error * 1.0)
             logger.info(
                 f"Pepmass input filepath is set to {discard_filepath.absolute()}"
             )
@@ -134,14 +134,11 @@ class FilterMgf(BaseStep):
                 float_allowed=False,
             ).execute()
 
-            print(len(compound_list))
-
             compounds: List[Compound] = [
                 c for c in compound_list if "id" in c and c["id"] == int(compound_id)
             ]
 
             return_files: Set[Path] = set()
-            print(len(compounds))
 
             for compound in compounds:
                 if "origin" not in compound:
@@ -156,6 +153,7 @@ class FilterMgf(BaseStep):
             return list(return_files)
 
         if discard_filepath and error:
+            print("discard mass")
             pepmass_intervals: List[Tuple[float, float]] = []
 
             with open(discard_filepath, "r") as f:
@@ -172,34 +170,38 @@ class FilterMgf(BaseStep):
                 ):
                     del compound_list[i]
 
-        if filter_missing_ms:
-            for i, compound in enumerate(compound_list):
-                if "mslevel" not in compound:
-                    del compound_list[i]
-
-                found = False
-
-                for c in compound_list:
-                    if "id" in c and compound["id"] != c["id"]:
-                        continue
-
-                    if "mslevel" in c and c["mslevel"] == 3 - compound["mslevel"]:  # type: ignore
-                        found = True
-                        break
-
-                if not found:
-                    del compound_list[i]
-
         if filename_filter:
+            print("filter filename")
             filename_list: List[str] = []
 
             with open(filename_filter, "r") as f:
                 filename_list = f.readlines()
 
+            compound_list = [
+                c
+                for c in compound_list
+                if "filename" in c
+                and any(c["filename"] == fn.replace("\n", "") for fn in filename_list)
+            ]
+
+        if filter_missing_ms:
             for i, compound in enumerate(compound_list):
-                if "filename" in compound and compound["filename"] in filename_list:
-                    continue
-                del compound_list[i]
+                if "mslevel" not in compound:
+                    del compound_list[i]
+
+            compound_list = [
+                c
+                for c in compound_list
+                if any(
+                    "id" in co
+                    and "mslevel" in co
+                    and "id" in c
+                    and "mslevel" in c
+                    and co["id"] == c["id"]
+                    and c["mslevel"] == 3 - co["mslevel"]
+                    for co in compound_list
+                )
+            ]
 
         return_files: Set[Path] = set()
 

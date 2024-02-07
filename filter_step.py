@@ -12,13 +12,13 @@ pipeline.set_input([Path("./examples/sirius_output.mgf")])
 pipeline.add_step(
     FilterMgf,
     {
-        "discard_pepmass": False,
-        "discard_filepath": None,
-        "error": 5,
-        "should_stop": True,
+        "discard_pepmass": True,
+        "discard_filepath": Path("discard.txt"),
+        "error": 50000000,
+        "should_stop": False,
         "filter_missing_ms": True,
         "should_filter_filename": False,
-        "filter_filename": None,
+        "filter_filename": Path("file.txt"),
     },
 )
 
